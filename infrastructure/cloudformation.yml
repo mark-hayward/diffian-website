@@ -1,92 +1,22 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Diffian website — S3 static hosting + CloudFront distribution'
-
-Parameters:
-  DomainName:
-    Type: String
-    Default: diffian.com
-    Description: Primary domain name (leave as-is if not using a custom domain yet)
+Description: >
+  Diffian website — GitHub Actions OIDC provider + deploy role.
+  The S3 bucket (diffian, eu-west-2) and CloudFront distribution (EF9LHCH0Z4JI4)
+  already exist; this stack only manages IAM so deployments never use long-lived keys.
 
 Resources:
 
-  # ---------- S3 bucket (private, served only via CloudFront) ----------
-  WebsiteBucket:
-    Type: AWS::S3::Bucket
+  # ---------- GitHub Actions OIDC provider ----------
+  GitHubOIDCProvider:
+    Type: AWS::IAM::OIDCProvider
     Properties:
-      BucketName: !Sub 'diffian-website-${AWS::AccountId}'
-      PublicAccessBlockConfiguration:
-        BlockPublicAcls: true
-        BlockPublicPolicy: true
-        IgnorePublicAcls: true
-        RestrictPublicBuckets: true
-      VersioningConfiguration:
-        Status: Enabled
-      Tags:
-        - Key: Project
-          Value: diffian-website
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+      ThumbprintList:
+        - 6938fd4d98bab03faadb97b34396831e3780aea1
 
-  # CloudFront Origin Access Control
-  OriginAccessControl:
-    Type: AWS::CloudFront::OriginAccessControl
-    Properties:
-      OriginAccessControlConfig:
-        Name: diffian-website-oac
-        OriginAccessControlOriginType: s3
-        SigningBehavior: always
-        SigningProtocol: sigv4
-
-  # Bucket policy — allow CloudFront OAC only
-  WebsiteBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref WebsiteBucket
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Sid: AllowCloudFrontServicePrincipal
-            Effect: Allow
-            Principal:
-              Service: cloudfront.amazonaws.com
-            Action: s3:GetObject
-            Resource: !Sub '${WebsiteBucket.Arn}/*'
-            Condition:
-              StringEquals:
-                AWS:SourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}'
-
-  # ---------- CloudFront distribution ----------
-  CloudFrontDistribution:
-    Type: AWS::CloudFront::Distribution
-    Properties:
-      DistributionConfig:
-        Enabled: true
-        DefaultRootObject: index.html
-        HttpVersion: http2and3
-        IPV6Enabled: true
-        PriceClass: PriceClass_100
-        Origins:
-          - Id: S3Origin
-            DomainName: !GetAtt WebsiteBucket.RegionalDomainName
-            S3OriginConfig:
-              OriginAccessIdentity: ''
-            OriginAccessControlId: !GetAtt OriginAccessControl.Id
-        DefaultCacheBehavior:
-          TargetOriginId: S3Origin
-          ViewerProtocolPolicy: redirect-to-https
-          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6  # CachingOptimized (AWS managed)
-          Compress: true
-        CustomErrorResponses:
-          - ErrorCode: 403
-            ResponseCode: 200
-            ResponsePagePath: /index.html
-          - ErrorCode: 404
-            ResponseCode: 200
-            ResponsePagePath: /index.html
-        Comment: Diffian website distribution
-      Tags:
-        - Key: Project
-          Value: diffian-website
-
-  # ---------- IAM role for GitHub Actions OIDC ----------
+  # ---------- IAM role assumed by GitHub Actions ----------
   GitHubActionsRole:
     Type: AWS::IAM::Role
     Properties:
@@ -96,11 +26,11 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              Federated: !Sub 'arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com'
+              Federated: !GetAtt GitHubOIDCProvider.Arn
             Action: sts:AssumeRoleWithWebIdentity
             Condition:
               StringLike:
-                # Update this to match your org/repo once the org is created
+                # Covers personal repo now; update to diffian/diffian-website after org transfer
                 token.actions.githubusercontent.com:sub: 'repo:mark-hayward/diffian-website:*'
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
@@ -117,45 +47,15 @@ Resources:
                   - s3:GetObject
                   - s3:ListBucket
                 Resource:
-                  - !GetAtt WebsiteBucket.Arn
-                  - !Sub '${WebsiteBucket.Arn}/*'
+                  - !Sub 'arn:aws:s3:::diffian'
+                  - !Sub 'arn:aws:s3:::diffian/*'
               - Sid: CloudFrontInvalidate
                 Effect: Allow
                 Action:
                   - cloudfront:CreateInvalidation
-                Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}'
-
-  # ---------- GitHub Actions OIDC provider (skip if already exists) ----------
-  # Uncomment if you haven't added the GitHub OIDC provider to your account yet.
-  # Only one OIDC provider per URL is allowed per account — check first with:
-  #   aws iam list-open-id-connect-providers
-  #
-  # GitHubOIDCProvider:
-  #   Type: AWS::IAM::OIDCProvider
-  #   Properties:
-  #     Url: https://token.actions.githubusercontent.com
-  #     ClientIdList:
-  #       - sts.amazonaws.com
-  #     ThumbprintList:
-  #       - 6938fd4d98bab03faadb97b34396831e3780aea1
+                Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/EF9LHCH0Z4JI4'
 
 Outputs:
-  BucketName:
-    Description: S3 bucket name
-    Value: !Ref WebsiteBucket
-    Export:
-      Name: diffian-website-bucket
-
-  DistributionId:
-    Description: CloudFront distribution ID
-    Value: !Ref CloudFrontDistribution
-    Export:
-      Name: diffian-website-distribution-id
-
-  DistributionDomain:
-    Description: CloudFront domain (use this as your CNAME target)
-    Value: !GetAtt CloudFrontDistribution.DomainName
-
   GitHubActionsRoleArn:
-    Description: IAM role ARN for GitHub Actions — add as AWS_ROLE_ARN secret
+    Description: IAM role ARN — set as AWS_ROLE_ARN in GitHub Actions secrets
     Value: !GetAtt GitHubActionsRole.Arn
