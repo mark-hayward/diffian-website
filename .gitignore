@@ -1,0 +1,11 @@
+.DS_Store
+*.swp
+*.swo
+.env
+.env.*
+node_modules/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+cdk.out/
