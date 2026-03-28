@@ -51,6 +51,48 @@ jobs:
             --cache-control "public,max-age=86400,s-maxage=604800" \
             --delete
 
+      - name: Deploy CloudFront Function (append index.html to directory URLs)
+        run: |
+          FUNCTION_NAME="diffian-append-index-html"
+          FUNCTION_CODE="infrastructure/index-redirect.js"
+          FUNCTION_CONFIG='{"Comment":"Append index.html to directory URLs","Runtime":"cloudfront-js-2.0"}'
+
+          if aws cloudfront describe-function --name "$FUNCTION_NAME" --stage LIVE 2>/dev/null; then
+            ETAG=$(aws cloudfront describe-function --name "$FUNCTION_NAME" --query 'ETag' --output text)
+            aws cloudfront update-function \
+              --name "$FUNCTION_NAME" \
+              --if-match "$ETAG" \
+              --function-config "$FUNCTION_CONFIG" \
+              --function-code "fileb://$FUNCTION_CODE"
+          else
+            aws cloudfront create-function \
+              --name "$FUNCTION_NAME" \
+              --function-config "$FUNCTION_CONFIG" \
+              --function-code "fileb://$FUNCTION_CODE"
+          fi
+
+          ETAG=$(aws cloudfront describe-function --name "$FUNCTION_NAME" --query 'ETag' --output text)
+          aws cloudfront publish-function --name "$FUNCTION_NAME" --if-match "$ETAG"
+          FUNCTION_ARN=$(aws cloudfront describe-function --name "$FUNCTION_NAME" --stage LIVE --query 'FunctionSummary.FunctionMetadata.FunctionARN' --output text)
+
+          # Associate function with the distribution's default cache behaviour (viewer-request)
+          DIST_CONFIG=$(aws cloudfront get-distribution-config --id "${{ env.CLOUDFRONT_DISTRIBUTION_ID }}")
+          ETAG=$(echo "$DIST_CONFIG" | jq -r '.ETag')
+          UPDATED_CONFIG=$(echo "$DIST_CONFIG" | jq --arg arn "$FUNCTION_ARN" '
+            .DistributionConfig.DefaultCacheBehavior.FunctionAssociations = {
+              "Quantity": 1,
+              "Items": [{
+                "FunctionARN": $arn,
+                "EventType": "viewer-request"
+              }]
+            }
+            | .DistributionConfig
+          ')
+          aws cloudfront update-distribution \
+            --id "${{ env.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --if-match "$ETAG" \
+            --distribution-config "$UPDATED_CONFIG"
+
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \

@@ -1,0 +1,12 @@
+// CloudFront Function: append index.html to directory URLs
+// Handles requests like /blog/ -> /blog/index.html
+function handler(event) {
+    var request = event.request;
+    var uri = request.uri;
+
+    if (uri.endsWith('/')) {
+        request.uri += 'index.html';
+    }
+
+    return request;
+}

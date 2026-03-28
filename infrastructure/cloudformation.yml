@@ -54,6 +54,22 @@ Resources:
                 Action:
                   - cloudfront:CreateInvalidation
                 Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/EF9LHCH0Z4JI4'
+              - Sid: CloudFrontFunction
+                Effect: Allow
+                Action:
+                  - cloudfront:CreateFunction
+                  - cloudfront:UpdateFunction
+                  - cloudfront:PublishFunction
+                  - cloudfront:DescribeFunction
+                  - cloudfront:GetFunction
+                Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:function/diffian-append-index-html'
+              - Sid: CloudFrontDistributionUpdate
+                Effect: Allow
+                Action:
+                  - cloudfront:GetDistribution
+                  - cloudfront:GetDistributionConfig
+                  - cloudfront:UpdateDistribution
+                Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/EF9LHCH0Z4JI4'
 
 Outputs:
   GitHubActionsRoleArn:
