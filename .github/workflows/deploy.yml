@@ -31,12 +31,28 @@ jobs:
 
       - name: Sync to S3
         run: |
-          # Upload index.html with a short TTL (changes go live within 60s via CloudFront)
-          aws s3 cp index.html s3://${{ env.S3_BUCKET }}/index.html \
-            --cache-control "public,max-age=60,s-maxage=3600"
+          # HTML files — short TTL so updates go live quickly
+          aws s3 sync . s3://${{ env.S3_BUCKET }}/ \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude ".claude/*" \
+            --exclude "*.md" \
+            --include "*.html" \
+            --cache-control "public,max-age=60,s-maxage=3600" \
+            --delete
+
+          # Static assets — longer TTL
+          aws s3 sync . s3://${{ env.S3_BUCKET }}/ \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude ".claude/*" \
+            --exclude "*.md" \
+            --exclude "*.html" \
+            --cache-control "public,max-age=86400,s-maxage=604800" \
+            --delete
 
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/index.html" "/"
+            --paths "/" "/index.html" "/blog/*"

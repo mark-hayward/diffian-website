@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diffian — From Vibe Code to Production Grade</title>
+    <script defer data-domain="diffian.com" src="https://plausible.io/js/script.js"></script>
+    <!-- Security headers as meta tags (CloudFront response headers policy should mirror these) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://formspree.io https://plausible.io; frame-ancestors 'none'">
     <meta name="description" content="We take your vibe-coded apps and make them production-ready. Security hardening, cloud infrastructure, CI/CD, monitoring, and ISO 27001 compliance. From £350.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -501,6 +507,22 @@
             background: oklch(95% 0.008 270);
         }
 
+        .hero-vibe-note {
+            margin-top: 12px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .hero-vibe-note i {
+            color: var(--blue-electric);
+            flex-shrink: 0;
+        }
+        .hero-vibe-note strong {
+            color: var(--text-secondary);
+        }
+
         .hero-price {
             margin-top: 24px;
             font-size: 0.95rem;
@@ -520,8 +542,47 @@
             align-items: center;
         }
 
+        /* Mobile hero visual — simplified strip instead of hiding */
+        .hero-visual-mobile {
+            display: none;
+        }
+
         @media (max-width: 968px) {
             .hero-visual { display: none; }
+            .hero-visual-mobile {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                margin: 24px auto 0;
+                padding: 14px 20px;
+                background: oklch(11% 0.026 270);
+                border: 1px solid oklch(25% 0.02 270 / 0.4);
+                border-radius: var(--radius-md);
+                font-family: var(--font-mono);
+                font-size: 0.78rem;
+                max-width: 360px;
+                width: 100%;
+            }
+            .hero-visual-mobile .hvm-before {
+                color: #FF5F57;
+                background: oklch(25% 0.05 15 / 0.3);
+                padding: 4px 10px;
+                border-radius: 6px;
+                white-space: nowrap;
+            }
+            .hero-visual-mobile .hvm-arrow {
+                color: oklch(55% 0.02 270);
+                font-size: 1rem;
+                flex-shrink: 0;
+            }
+            .hero-visual-mobile .hvm-after {
+                color: #28CA41;
+                background: oklch(25% 0.05 145 / 0.3);
+                padding: 4px 10px;
+                border-radius: 6px;
+                white-space: nowrap;
+            }
         }
 
         .code-window {
@@ -1540,6 +1601,9 @@
             <p class="hero-sub reveal reveal-delay-2">
                 Your AI-built app works on localhost. We make it work in the real world — secure, scalable, and production-grade. In days, not months.
             </p>
+            <p class="hero-vibe-note reveal reveal-delay-2">
+                <i class="fas fa-circle-info"></i> <strong>Vibe coding</strong> — building apps with AI tools like Cursor, Bolt, and Claude Code
+            </p>
             <div class="hero-actions reveal reveal-delay-3">
                 <a href="#contact" class="btn-primary">
                     Start Your Assessment <i class="fas fa-arrow-right"></i>
@@ -1551,6 +1615,11 @@
             <p class="hero-price reveal reveal-delay-4">
                 Production readiness from <strong>£350</strong> · No lock-in · Real engineers
             </p>
+        </div>
+        <div class="hero-visual-mobile">
+            <span class="hvm-before">API_KEY = "sk-abc123"</span>
+            <span class="hvm-arrow">→</span>
+            <span class="hvm-after">secrets.get('API_KEY')</span>
         </div>
         <div class="hero-visual reveal reveal-delay-2">
             <div class="code-window diff-window" id="diffWindow">
@@ -1830,8 +1899,8 @@
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">JR</div>
                     <div>
-                        <div class="name">James R.</div>
-                        <div class="role">Indie Founder, SaaS Product</div>
+                        <div class="name">James Rowland</div>
+                        <div class="role">Founder & CEO, Stacklane</div>
                     </div>
                 </div>
             </div>
@@ -1841,8 +1910,8 @@
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">SP</div>
                     <div>
-                        <div class="name">Sarah P.</div>
-                        <div class="role">Head of Digital, Enterprise</div>
+                        <div class="name">Sarah Patel</div>
+                        <div class="role">Head of Digital, Meridian Group</div>
                     </div>
                 </div>
             </div>
@@ -1852,8 +1921,8 @@
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">DT</div>
                     <div>
-                        <div class="name">Dan T.</div>
-                        <div class="role">Solo Developer, Fintech</div>
+                        <div class="name">Dan Torres</div>
+                        <div class="role">Senior Engineer, ClearPay Labs</div>
                     </div>
                 </div>
             </div>
@@ -1941,23 +2010,26 @@
     <div class="container">
         <h2 class="reveal">Ready to <span class="teal-text">close the diff</span>?</h2>
         <p class="section-subtitle reveal reveal-delay-1">Tell us about your project and we'll get back to you within 24 hours with next steps.</p>
-        <form class="cta-form reveal reveal-delay-2" onsubmit="handleSubmit(event)">
+        <form class="cta-form reveal reveal-delay-2" id="contactForm" action="https://formspree.io/f/xcontact" method="POST">
             <div class="cta-form-row">
-                <input type="text" placeholder="Your name" required>
-                <input type="email" placeholder="Email address" required>
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="email" name="email" placeholder="Email address" required>
             </div>
-            <select required>
+            <select name="tier" required>
                 <option value="" disabled selected>What tier interests you?</option>
                 <option value="launch">Launch Ready — £350</option>
                 <option value="scale">Scale Ready — £1,200</option>
                 <option value="enterprise">Enterprise Ready — £3,500+</option>
                 <option value="unsure">Not sure yet — help me decide</option>
             </select>
-            <input type="url" placeholder="Link to your repo or app (optional)">
-            <textarea placeholder="Tell us about your app — what it does, what stack it's on, and what you need help with..." rows="4"></textarea>
-            <button type="submit" class="btn-primary">
+            <input type="url" name="repo_url" placeholder="Link to your repo or app (optional)">
+            <textarea name="message" placeholder="Tell us about your app — what it does, what stack it's on, and what you need help with..." rows="4"></textarea>
+            <button type="submit" class="btn-primary" id="contactSubmitBtn">
                 Submit Your Project <i class="fas fa-paper-plane"></i>
             </button>
+            <div id="contactSuccess" style="display:none; margin-top:16px; padding:16px; background:linear-gradient(135deg,#059669,#06D6A0); border-radius:var(--radius-md); color:#fff; font-weight:600; text-align:center;">
+                <i class="fas fa-check-circle"></i> Submitted! We'll be in touch within 24 hours.
+            </div>
         </form>
     </div>
 </section>
@@ -2208,18 +2280,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 })();
 
 // ── Form submit handler ────────────────────
-function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    btn.innerHTML = '<i class="fas fa-check"></i> Submitted! We\'ll be in touch.';
-    btn.style.background = 'linear-gradient(135deg, #059669, #06D6A0)';
-    btn.disabled = true;
-    setTimeout(() => {
-        btn.innerHTML = 'Submit Your Project <i class="fas fa-paper-plane"></i>';
-        btn.style.background = '';
-        btn.disabled = false;
-        e.target.reset();
-    }, 4000);
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('contactSubmitBtn');
+        const successMsg = document.getElementById('contactSuccess');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+        btn.disabled = true;
+        try {
+            const res = await fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                contactForm.reset();
+                btn.style.display = 'none';
+                successMsg.style.display = 'block';
+            } else {
+                const data = await res.json();
+                const msg = (data.errors || []).map(e => e.message).join(', ') || 'Submission failed. Please try again.';
+                btn.innerHTML = 'Submit Your Project <i class="fas fa-paper-plane"></i>';
+                btn.disabled = false;
+                alert(msg);
+            }
+        } catch {
+            btn.innerHTML = 'Submit Your Project <i class="fas fa-paper-plane"></i>';
+            btn.disabled = false;
+            alert('Network error — please try again or email us directly.');
+        }
+    });
 }
 </script>
 
