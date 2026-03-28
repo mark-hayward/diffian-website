@@ -73,8 +73,7 @@
         .navbar.scrolled { background: oklch(100% 0 0 / 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--dark-card-border); box-shadow: 0 1px 12px oklch(0% 0 0 / 0.06); padding: 12px 0; }
         .navbar .container { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-icon { width: 36px; height: 36px; background: var(--gradient-blue); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; color: white; position: relative; overflow: hidden; }
-        .logo-icon::after { content: ''; position: absolute; inset: 2px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); }
+        .logo-icon { height: 36px; object-fit: contain; }
         .logo-text { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); }
         .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
         .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
@@ -158,9 +157,6 @@
         .footer ul a:hover { color: var(--text-primary); }
         .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--dark-card-border); flex-wrap: wrap; gap: 16px; }
         .footer-bottom p { font-size: var(--text-xs); color: var(--text-muted); }
-        .footer-socials { display: flex; gap: 16px; }
-        .footer-socials a { color: var(--text-muted); font-size: 1.1rem; transition: color 0.2s; }
-        .footer-socials a:hover { color: var(--text-primary); }
     </style>
 </head>
 <body>
@@ -168,8 +164,7 @@
 <nav class="navbar" id="navbar">
     <div class="container">
         <a href="../index.html" class="logo">
-            <div class="logo-icon">D</div>
-            <span class="logo-text">Diffian</span>
+            <img class="logo-icon" src="../images/diffian.png" alt="Diffian">
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="../index.html#services">Services</a></li>
@@ -353,7 +348,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="../index.html" class="logo">
-                    <div class="logo-icon">D</div>
+                    <img class="logo-icon" src="../images/D.png" alt="Diffian">
                     <span class="logo-text">Diffian</span>
                 </a>
                 <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
@@ -379,21 +374,11 @@
                 </ul>
             </div>
             <div>
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
+
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Diffian. All rights reserved. A Cloudavian venture. diffian.com</p>
-            <div class="footer-socials">
-                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            </div>
         </div>
     </div>
 </footer>

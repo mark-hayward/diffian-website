@@ -231,26 +231,8 @@
         }
 
         .logo-icon {
-            width: 36px;
             height: 36px;
-            background: var(--gradient-blue);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.1rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-icon::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.2);
+            object-fit: contain;
         }
 
         .logo-text {
@@ -1533,18 +1515,6 @@
             color: var(--text-muted);
         }
 
-        .footer-socials {
-            display: flex;
-            gap: 16px;
-        }
-
-        .footer-socials a {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            transition: color 0.2s;
-        }
-
-        .footer-socials a:hover { color: var(--text-primary); }
 
         /* ── GLARE EFFECTS ───────────────── */
         .glare {
@@ -1564,8 +1534,7 @@
 <nav class="navbar" id="navbar">
     <div class="container">
         <a href="#" class="logo">
-            <div class="logo-icon">D</div>
-            <span class="logo-text">Diffian</span>
+            <img class="logo-icon" src="images/diffian.png" alt="Diffian">
         </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#services">Services</a></li>
@@ -1590,10 +1559,7 @@
     <div class="hero-orb hero-orb-3"></div>
     <div class="container">
         <div class="hero-content">
-            <div class="hero-badge reveal">
-                <span class="dot"></span>
-                Now accepting projects — Cardiff, UK
-            </div>
+
             <h1 class="reveal reveal-delay-1">
                 You vibed it.<br>
                 <span class="gradient-text">We'll ship it.</span>
@@ -1853,23 +1819,18 @@
         <div class="why-grid">
             <div class="why-card reveal">
                 <div class="icon"><i class="fas fa-map-pin"></i></div>
-                <h3>Cardiff, UK Based</h3>
-                <p>A real team in a real office. Same timezone, clear communication, accountable delivery.</p>
+                <h3>UK Based</h3>
+                <p>A real team in a real office. Same timezone, clear communication, accountable delivery. Feel free to visit us in Cardiff.</p>
             </div>
             <div class="why-card reveal reveal-delay-1">
                 <div class="icon"><i class="fab fa-aws"></i></div>
                 <h3>AWS Experts</h3>
                 <p>Certified AWS architects and DevOps engineers. We build on the platform that runs half the internet.</p>
             </div>
-            <div class="why-card reveal reveal-delay-2">
-                <div class="icon"><i class="fas fa-users-gear"></i></div>
-                <h3>Senior Engineers Only</h3>
-                <p>No juniors learning on your project. Every person who touches your code has 10+ years of production experience.</p>
-            </div>
             <div class="why-card reveal reveal-delay-3">
                 <div class="icon"><i class="fas fa-building"></i></div>
-                <h3>Cloudavian Pedigree</h3>
-                <p>Born from the team behind Cloudavian. We bring enterprise cloud expertise to the indie hacker world.</p>
+                <h3>Enterprise Pedigree</h3>
+                <p>We bring enterprise cloud expertise to the modern AI developer.</p>
             </div>
             <div class="why-card reveal reveal-delay-4">
                 <div class="icon"><i class="fas fa-bolt"></i></div>
@@ -1944,7 +1905,7 @@
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Vibe coding is building software using AI tools like ChatGPT, Claude, Cursor, or Copilot — describing what you want in natural language and letting AI generate the code. It's brilliant for prototyping, but the output typically lacks the security, testing, and infrastructure needed for production.</p>
+                    <p>Vibe coding is building software using AI tools like V0, Lovable, ChatGPT, Claude, Cursor, or Copilot — describing what you want in natural language and letting AI generate the code. It's brilliant for prototyping, but the output typically lacks the security, testing, and infrastructure needed for production.</p>
                 </div>
             </div>
             <div class="faq-item reveal reveal-delay-1">
@@ -2040,7 +2001,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo">
-                    <div class="logo-icon">D</div>
+                    <img class="logo-icon" src="images/D.png" alt="Diffian">
                     <span class="logo-text">Diffian</span>
                 </a>
                 <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
@@ -2065,22 +2026,9 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
-            <div>
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Diffian. All rights reserved. A Cloudavian venture. diffian.com</p>
-            <div class="footer-socials">
-                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            </div>
         </div>
     </div>
 </footer>
