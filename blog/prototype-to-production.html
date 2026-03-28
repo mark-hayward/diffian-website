@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Prototype to Production: A Step-by-Step Guide | Diffian Blog</title>
+    <meta name="description" content="What 'production-ready' actually means, and how to get there from a vibe-coded prototype. A step-by-step guide covering security, infrastructure, CI/CD, monitoring, and compliance.">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="From Prototype to Production: A Step-by-Step Guide">
+    <meta property="og:description" content="Six stages from working prototype to enterprise-grade production system — with real examples of what goes wrong at each step.">
+    <meta property="og:url" content="https://diffian.com/blog/prototype-to-production.html">
+    <meta property="article:published_time" content="2026-03-10">
+    <meta property="article:author" content="Mark Hayward">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="From Prototype to Production: A Step-by-Step Guide">
+    <meta name="twitter:description" content="What production-ready actually means — and how to get there from a vibe-coded app.">
+    <link rel="canonical" href="https://diffian.com/blog/prototype-to-production.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "From Prototype to Production: A Step-by-Step Guide",
+      "description": "A step-by-step guide covering security hardening, infrastructure, CI/CD, monitoring, and compliance for vibe-coded applications.",
+      "author": { "@type": "Person", "name": "Mark Hayward", "url": "https://diffian.com" },
+      "publisher": { "@type": "Organization", "name": "Diffian", "url": "https://diffian.com" },
+      "datePublished": "2026-03-10",
+      "dateModified": "2026-03-10",
+      "url": "https://diffian.com/blog/prototype-to-production.html",
+      "mainEntityOfPage": "https://diffian.com/blog/prototype-to-production.html",
+      "keywords": "prototype to production, production-ready, DevOps, CI/CD, security hardening, cloud infrastructure, monitoring"
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --blue-electric: oklch(53% 0.22 255);
+            --teal-bright: oklch(82% 0.16 168);
+            --teal-dark: oklch(60% 0.16 168);
+            --cyan-glow: oklch(83% 0.14 210);
+            --dark-bg: oklch(98.5% 0.005 270);
+            --dark-card: oklch(100% 0 0);
+            --dark-card-border: oklch(88% 0.012 270);
+            --dark-surface: oklch(96% 0.008 270);
+            --text-primary: oklch(13% 0.02 270);
+            --text-secondary: oklch(40% 0.015 270);
+            --text-muted: oklch(58% 0.012 270);
+            --shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.06), 0 4px 16px oklch(0% 0 0 / 0.04);
+            --shadow-md: 0 2px 8px oklch(0% 0 0 / 0.07), 0 8px 28px oklch(0% 0 0 / 0.05);
+            --gradient-accent: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
+            --gradient-blue: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
+            --gradient-cta: linear-gradient(135deg, var(--teal-bright), var(--cyan-glow));
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px;
+            --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px;
+            --space-5: 40px; --space-6: 48px; --space-8: 64px;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; border-radius: 4px; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-sans); background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .gradient-text { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 0; transition: background 0.3s ease, padding 0.3s ease; }
+        .navbar.scrolled { background: oklch(100% 0 0 / 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--dark-card-border); box-shadow: 0 1px 12px oklch(0% 0 0 / 0.06); padding: 12px 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: var(--gradient-blue); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; color: white; position: relative; overflow: hidden; }
+        .logo-icon::after { content: ''; position: absolute; inset: 2px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); }
+        .logo-text { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); }
+        .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        .nav-cta { padding: 10px 24px; background: var(--gradient-cta); color: var(--dark-bg) !important; font-weight: 700 !important; border-radius: 100px; transition: transform 0.2s, box-shadow 0.2s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,214,160,0.3); }
+        .mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: oklch(100% 0 0 / 0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--dark-card-border); box-shadow: 0 8px 24px oklch(0% 0 0 / 0.08); }
+            .nav-links.open { display: flex; }
+        }
+        .article-hero { padding: 120px 0 60px; background: linear-gradient(135deg, oklch(99% 0.004 270) 0%, oklch(97% 0.014 285) 100%); border-bottom: 1px solid var(--dark-card-border); }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 24px; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--text-primary); }
+        .breadcrumb-sep { color: var(--dark-card-border); }
+        .article-tag { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-dark); background: oklch(95% 0.025 168); padding: 4px 10px; border-radius: 100px; display: inline-block; margin-bottom: 16px; }
+        .article-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; max-width: 840px; margin-bottom: 24px; }
+        .article-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .article-author { display: flex; align-items: center; gap: 10px; }
+        .article-author-avatar { width: 40px; height: 40px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 0.9rem; flex-shrink: 0; }
+        .article-author-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+        .article-author-role { font-size: var(--text-xs); color: var(--text-muted); }
+        .article-meta-divider { width: 1px; height: 28px; background: var(--dark-card-border); }
+        .article-meta-item { font-size: var(--text-sm); color: var(--text-muted); }
+        .article-layout { padding: 64px 0 0; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+        .article-body { font-size: 1.0625rem; line-height: 1.78; color: var(--text-secondary); }
+        .article-body h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--text-primary); margin: 2.5rem 0 1rem; }
+        .article-body h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin: 1.75rem 0 0.6rem; }
+        .article-body p { margin-bottom: 1.4rem; }
+        .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body strong { color: var(--text-primary); font-weight: 600; }
+        .article-body blockquote { border-left: 3px solid var(--teal-dark); padding: 16px 24px; margin: 2rem 0; background: var(--dark-surface); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-style: italic; color: var(--text-primary); font-size: 1.05rem; line-height: 1.6; }
+        .article-body a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
+        .article-body a:hover { color: var(--blue-electric); }
+        /* Step cards */
+        .step-card { background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-lg); padding: 28px 32px; margin: 2rem 0; box-shadow: var(--shadow-sm); display: flex; gap: 20px; }
+        .step-number { width: 40px; height: 40px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; color: white; flex-shrink: 0; margin-top: 2px; }
+        .step-content { flex: 1; }
+        .step-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .step-duration { font-size: var(--text-xs); font-family: var(--font-mono); color: var(--teal-dark); margin-bottom: 12px; display: block; }
+        .step-body { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.7; }
+        .step-body p { margin-bottom: 0.75rem; }
+        .step-body ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+        .step-body li { margin-bottom: 0.4rem; }
+        .step-warning { background: oklch(98% 0.01 30); border: 1px solid oklch(88% 0.04 30); border-radius: var(--radius-sm); padding: 10px 14px; margin-top: 12px; font-size: var(--text-xs); color: oklch(45% 0.06 30); }
+        .step-warning strong { color: oklch(38% 0.07 30); }
+        @media (max-width: 560px) { .step-card { flex-direction: column; } }
+        .share-section { margin-top: 48px; padding: 28px 32px; background: var(--dark-surface); border-radius: var(--radius-lg); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .share-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+        .share-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 100px; font-size: var(--text-xs); font-weight: 600; text-decoration: none; transition: transform 0.2s, opacity 0.2s; cursor: pointer; border: none; font-family: var(--font-sans); }
+        .share-btn:hover { transform: translateY(-1px); opacity: 0.85; }
+        .share-btn--twitter { background: #000; color: white; }
+        .share-btn--linkedin { background: #0A66C2; color: white; }
+        .share-btn--copy { background: var(--dark-card); color: var(--text-secondary); border: 1px solid var(--dark-card-border) !important; }
+        .author-bio { margin-top: 40px; padding: 32px; background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-lg); display: flex; gap: 24px; align-items: flex-start; box-shadow: var(--shadow-sm); }
+        .author-bio-avatar { width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; color: white; flex-shrink: 0; }
+        .author-bio-name { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+        .author-bio-role { font-size: var(--text-xs); color: var(--teal-dark); font-family: var(--font-mono); margin-bottom: 10px; }
+        .author-bio-text { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.65; }
+        @media (max-width: 560px) { .author-bio { flex-direction: column; } }
+        .article-cta-section { padding: 60px 0; }
+        .article-cta { padding: 48px; background: linear-gradient(135deg, var(--blue-electric), var(--teal-dark)); border-radius: var(--radius-xl); text-align: center; }
+        .article-cta h2 { font-size: 1.75rem; font-weight: 800; margin-bottom: 12px; color: white; letter-spacing: -0.02em; }
+        .article-cta p { font-size: var(--text-base); color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto 24px; line-height: 1.6; }
+        .article-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: white; color: var(--blue-electric); font-weight: 700; border-radius: 100px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; font-size: var(--text-sm); }
+        .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        @media (max-width: 640px) { .article-cta { padding: 32px 24px; } .article-cta h2 { font-size: 1.5rem; } }
+        .related-section { padding: 60px 0 80px; border-top: 1px solid var(--dark-card-border); }
+        .related-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; }
+        .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } }
+        .related-card { padding: 24px; background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: block; }
+        .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+        .related-card-tag { font-size: 0.7rem; font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-dark); margin-bottom: 8px; display: block; }
+        .related-card-title { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+        .related-card-date { font-size: var(--text-xs); color: var(--text-muted); margin-top: 8px; display: block; }
+        .footer { padding: var(--space-8) 0 var(--space-4); background: oklch(97% 0.007 270); border-top: 1px solid var(--dark-card-border); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-brand p { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.65; margin-top: var(--space-1); max-width: 280px; }
+        .footer h4 { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: var(--space-2); }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul a { color: var(--text-secondary); text-decoration: none; font-size: var(--text-sm); transition: color 0.2s; }
+        .footer ul a:hover { color: var(--text-primary); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--dark-card-border); flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { font-size: var(--text-xs); color: var(--text-muted); }
+        .footer-socials { display: flex; gap: 16px; }
+        .footer-socials a { color: var(--text-muted); font-size: 1.1rem; transition: color 0.2s; }
+        .footer-socials a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <a href="../index.html" class="logo">
+            <div class="logo-icon">D</div>
+            <span class="logo-text">Diffian</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html#services">Services</a></li>
+            <li><a href="../index.html#how-it-works">Process</a></li>
+            <li><a href="../index.html#pricing">Pricing</a></li>
+            <li><a href="../index.html#why-us">Why Us</a></li>
+            <li><a href="../index.html#faq">FAQ</a></li>
+            <li><a href="./index.html" class="active">Blog</a></li>
+            <li><a href="../index.html#contact" class="nav-cta">Get Started</a></li>
+        </ul>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<header class="article-hero">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">Diffian</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="./index.html">Blog</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>From Prototype to Production</span>
+        </nav>
+        <span class="article-tag">DevOps</span>
+        <h1>From Prototype to Production: A Step-by-Step Guide</h1>
+        <div class="article-meta">
+            <div class="article-author">
+                <div class="article-author-avatar">MH</div>
+                <div>
+                    <div class="article-author-name">Mark Hayward</div>
+                    <div class="article-author-role">Founder, Diffian</div>
+                </div>
+            </div>
+            <div class="article-meta-divider"></div>
+            <span class="article-meta-item">10 March 2026</span>
+            <div class="article-meta-divider"></div>
+            <span class="article-meta-item">10 min read</span>
+        </div>
+    </div>
+</header>
+
+<main class="article-layout">
+    <div class="article-container">
+        <article class="article-body reveal">
+
+            <p>"Production-ready" gets thrown around a lot, but what does it actually mean? It's not a single thing — it's a constellation of properties that together make an application safe to run in front of real users, at real scale, for real money. Security that holds up under attack. Infrastructure that stays up when things go wrong. A deployment process that doesn't require a developer to manually push files and hope. Monitoring that tells you about problems before your users do.</p>
+
+            <p>The journey from working prototype to production-grade system is well-understood. It has predictable stages, predictable effort, and predictable outcomes — when you know what you're doing. Here's how it works.</p>
+
+            <h2>What "Production-Ready" Actually Means</h2>
+
+            <p>Before diving into the steps, it's worth defining the destination. A production-ready application has:</p>
+
+            <ul>
+                <li><strong>Security</strong> — no exposed secrets, hardened authentication and authorisation, input validation, dependency hygiene</li>
+                <li><strong>Reliability</strong> — the system stays up; failures are isolated and recoverable; there are backups</li>
+                <li><strong>Observability</strong> — you know what's happening inside the system at all times, without having to ask users</li>
+                <li><strong>Deployability</strong> — code can be tested, reviewed, deployed, and rolled back in a controlled, repeatable way</li>
+                <li><strong>Scalability</strong> — the system handles growth without requiring emergency intervention</li>
+                <li><strong>Compliance</strong> — where applicable, meets the legal and regulatory requirements of its domain and jurisdiction</li>
+            </ul>
+
+            <p>None of these are binary — each exists on a spectrum, and what's "good enough" depends on the application. A low-stakes internal tool has different requirements than a healthcare platform or a fintech service. The steps below are universal; the depth of implementation should be calibrated to risk.</p>
+
+            <h2>The Six Stages</h2>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Code Review &amp; Architectural Assessment</div>
+                    <span class="step-duration">Typical duration: 1–3 days</span>
+                    <div class="step-body">
+                        <p>Before changing anything, understand what you have. A thorough review of a vibe-coded application covers the data model and its integrity constraints, authentication and authorisation flows, API design and input handling, dependency versions and known vulnerabilities, and the overall architecture — whether it will scale, where the single points of failure are, and what the technical debt looks like.</p>
+                        <p>This stage produces a prioritised list of issues: critical security findings that block launch, important hardening tasks to complete before significant user growth, and lower-priority improvements that can wait. It gives everyone a shared, honest picture of where the application actually stands.</p>
+                        <div class="step-warning"><strong>Common finding:</strong> API keys in frontend code, committed to version control, or in <code>.env</code> files that were accidentally pushed. Rotate these immediately — they should be considered compromised.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Security Hardening</div>
+                    <span class="step-duration">Typical duration: 3–10 days depending on findings</span>
+                    <div class="step-body">
+                        <p>Address the findings from Stage 1, working from highest to lowest severity. Critical security work typically includes:</p>
+                        <ul>
+                            <li>Moving all secrets to a proper secret management system (environment variables, AWS Secrets Manager, Vault)</li>
+                            <li>Auditing and fixing authorisation checks — ensuring every API endpoint verifies not just that the user is authenticated, but that they're authorised to access the specific resource</li>
+                            <li>Adding rate limiting to authentication endpoints and other sensitive operations</li>
+                            <li>Replacing any string-concatenated SQL queries with parameterised queries</li>
+                            <li>Adding proper input validation and output encoding</li>
+                            <li>Implementing security headers (CSP, HSTS, X-Frame-Options)</li>
+                            <li>Setting up dependency vulnerability scanning</li>
+                        </ul>
+                        <div class="step-warning"><strong>Common mistake:</strong> Treating authentication and authorisation as the same problem. Authentication (are you who you say you are?) is usually implemented correctly. Authorisation (are you allowed to access this specific thing?) is where the holes are most often found.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Infrastructure Setup</div>
+                    <span class="step-duration">Typical duration: 2–5 days</span>
+                    <div class="step-body">
+                        <p>Move from "running on a server somewhere" to a properly designed, infrastructure-as-code-managed environment. This means separate staging and production environments, automated backups with tested restore procedures, appropriate compute and database sizing, CDN configuration for static assets, and DNS and SSL certificate management.</p>
+                        <p>For most vibe-coded applications, the right infrastructure is simpler than people assume: a managed application platform (Railway, Render, Fly.io, or AWS ECS), a managed database (RDS, PlanetScale, Supabase), and a CDN. The goal is managed services that reduce operational burden, not a bespoke Kubernetes cluster that requires a dedicated DevOps engineer to maintain.</p>
+                        <p>Everything should be defined as code — Terraform, Pulumi, or CloudFormation — so that infrastructure is reproducible, auditable, and can be rebuilt from scratch if necessary.</p>
+                        <div class="step-warning"><strong>Common mistake:</strong> Building production infrastructure before having a tested backup and restore process. The infrastructure that matters most is the one you use when something goes catastrophically wrong.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">CI/CD Pipeline</div>
+                    <span class="step-duration">Typical duration: 2–4 days</span>
+                    <div class="step-body">
+                        <p>Replace manual deployments with an automated pipeline that runs on every code change. A minimal, effective CI/CD pipeline includes: running automated tests on every pull request, blocking merges when tests fail, automated deployment to staging on merge to the main branch, a manual promotion gate before production deployment, and automated rollback capability if a deployment fails health checks.</p>
+                        <p>GitHub Actions, GitLab CI, and CircleCI are all solid choices. The specific tool matters less than the discipline: nothing goes to production without passing the pipeline. No exceptions for "just a small change".</p>
+                        <p>This is also the stage to establish a branching strategy, a pull request review process, and a deployment approval workflow. These aren't bureaucracy for its own sake — they're the mechanisms that keep accidental changes from reaching production and ensure that at least one other set of eyes has seen every change.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-title">Monitoring &amp; Alerting</div>
+                    <span class="step-duration">Typical duration: 1–3 days</span>
+                    <div class="step-body">
+                        <p>You cannot fix what you cannot see. Production monitoring should cover uptime checks (external monitoring that simulates a user accessing your service every minute), error tracking (Sentry, Datadog, or similar — capturing every exception with full context), performance monitoring (p50/p95/p99 latency for critical endpoints), and business metrics (user signups, key actions, revenue events — whatever matters to the health of the product).</p>
+                        <p>Alerting should be calibrated carefully. Too many alerts means alerts get ignored; too few means you miss real problems. Start with: page on downtime (immediately), alert on elevated error rates (within minutes), warn on performance degradation. Review and tune over the first few weeks in production.</p>
+                        <div class="step-warning"><strong>Common gap:</strong> Monitoring that tells you the server is up but not whether the application is working correctly. A server can be running and accepting requests while serving error pages to 100% of users. Monitor what users experience, not just what the server reports.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <div class="step-title">Documentation &amp; Compliance</div>
+                    <span class="step-duration">Typical duration: 2–5 days (ongoing)</span>
+                    <div class="step-body">
+                        <p>Documentation serves two audiences: the engineering team (who needs to understand and maintain the system) and compliance/legal (who needs evidence of controls). Both are important, and the work overlaps more than people expect.</p>
+                        <p>Technical documentation should cover: architecture diagrams, deployment and rollback procedures, incident response runbooks, and on-call responsibilities. For applications handling personal data, compliance documentation includes data processing records (GDPR Article 30), a privacy policy and terms of service, a data breach response procedure, and if applicable, a Data Protection Impact Assessment.</p>
+                        <p>For teams pursuing SOC 2 or ISO 27001, this stage is the beginning of a longer programme — but starting with the documentation discipline early makes certification significantly less painful when you get there.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>When to DIY vs When to Get Help</h2>
+
+            <p>The honest answer is: it depends on whether your team has done it before. Each of these stages is learnable, and if you have the time and the interest, doing it yourself builds genuine capability.</p>
+
+            <p>The cases where getting specialist help makes clear financial sense: when you have a time-to-market constraint that doesn't allow for the learning curve, when compliance requirements mean mistakes have regulatory consequences, when the security risk surface is high (user financial data, healthcare data, enterprise customers), or when your team's time is more valuable spent on product than on infrastructure.</p>
+
+            <p>A well-run production hardening engagement takes two to four weeks and leaves you with a system that's genuinely production-grade, documented, and understood by your team. That's usually faster and cheaper than the alternative — which is discovering the gaps one at a time, under pressure, after they've caused real problems.</p>
+
+        </article>
+
+        <div class="share-section reveal">
+            <span class="share-label">Share this article</span>
+            <div class="share-buttons">
+                <a class="share-btn share-btn--twitter" href="https://twitter.com/intent/tweet?text=From+Prototype+to+Production%3A+A+Step-by-Step+Guide&url=https://diffian.com/blog/prototype-to-production.html" target="_blank" rel="noopener">
+                    <i class="fab fa-x-twitter"></i> Share on X
+                </a>
+                <a class="share-btn share-btn--linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://diffian.com/blog/prototype-to-production.html" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+                <button class="share-btn share-btn--copy" onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'">
+                    <i class="fas fa-link"></i> Copy link
+                </button>
+            </div>
+        </div>
+
+        <div class="author-bio reveal">
+            <div class="author-bio-avatar">MH</div>
+            <div>
+                <div class="author-bio-name">Mark Hayward</div>
+                <div class="author-bio-role">Founder, Diffian</div>
+                <p class="author-bio-text">Mark is a DevOps engineer and software architect with over a decade of experience taking applications from prototype to production. Based in Cardiff, he founded Diffian to help the growing wave of vibe-coded software reach its full potential safely.</p>
+            </div>
+        </div>
+
+        <div class="article-cta-section reveal">
+            <div class="article-cta">
+                <h2>Ready to take your prototype the rest of the way?</h2>
+                <p>We work through all six stages with you — code review, security hardening, infrastructure, CI/CD, monitoring, and compliance. Fixed-price packages from £350.</p>
+                <a href="../index.html#contact">See our packages <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="related-section reveal">
+            <h2>Continue reading</h2>
+            <div class="related-grid">
+                <a class="related-card" href="./hidden-costs-vibe-coded-apps.html">
+                    <span class="related-card-tag">Security</span>
+                    <div class="related-card-title">The Hidden Costs of Shipping Vibe-Coded Apps Without Engineering Support</div>
+                    <span class="related-card-date">5 February 2026</span>
+                </a>
+                <a class="related-card" href="./vibe-coding-platforms-compared.html">
+                    <span class="related-card-tag">Tools</span>
+                    <div class="related-card-title">Vibe Coding Platforms Compared: Cursor vs Bolt vs Lovable vs Replit vs Claude Code</div>
+                    <span class="related-card-date">20 February 2026</span>
+                </a>
+                <a class="related-card" href="./why-cardiff.html">
+                    <span class="related-card-tag">Culture</span>
+                    <div class="related-card-title">Why Cardiff? Building a World-Class DevOps Team in Wales</div>
+                    <span class="related-card-date">20 March 2026</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">D</div>
+                    <span class="logo-text">Diffian</span>
+                </a>
+                <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="../index.html#services">Code Review</a></li>
+                    <li><a href="../index.html#services">Security Hardening</a></li>
+                    <li><a href="../index.html#services">Cloud Infrastructure</a></li>
+                    <li><a href="../index.html#services">CI/CD Pipelines</a></li>
+                    <li><a href="../index.html#services">Monitoring</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="../index.html#why-us">About Us</a></li>
+                    <li><a href="../index.html#pricing">Pricing</a></li>
+                    <li><a href="../index.html#faq">FAQ</a></li>
+                    <li><a href="./index.html">Blog</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Diffian. All rights reserved. A Cloudavian venture. diffian.com</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+document.getElementById('mobileToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
