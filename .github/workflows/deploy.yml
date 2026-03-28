@@ -52,6 +52,7 @@ jobs:
             --delete
 
       - name: Deploy CloudFront Function (append index.html to directory URLs)
+        continue-on-error: true  # Requires manual CloudFormation stack update to grant IAM permissions first
         run: |
           FUNCTION_NAME="diffian-append-index-html"
           FUNCTION_CODE="infrastructure/index-redirect.js"
@@ -94,6 +95,7 @@ jobs:
             --distribution-config "$UPDATED_CONFIG"
 
       - name: Invalidate CloudFront cache
+        if: always()
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
