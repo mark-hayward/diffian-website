@@ -18,28 +18,28 @@
     <style>
         :root {
             /* Vibrant accent colors — OKLCH for perceptual uniformity */
-            --blue-electric: oklch(53% 0.22 255);
-            --teal-bright: oklch(82% 0.16 168);
-            --teal-dark: oklch(60% 0.16 168);
-            --cyan-glow: oklch(83% 0.14 210);
+            --blue-electric: oklch(56% 0.2 250);
+            --teal-bright: oklch(84% 0.13 205);
+            --teal-dark: oklch(67% 0.14 210);
+            --cyan-glow: oklch(90% 0.09 195);
 
-            /* Light tinted neutrals — violet-hued light backgrounds */
-            --dark-bg: oklch(98.5% 0.005 270);
+            /* Light tinted neutrals — cool blue light backgrounds */
+            --dark-bg: oklch(98.5% 0.004 245);
             --dark-card: oklch(100% 0 0);
-            --dark-card-border: oklch(88% 0.012 270);
-            --dark-surface: oklch(96% 0.008 270);
+            --dark-card-border: oklch(88% 0.01 245);
+            --dark-surface: oklch(96% 0.006 245);
 
             /* Text — tinted neutrals, high contrast on light */
-            --text-primary: oklch(13% 0.02 270);
-            --text-secondary: oklch(40% 0.015 270);
-            --text-muted: oklch(58% 0.012 270);
+            --text-primary: oklch(13% 0.018 245);
+            --text-secondary: oklch(40% 0.014 245);
+            --text-muted: oklch(58% 0.011 245);
 
             /* Card shadow — for depth on light bg */
             --shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.06), 0 4px 16px oklch(0% 0 0 / 0.04);
             --shadow-md: 0 2px 8px oklch(0% 0 0 / 0.07), 0 8px 28px oklch(0% 0 0 / 0.05);
             --shadow-lg: 0 4px 16px oklch(0% 0 0 / 0.08), 0 16px 48px oklch(0% 0 0 / 0.06);
 
-            --gradient-hero: linear-gradient(135deg, oklch(99% 0.004 270) 0%, oklch(97% 0.014 285) 40%, oklch(98% 0.009 255) 70%, oklch(99% 0.004 270) 100%);
+            --gradient-hero: linear-gradient(135deg, oklch(99% 0.003 245) 0%, oklch(97% 0.012 230) 42%, oklch(98% 0.01 200) 74%, oklch(99% 0.003 245) 100%);
             --gradient-accent: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
             /* gradient-blue: blue→teal used for all UI elements (icons, badges, circles) */
             --gradient-blue: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
@@ -1983,7 +1983,7 @@
                 <option value="enterprise">Enterprise Ready — £3,500+</option>
                 <option value="unsure">Not sure yet — help me decide</option>
             </select>
-            <input type="url" name="repo_url" placeholder="Link to your repo or app (optional)">
+            <input type="url" name="app_url" placeholder="App URL (optional)">
             <textarea name="message" placeholder="Tell us about your app — what it does, what stack it's on, and what you need help with..." rows="4"></textarea>
             <button type="submit" class="btn-primary" id="contactSubmitBtn">
                 Submit Your Project <i class="fas fa-paper-plane"></i>
@@ -2234,12 +2234,17 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        const endpoint = contactForm.getAttribute('action');
         const btn = document.getElementById('contactSubmitBtn');
         const successMsg = document.getElementById('contactSuccess');
+        if (!endpoint) {
+            alert('Form endpoint is not configured yet.');
+            return;
+        }
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
         btn.disabled = true;
         try {
-            const res = await fetch(contactForm.action, {
+            const res = await fetch(endpoint, {
                 method: 'POST',
                 body: new FormData(contactForm),
                 headers: { 'Accept': 'application/json' }
