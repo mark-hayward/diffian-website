@@ -8,7 +8,7 @@
     <meta name="description" content="Vibe coding empowers domain experts to build software the way they want it. AI tools let them iterate at the speed of thought. Here's why this changes everything.">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Why Vibe Coding Is the Future of Software Development">
-    <meta property="og:description" content="For the first time, the people who understand problems best can build solutions themselves. Here's why vibe coding is a fundamental shift — not a shortcut.">
+    <meta property="og:description" content="For the first time, the people who understand problems best can build solutions themselves. Here's why vibe coding is a fundamental shift, not a shortcut.">
     <meta property="og:url" content="https://diffian.com/blog/vibe-coding-future.html">
     <meta property="article:published_time" content="2026-01-15">
     <meta property="article:author" content="Mark Hayward">
@@ -109,6 +109,8 @@
         .article-layout { padding: 64px 0 0; }
         .article-container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
         .article-body { font-size: 1.0625rem; line-height: 1.78; color: var(--text-secondary); }
+        .article-feature-image { width: 100%; height: auto; border-radius: var(--radius-lg); margin-bottom: 3rem; overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--dark-card-border); }
+        .article-feature-image img { width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 16 / 9; }
         .article-body h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--text-primary); margin: 2.5rem 0 1rem; }
         .article-body h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); margin: 2rem 0 0.75rem; }
         .article-body p { margin-bottom: 1.4rem; }
@@ -228,15 +230,15 @@
     <div class="article-container">
         <article class="article-body reveal">
 
-            <p>There's a quiet revolution happening in software development. It doesn't look like the revolutions we were promised — no general AI superintelligence, no robot coders replacing entire teams overnight. It looks like a product manager at a logistics company building their own internal dashboard in an afternoon. It looks like a nurse manager creating a shift scheduling tool that actually maps to how nurses work. It looks like a founder prototyping their SaaS idea over a weekend and validating it before spending a penny on engineering.</p>
+            <p>There's a quiet revolution happening in software development. It doesn't look like the revolutions we were promised: no general AI superintelligence, no robot coders replacing entire teams overnight. It looks like a product manager at a logistics company building their own internal dashboard in an afternoon. It looks like a nurse manager creating a shift scheduling tool that actually maps to how nurses work. It looks like a founder prototyping their SaaS idea over a weekend and validating it before spending a penny on engineering.</p>
 
-            <p>This is vibe coding: the practice of building software through natural language, AI-assisted iteration, and domain-led design — without needing traditional programming skills. And it's not a trend. It's a structural shift in who gets to create software.</p>
+            <p>This is vibe coding: the practice of building software through natural language, AI-assisted iteration, and domain-led design, without needing traditional programming skills. And it's not a trend; it's a structural shift in who gets to create software.</p>
 
             <h2>What Vibe Coding Actually Is</h2>
 
             <p>The term was coined by OpenAI researcher Andrej Karpathy in early 2025, describing a mode of development where you describe what you want to a large language model and iteratively refine the result. You write English instead of Python. You describe the outcome you're looking for, not the implementation steps. The AI handles the syntax; you handle the intent.</p>
 
-            <p>The tools enabling this — platforms like Cursor, Bolt.new, Lovable, Claude Code, and Replit — each take a slightly different approach. Some are browser-based IDEs, some are CLI tools, some focus on design-first workflows. What they share is a dramatic reduction in the technical overhead required to go from idea to working software. (<a href="./vibe-coding-platforms-compared.html">We've compared all the major platforms here</a> if you want a detailed breakdown.)</p>
+            <p>The tools enabling this, including platforms like Cursor, Bolt.new, Lovable, Claude Code, and Replit, each take a slightly different approach. Some are browser-based IDEs, some are CLI tools, some focus on design-first workflows. What they share is a dramatic reduction in the technical overhead required to go from idea to working software. (<a href="./vibe-coding-platforms-compared.html">We've compared all the major platforms here</a> if you want a detailed breakdown.)</p>
 
             <p>But the tools aren't the revolution. The revolution is what happens when they get into the hands of the right people.</p>
 
@@ -246,17 +248,38 @@
 
             <p>A software specification travels through a chain of handoffs: business stakeholder → product manager → UX designer → developer → QA tester → and back around again. At every step, something is lost. Context erodes. The nuances that make a solution actually useful get filtered out.</p>
 
-            <p>A developer building a scheduling system for a hospital doesn't know that the overnight staff always work in pairs, or that certain wards require specific certification levels, or that pay rules change on bank holidays. The nurse manager who knows all of this intimately had that knowledge filtered out two handoffs ago — translated into a specification document that captures the surface but misses the texture.</p>
+            <p>A developer building a scheduling system for a hospital doesn't know that the overnight staff always work in pairs, or that certain wards require specific certification levels, or that pay rules change on bank holidays. The nurse manager who knows all of this intimately had that knowledge filtered out two handoffs ago (translated into a specification document that captures the surface but misses the texture).</p>
+
+            <div class="article-image reveal">
+                <svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 40H250L200 160H100L50 40Z" fill="var(--blue-electric)" fill-opacity="0.05" stroke="var(--blue-electric)" stroke-width="1" stroke-dasharray="4 2" />
+                    <text x="150" y="30" font-family="var(--font-mono)" font-size="10" fill="var(--text-muted)" text-anchor="middle">TRADITIONAL SPECIFICATION</text>
+                    <text x="150" y="70" font-family="var(--font-sans)" font-size="11" fill="var(--text-primary)" text-anchor="middle">Expert Knowledge</text>
+                    <path d="M150 80V110" stroke="var(--text-muted)" stroke-width="1" marker-end="url(#arrow-gray)" />
+                    <text x="150" y="135" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="oklch(60% 0.22 25)" text-anchor="middle">"The Spec"</text>
+                    <rect x="350" y="40" width="200" height="120" rx="8" fill="var(--teal-bright)" fill-opacity="0.05" stroke="var(--teal-bright)" stroke-width="2" />
+                    <text x="450" y="30" font-family="var(--font-mono)" font-size="10" fill="var(--teal-dark)" text-anchor="middle">VIBE CODING</text>
+                    <circle cx="450" cy="85" r="25" fill="var(--teal-bright)" fill-opacity="0.2" stroke="var(--teal-bright)" stroke-width="2" />
+                    <text x="450" y="89" font-family="var(--font-sans)" font-size="10" font-weight="800" fill="var(--text-primary)" text-anchor="middle">EXPERT</text>
+                    <path d="M450 110V135" stroke="var(--teal-bright)" stroke-width="2" marker-end="url(#arrow-teal)" />
+                    <text x="450" y="155" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="var(--text-primary)" text-anchor="middle">Working Software</text>
+                    <defs>
+                        <marker id="arrow-gray" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="var(--text-muted)" /></marker>
+                        <marker id="arrow-teal" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="var(--teal-bright)" /></marker>
+                    </defs>
+                </svg>
+                <div class="article-image-caption">Fig 2: Closing the Context Gap with Domain-Led Build</div>
+            </div>
 
             <blockquote>"The best software is built by people who would use it themselves. For the first time, that's becoming universally possible."</blockquote>
 
-            <p>Vibe coding short-circuits this chain. The person who owns the problem can now be the person who builds the solution. And the software that emerges is qualitatively different — shaped by real domain knowledge rather than a specification document's approximation of it.</p>
+            <p>Vibe coding short-circuits this chain. The person who owns the problem can now be the person who builds the solution. And the software that emerges is qualitatively different, shaped by real domain knowledge rather than a specification document's approximation of it.</p>
 
             <h2>The Speed of Iteration</h2>
 
-            <p>Traditional software development is measured in sprints — two-week cycles of planning, building, reviewing, and testing. A change to how a single screen displays data might take a week to implement and another week to verify. The feedback loop between having an idea and seeing it in working software is long, expensive, and full of degradation.</p>
+            <p>Traditional software development is measured in sprints: two-week cycles of planning, building, reviewing, and testing. A change to how a single screen displays data might take a week to implement and another week to verify. The feedback loop between having an idea and seeing it in working software is long, expensive, and full of degradation.</p>
 
-            <p>Vibe-coded software iterates at the speed of thought. See something that doesn't quite work? Change it in thirty seconds. Want to try a completely different approach to the data model? Rebuild the feature in an hour. Testing becomes immediate and intuitive because the person building is also the person using — there's no handoff delay, no misinterpretation, no waiting for the next sprint cycle.</p>
+            <p>Vibe-coded software iterates at the speed of thought. See something that doesn't quite work? Change it in thirty seconds. Want to try a completely different approach to the data model? Rebuild the feature in an hour. Testing becomes immediate and intuitive because the person building is also the person using; there's no handoff delay, no misinterpretation, no waiting for the next sprint cycle.</p>
 
             <p>This speed compounds. An internal tool that previously required three months and significant development budget can now be created, tested, refined, and deployed in a week by someone who has never written a line of code. The time saved isn't just financial — it's competitive. Ideas that would have died waiting for development bandwidth can now be tested in the real world and validated or discarded before significant investment is made.</p>
 
@@ -265,11 +288,11 @@
             <p>The range of applications being built this way is broader than most people realise:</p>
 
             <ul>
-                <li><strong>Internal tools</strong> — dashboards, reporting systems, inventory trackers, and customer management interfaces built specifically for how a business actually operates, not how a generic SaaS vendor imagines it might</li>
-                <li><strong>MVPs and prototypes</strong> — complete working prototypes with authentication, databases, and real interfaces, ready for user testing within days</li>
-                <li><strong>Automations</strong> — tools that connect APIs, process data, trigger notifications, and perform tasks that previously required custom backend development</li>
-                <li><strong>Client portals</strong> — bespoke interfaces for customers or partners, tailored to specific workflows rather than forced into generic templates</li>
-                <li><strong>Data tools</strong> — custom visualisations and analysis dashboards built against real business data, without the overhead of enterprise BI tooling</li>
+                <li><strong>Internal tools</strong>: dashboards, reporting systems, inventory trackers, and customer management interfaces built specifically for how a business actually operates, not how a generic SaaS vendor imagines it might</li>
+                <li><strong>MVPs and prototypes</strong>: complete working prototypes with authentication, databases, and real interfaces, ready for user testing within days</li>
+                <li><strong>Automations</strong>: tools that connect APIs, process data, trigger notifications, and perform tasks that previously required custom backend development</li>
+                <li><strong>Client portals</strong>: bespoke interfaces for customers or partners, tailored to specific workflows rather than forced into generic templates</li>
+                <li><strong>Data tools</strong>: custom visualisations and analysis dashboards built against real business data, without the overhead of enterprise BI tooling</li>
             </ul>
 
             <p>These aren't toy projects. With appropriate engineering attention applied, they can be genuine production software. Which brings us to an important caveat.</p>
@@ -360,7 +383,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="../index.html" class="logo">
-                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px;">
+                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px 14px; height: 108px;">
                 </a>
                 <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
             </div>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer data-domain="diffian.com" src="https://plausible.io/js/script.js"></script>
     <title>The Hidden Costs of Shipping Vibe-Coded Apps Without Engineering Support | Diffian Blog</title>
-    <meta name="description" content="Vibe coding gets you 80% of the way there fast. But the missing 20% — security, CI/CD, monitoring, compliance — is where the real risk lives. Here's what you're missing.">
+    <meta name="description" content="Vibe coding gets you 80% of the way there fast. But the missing 20% (security, CI/CD, monitoring, compliance) is where the real risk lives. Here's what you're missing.">
     <meta property="og:type" content="article">
     <meta property="og:title" content="The Hidden Costs of Shipping Vibe-Coded Apps Without Engineering Support">
     <meta property="og:description" content="AI tools ship fast. But security gaps, no monitoring, and missing compliance can cost far more than the engineering you saved.">
@@ -21,7 +21,7 @@
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": "The Hidden Costs of Shipping Vibe-Coded Apps Without Engineering Support",
-      "description": "Vibe coding gets you 80% of the way there. The missing 20% — security, CI/CD, monitoring, compliance — is where the real risk lives.",
+      "description": "Vibe coding gets you 80% of the way there. The missing 20% (security, CI/CD, monitoring, compliance) is where the real risk lives.",
       "author": { "@type": "Person", "name": "Mark Hayward", "url": "https://diffian.com" },
       "publisher": { "@type": "Organization", "name": "Diffian", "url": "https://diffian.com" },
       "datePublished": "2026-02-05",
@@ -214,11 +214,11 @@
 
             <p>AI coding tools are genuinely impressive. In a matter of hours you can go from a blank screen to a working web application with a database, user authentication, and a polished interface. The speed is intoxicating, and the results are often good enough to demo, pilot, and even charge money for.</p>
 
-            <p>But "good enough to demo" and "safe to run in production" are very different things. The gap between them — which we think of as the missing 20% — is where the real cost of skipping professional engineering support tends to live. And that cost is rarely obvious until something goes wrong.</p>
+            <p>But "good enough to demo" and "safe to run in production" are very different things. The gap between them, which we think of as the missing 20%, is where the real cost of skipping professional engineering support tends to live. And that cost is rarely obvious until something goes wrong.</p>
 
             <h2>The 80/20 Problem in Practice</h2>
 
-            <p>Vibe coding tools are optimised for speed and functional correctness. They produce code that works — in the happy path, on the developer's machine, with expected inputs and no adversarial users. They're not optimised for what happens when a user tries to access someone else's data, or when traffic spikes, or when a dependency has a known vulnerability, or when a regulator asks to see your data processing records.</p>
+            <p>Vibe coding tools are optimised for speed and functional correctness. They produce code that works: in the happy path, on the developer's machine, with expected inputs and no adversarial users. They're not optimised for what happens when a user tries to access someone else's data, or when traffic spikes, or when a dependency has a known vulnerability, or when a regulator asks to see your data processing records.</p>
 
             <div class="article-image reveal">
                 <svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -259,7 +259,7 @@
                 <div class="article-image-caption">Fig 1: The Iceberg of Production Readiness</div>
             </div>
 
-            <p>The 80% — the working prototype — is real and valuable. The 20% is not a minor cleanup job. It's the part that determines whether your application is safe to put in front of real users, whether it will still work under load, whether it will stay up when things go wrong, and whether you'll hear about downtime from your monitoring system or from angry users on social media.</p>
+            <p>The 80%, the working prototype, is real and valuable. The 20% is not a minor cleanup job. It's the part that determines whether your application is safe to put in front of real users, whether it will still work under load, whether it will stay up when things go wrong, and whether you'll hear about downtime from your monitoring system or from angry users on social media.</p>
 
             <blockquote>"We shipped on a Friday. By Monday morning we had 3,000 users and no idea the app had been leaking session tokens since launch."</blockquote>
 
@@ -267,9 +267,45 @@
 
             <h2>Security Gaps</h2>
 
+            <div class="article-image reveal">
+                <svg width="600" height="240" viewBox="0 0 600 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Shield Shape -->
+                    <path d="M300 40C240 40 200 60 200 60V120C200 170 300 200 300 200C300 200 400 170 400 120V60C400 60 360 40 300 40Z" stroke="var(--blue-electric)" stroke-width="2" stroke-dasharray="8 4" opacity="0.3" />
+                    
+                    <!-- Core Lock -->
+                    <rect x="275" y="100" width="50" height="40" rx="4" fill="var(--teal-bright)" fill-opacity="0.2" stroke="var(--teal-bright)" stroke-width="2" />
+                    <path d="M285 100V85C285 76.7157 291.716 70 300 70C308.284 70 315 76.7157 315 85V100" stroke="var(--teal-bright)" stroke-width="2" />
+                    <circle cx="300" cy="120" r="4" fill="var(--teal-bright)" />
+                    
+                    <!-- Threat Vectors -->
+                    <g>
+                        <path d="M120 80L180 100" stroke="oklch(60% 0.22 25)" stroke-width="2" marker-end="url(#arrow-red)" opacity="0.6" />
+                        <text x="60" y="75" font-family="var(--font-mono)" font-size="9" fill="oklch(60% 0.22 25)">IDOR ATTACKS</text>
+                        
+                        <path d="M140 160L190 140" stroke="oklch(60% 0.22 25)" stroke-width="2" marker-end="url(#arrow-red)" opacity="0.6" />
+                        <text x="70" y="175" font-family="var(--font-mono)" font-size="9" fill="oklch(60% 0.22 25)">SQL INJECTION</text>
+                        
+                        <path d="M480 80L420 100" stroke="oklch(60% 0.22 25)" stroke-width="2" marker-end="url(#arrow-red)" opacity="0.6" />
+                        <text x="490" y="75" font-family="var(--font-mono)" font-size="9" fill="oklch(60% 0.22 25)">LEAKED KEYS</text>
+                        
+                        <path d="M460 160L410 140" stroke="oklch(60% 0.22 25)" stroke-width="2" marker-end="url(#arrow-red)" opacity="0.6" />
+                        <text x="470" y="175" font-family="var(--font-mono)" font-size="9" fill="oklch(60% 0.22 25)">XSS VULNS</text>
+                    </g>
+                    
+                    <defs>
+                        <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="oklch(60% 0.22 25)" />
+                        </marker>
+                    </defs>
+                    
+                    <text x="300" y="230" font-family="var(--font-mono)" font-size="10" fill="var(--text-muted)" text-anchor="middle">REACTIVE VULNERABILITY MITIGATION</text>
+                </svg>
+                <div class="article-image-caption">Fig 2: Common Security Threat Vectors in AI-Built Apps</div>
+            </div>
+
             <div class="risk-card">
                 <h3>Exposed API keys and secrets</h3>
-                <p>AI-generated code frequently includes API keys, database connection strings, and other secrets hardcoded directly in the frontend or committed to version control. These are trivially discoverable — by automated scanners, by competitors, or by anyone who opens browser developer tools. Once exposed, a leaked key can mean unauthorised access to your data, unexpected charges, or complete compromise of a third-party service.</p>
+                <p>AI-generated code frequently includes API keys, database connection strings, and other secrets hardcoded directly in the frontend or committed to version control. These are trivially discoverable by automated scanners, competitors, or anyone who opens browser developer tools. Once exposed, a leaked key can mean unauthorised access to your data, unexpected charges, or complete compromise of a third-party service.</p>
             </div>
 
             <div class="risk-card">
@@ -284,7 +320,7 @@
 
             <div class="risk-card">
                 <h3>SQL injection and input validation</h3>
-                <p>When AI writes database queries using string concatenation rather than parameterised queries, the application becomes vulnerable to SQL injection — one of the oldest and most well-understood attack classes in existence. Similarly, insufficient input validation can enable cross-site scripting (XSS), allowing attackers to inject malicious code into your application's output.</p>
+                <p>When AI writes database queries using string concatenation rather than parameterised queries, the application becomes vulnerable to SQL injection, one of the oldest and most well-understood attack classes in existence. Similarly, insufficient input validation can enable cross-site scripting (XSS), allowing attackers to inject malicious code into your application's output.</p>
             </div>
 
             <h2>No CI/CD Means No Safety Net</h2>
@@ -293,11 +329,11 @@
 
             <p>Without a continuous integration and deployment pipeline, you have no automated testing before code reaches production, no ability to roll back instantly if a deployment breaks something, no audit trail of what was deployed and when, and no confidence that the code running in production matches what's in version control.</p>
 
-            <p>The practical consequence: bugs that could have been caught automatically reach users. Fixing them requires another manual deployment. If the fix introduces a new bug, you do it again. Each cycle is manual, error-prone, and stressful. Teams in this situation often end up freezing changes because they're afraid of breaking something — which means the product stops improving.</p>
+            <p>The practical consequence: bugs that could have been caught automatically reach users. Fixing them requires another manual deployment. If the fix introduces a new bug, you do it again. Each cycle is manual, error-prone, and stressful. Teams in this situation often end up freezing changes because they're afraid of breaking something, meaning the product stops improving.</p>
 
             <h2>No Monitoring Means Discovering Problems the Wrong Way</h2>
 
-            <p>Without monitoring, you find out about downtime from users. You find out about performance degradation when customers complain. You find out about errors when a frustrated support email arrives. By the time any of this reaches you, the damage — to the user experience, to trust, to revenue — has already been done.</p>
+            <p>Without monitoring, you find out about downtime from users. You find out about performance degradation when customers complain. You find out about errors when a frustrated support email arrives. By the time any of this reaches you, the damage to user experience, trust, and revenue has already been done.</p>
 
             <p>Proper production monitoring includes uptime checks that alert within minutes of a service going down, error rate tracking that surfaces exceptions before they become widespread, performance monitoring that catches latency regressions, log aggregation that lets you diagnose issues after the fact, and alerting that pages the right person immediately. None of this appears automatically in a vibe-coded application.</p>
 
@@ -307,7 +343,7 @@
 
             <p>These frameworks require documented security controls, data processing records, incident response procedures, access control policies, and regular security reviews. A vibe-coded application has none of these by default. Retrofitting them after the fact is significantly more expensive than building them in from the start.</p>
 
-            <p>The cost of non-compliance isn't theoretical. GDPR fines can reach 4% of global annual turnover. More commonly, the cost is a lost enterprise deal — the one that would have changed the trajectory of the business — because you couldn't pass the security questionnaire.</p>
+            <p>The cost of non-compliance isn't theoretical. GDPR fines can reach 4% of global annual turnover. More commonly, the cost is a lost enterprise deal, the one that would have changed the trajectory of the business, because you couldn't pass the security questionnaire.</p>
 
             <h2>Scaling Challenges</h2>
 
@@ -319,9 +355,9 @@
 
             <p>It's tempting to calculate the cost savings of shipping without engineering support and conclude you've saved money. The real calculation includes: the engineering time to fix a security incident after it happens (typically 10-100x the cost of preventing it), the revenue impact of downtime, the lost enterprise deals that require compliance certification, the technical debt accumulated by a system that was never designed for scale, and the cost of rebuilding when the shortcuts catch up with you.</p>
 
-            <p>The engineering investment to take a vibe-coded application from prototype to production-grade is a fraction of these downstream costs. It's also predictable and finite — unlike the cost of a breach, a compliance failure, or a critical system that needs to be rebuilt under pressure.</p>
+            <p>The engineering investment to take a vibe-coded application from prototype to production-grade is a fraction of these downstream costs. It's also predictable and finite, unlike the cost of a breach, a compliance failure, or a critical system that needs to be rebuilt under pressure.</p>
 
-            <p>The right question isn't whether you can afford the engineering. It's whether you can afford not to have it. <a href="./prototype-to-production.html">We've written a step-by-step guide to what production hardening actually involves</a> — it's less mysterious than it sounds.</p>
+            <p>The right question isn't whether you can afford the engineering. It's whether you can afford not to have it. <a href="./prototype-to-production.html">We've written a step-by-step guide to what production hardening actually involves</a>; it's less mysterious than it sounds.</p>
 
         </article>
 
@@ -390,7 +426,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="../index.html" class="logo">
-                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px;">
+                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px 14px; height: 108px;">
                 </a>
                 <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
             </div>

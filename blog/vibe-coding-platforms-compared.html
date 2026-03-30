@@ -239,9 +239,13 @@
     <div class="article-container">
         <article class="article-body reveal">
 
-            <p>The vibe coding landscape has matured rapidly. Where a year ago there were a handful of experimental tools, there are now several polished platforms with distinct philosophies, genuine strengths, and real tradeoffs. Choosing the right one for your project matters — the wrong choice can mean hours of fighting the tool rather than building.</p>
+            <div class="article-feature-image">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200&h=675" alt="Modern laptop showing code on a clean desk workspace - Tech developer background">
+            </div>
 
-            <p>We've used all of these platforms on real projects, from quick internal tools to multi-week product builds. This is an honest assessment, not a sponsored comparison. Pricing information is accurate as of February 2026 but changes frequently — always check the provider's website.</p>
+            <p>The vibe coding landscape has matured rapidly. Where a year ago there were a handful of experimental tools, there are now several polished platforms with distinct philosophies, genuine strengths, and real tradeoffs. Choosing the right one for your project matters; the wrong choice can mean hours of fighting the tool rather than building.</p>
+
+            <p>We've used all of these platforms on real projects, from quick internal tools to multi-week product builds. This is an honest assessment, not a sponsored comparison. Pricing information is accurate as of February 2026 but changes frequently (always check the provider's website).</p>
 
             <div class="article-image reveal">
                 <svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -575,6 +579,25 @@
 
             <h2>Which Should You Choose?</h2>
 
+            <div class="article-image reveal">
+                <svg width="600" height="220" viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="300" y="20" font-family="var(--font-mono)" font-size="10" fill="var(--text-muted)" text-anchor="middle">PLATFORM TRADE-OFFS</text>
+                    <text x="100" y="60" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="var(--text-primary)" text-anchor="end">Bolt / Lovable</text>
+                    <rect x="120" y="50" width="300" height="12" rx="6" fill="var(--teal-bright)" fill-opacity="0.8" />
+                    <text x="430" y="60" font-family="var(--font-mono)" font-size="9" fill="var(--teal-dark)">MAX SPEED</text>
+                    <text x="100" y="100" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="var(--text-primary)" text-anchor="end">Cursor</text>
+                    <rect x="120" y="90" width="220" height="12" rx="6" fill="var(--blue-electric)" fill-opacity="0.6" />
+                    <text x="350" y="100" font-family="var(--font-mono)" font-size="9" fill="var(--blue-electric)">BALANCE</text>
+                    <text x="100" y="140" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="var(--text-primary)" text-anchor="end">Claude Code</text>
+                    <rect x="120" y="130" width="140" height="12" rx="6" fill="var(--text-muted)" fill-opacity="0.4" />
+                    <text x="270" y="140" font-family="var(--font-mono)" font-size="9" fill="var(--text-muted)">MAX CONTROL</text>
+                    <line x1="120" y1="170" x2="420" y2="170" stroke="var(--dark-card-border)" stroke-width="1" />
+                    <text x="120" y="185" font-family="var(--font-mono)" font-size="8" fill="var(--text-muted)">CONTROL</text>
+                    <text x="420" y="185" font-family="var(--font-mono)" font-size="8" fill="var(--text-muted)" text-anchor="end">SPEED</text>
+                </svg>
+                <div class="article-image-caption">Fig 2: Balancing Velocity against Technical Control</div>
+            </div>
+
             <p><strong>If you're non-technical and want to build something fast</strong>, start with Bolt.new or Lovable. Both get you to a working prototype without any setup. Lovable is better if design matters from day one; Bolt is better if you need a working backend quickly.</p>
 
             <p><strong>If you're a developer who wants AI to accelerate your existing workflow</strong>, Cursor is the natural fit. It respects your existing setup and makes you faster without changing how you work.</p>
@@ -651,7 +674,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="../index.html" class="logo">
-                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px;">
+                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px 14px; height: 108px;">
                 </a>
                 <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
             </div>
@@ -693,6 +716,10 @@ const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
+ealObserver.observe(el));
 </script>
 </body>
 </html>

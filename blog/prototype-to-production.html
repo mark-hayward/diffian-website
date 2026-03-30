@@ -8,13 +8,13 @@
     <meta name="description" content="What 'production-ready' actually means, and how to get there from a vibe-coded prototype. A step-by-step guide covering security, infrastructure, CI/CD, monitoring, and compliance.">
     <meta property="og:type" content="article">
     <meta property="og:title" content="From Prototype to Production: A Step-by-Step Guide">
-    <meta property="og:description" content="Six stages from working prototype to enterprise-grade production system — with real examples of what goes wrong at each step.">
+    <meta property="og:description" content="Six stages from working prototype to enterprise-grade production system, featuring real examples of what goes wrong at each step.">
     <meta property="og:url" content="https://diffian.com/blog/prototype-to-production.html">
     <meta property="article:published_time" content="2026-03-10">
     <meta property="article:author" content="Mark Hayward">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="From Prototype to Production: A Step-by-Step Guide">
-    <meta name="twitter:description" content="What production-ready actually means — and how to get there from a vibe-coded app.">
+    <meta name="twitter:description" content="What production-ready actually means, and how to get there from a vibe-coded app.">
     <link rel="canonical" href="https://diffian.com/blog/prototype-to-production.html">
     <script type="application/ld+json">
     {
@@ -222,21 +222,25 @@
     <div class="article-container">
         <article class="article-body reveal">
 
-            <p>"Production-ready" gets thrown around a lot, but what does it actually mean? It's not a single thing — it's a constellation of properties that together make an application safe to run in front of real users, at real scale, for real money. Security that holds up under attack. Infrastructure that stays up when things go wrong. A deployment process that doesn't require a developer to manually push files and hope. Monitoring that tells you about problems before your users do.</p>
+            <div class="article-feature-image">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200&h=675" alt="Macro shot of a high-performance computer processor - Tech engineering background">
+            </div>
 
-            <p>The journey from working prototype to production-grade system is well-understood. It has predictable stages, predictable effort, and predictable outcomes — when you know what you're doing. Here's how it works.</p>
+            <p>"Production-ready" gets thrown around a lot, but what does it actually mean? It's not a single thing; it's a constellation of properties that together make an application safe to run in front of real users, at real scale, for real money. Security that holds up under attack. Infrastructure that stays up when things go wrong. A deployment process that doesn't require a developer to manually push files and hope. Monitoring that tells you about problems before your users do.</p>
+
+            <p>The journey from working prototype to production-grade system is well-understood. It has predictable stages, predictable effort, and predictable outcomes when you know what you're doing. Here's how it works.</p>
 
             <h2>What "Production-Ready" Actually Means</h2>
 
             <p>Before diving into the steps, it's worth defining the destination. A production-ready application has:</p>
 
             <ul>
-                <li><strong>Security</strong> — no exposed secrets, hardened authentication and authorisation, input validation, dependency hygiene</li>
-                <li><strong>Reliability</strong> — the system stays up; failures are isolated and recoverable; there are backups</li>
-                <li><strong>Observability</strong> — you know what's happening inside the system at all times, without having to ask users</li>
-                <li><strong>Deployability</strong> — code can be tested, reviewed, deployed, and rolled back in a controlled, repeatable way</li>
-                <li><strong>Scalability</strong> — the system handles growth without requiring emergency intervention</li>
-                <li><strong>Compliance</strong> — where applicable, meets the legal and regulatory requirements of its domain and jurisdiction</li>
+                <li><strong>Security</strong>: no exposed secrets, hardened authentication and authorisation, input validation, dependency hygiene</li>
+                <li><strong>Reliability</strong>: the system stays up; failures are isolated and recoverable; there are backups</li>
+                <li><strong>Observability</strong>: you know what's happening inside the system at all times, without having to ask users</li>
+                <li><strong>Deployability</strong>: code can be tested, reviewed, deployed, and rolled back in a controlled, repeatable way</li>
+                <li><strong>Scalability</strong>: the system handles growth without requiring emergency intervention</li>
+                <li><strong>Compliance</strong>: where applicable, meets the legal and regulatory requirements of its domain and jurisdiction</li>
             </ul>
 
             <p>None of these are binary — each exists on a spectrum, and what's "good enough" depends on the application. A low-stakes internal tool has different requirements than a healthcare platform or a fintech service. The steps below are universal; the depth of implementation should be calibrated to risk.</p>
@@ -290,7 +294,7 @@
                     <div class="step-title">Code Review &amp; Architectural Assessment</div>
                     <span class="step-duration">Typical duration: 1–3 days</span>
                     <div class="step-body">
-                        <p>Before changing anything, understand what you have. A thorough review of a vibe-coded application covers the data model and its integrity constraints, authentication and authorisation flows, API design and input handling, dependency versions and known vulnerabilities, and the overall architecture — whether it will scale, where the single points of failure are, and what the technical debt looks like.</p>
+                        <p>Before changing anything, understand what you have. A thorough review of a vibe-coded application covers the data model and its integrity constraints, authentication and authorisation flows, API design and input handling, dependency versions and known vulnerabilities, and the overall architecture, including whether it will scale, where the single points of failure are, and what the technical debt looks like.</p>
                         <p>This stage produces a prioritised list of issues: critical security findings that block launch, important hardening tasks to complete before significant user growth, and lower-priority improvements that can wait. It gives everyone a shared, honest picture of where the application actually stands.</p>
                         <div class="step-warning"><strong>Common finding:</strong> API keys in frontend code, committed to version control, or in <code>.env</code> files that were accidentally pushed. Rotate these immediately — they should be considered compromised.</div>
                     </div>
@@ -306,7 +310,7 @@
                         <p>Address the findings from Stage 1, working from highest to lowest severity. Critical security work typically includes:</p>
                         <ul>
                             <li>Moving all secrets to a proper secret management system (environment variables, AWS Secrets Manager, Vault)</li>
-                            <li>Auditing and fixing authorisation checks — ensuring every API endpoint verifies not just that the user is authenticated, but that they're authorised to access the specific resource</li>
+                            <li>Auditing and fixing authorisation checks to ensure every API endpoint verifies not just that the user is authenticated, but that they're authorised to access the specific resource</li>
                             <li>Adding rate limiting to authentication endpoints and other sensitive operations</li>
                             <li>Replacing any string-concatenated SQL queries with parameterised queries</li>
                             <li>Adding proper input validation and output encoding</li>
@@ -326,7 +330,7 @@
                     <div class="step-body">
                         <p>Move from "running on a server somewhere" to a properly designed, infrastructure-as-code-managed environment. This means separate staging and production environments, automated backups with tested restore procedures, appropriate compute and database sizing, CDN configuration for static assets, and DNS and SSL certificate management.</p>
                         <p>For most vibe-coded applications, the right infrastructure is simpler than people assume: a managed application platform (Railway, Render, Fly.io, or AWS ECS), a managed database (RDS, PlanetScale, Supabase), and a CDN. The goal is managed services that reduce operational burden, not a bespoke Kubernetes cluster that requires a dedicated DevOps engineer to maintain.</p>
-                        <p>Everything should be defined as code — Terraform, Pulumi, or CloudFormation — so that infrastructure is reproducible, auditable, and can be rebuilt from scratch if necessary.</p>
+                        <p>Everything should be defined as code (Terraform, Pulumi, or CloudFormation) so that infrastructure is reproducible, auditable, and can be rebuilt from scratch if necessary.</p>
                         <div class="step-warning"><strong>Common mistake:</strong> Building production infrastructure before having a tested backup and restore process. The infrastructure that matters most is the one you use when something goes catastrophically wrong.</div>
                     </div>
                 </div>
@@ -337,10 +341,38 @@
                 <div class="step-content">
                     <div class="step-title">CI/CD Pipeline</div>
                     <span class="step-duration">Typical duration: 2–4 days</span>
+                    
+                    <div class="article-image reveal" style="padding: 20px; background: var(--dark-bg); margin: 1.5rem 0;">
+                        <svg width="600" height="120" viewBox="0 0 600 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 60H550" stroke="var(--dark-card-border)" stroke-width="2" stroke-dasharray="4 4" />
+                            <g>
+                                <circle cx="100" cy="60" r="18" fill="var(--dark-card)" stroke="var(--blue-electric)" stroke-width="2" />
+                                <text x="100" y="95" font-family="var(--font-mono)" font-size="8" fill="var(--text-muted)" text-anchor="middle">COMMIT</text>
+                                <path d="M180 60 L220 60" stroke="var(--blue-electric)" stroke-width="2" marker-end="url(#arrow-blue)" />
+                                <circle cx="250" cy="60" r="18" fill="var(--dark-card)" stroke="var(--blue-electric)" stroke-width="2" />
+                                <text x="250" y="95" font-family="var(--font-mono)" font-size="8" fill="var(--text-muted)" text-anchor="middle">TEST</text>
+                                <path d="M330 60 L370 60" stroke="var(--blue-electric)" stroke-width="2" marker-end="url(#arrow-blue)" />
+                                <circle cx="400" cy="60" r="18" fill="var(--dark-card)" stroke="var(--blue-electric)" stroke-width="2" />
+                                <text x="400" y="95" font-family="var(--font-mono)" font-size="8" fill="var(--text-muted)" text-anchor="middle">BUILD</text>
+                                <path d="M480 60 L520 60" stroke="var(--teal-bright)" stroke-width="2" marker-end="url(#arrow-teal)" />
+                                <circle cx="550" cy="60" r="18" fill="var(--teal-bright)" fill-opacity="0.2" stroke="var(--teal-bright)" stroke-width="2" />
+                                <text x="550" y="95" font-family="var(--font-mono)" font-size="8" fill="var(--teal-dark)" text-anchor="middle">DEPLOY</text>
+                            </g>
+                            <defs>
+                                <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                                    <polygon points="0 0, 8 3, 0 6" fill="var(--blue-electric)" />
+                                </marker>
+                                <marker id="arrow-teal" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                                    <polygon points="0 0, 8 3, 0 6" fill="var(--teal-bright)" />
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+
                     <div class="step-body">
                         <p>Replace manual deployments with an automated pipeline that runs on every code change. A minimal, effective CI/CD pipeline includes: running automated tests on every pull request, blocking merges when tests fail, automated deployment to staging on merge to the main branch, a manual promotion gate before production deployment, and automated rollback capability if a deployment fails health checks.</p>
                         <p>GitHub Actions, GitLab CI, and CircleCI are all solid choices. The specific tool matters less than the discipline: nothing goes to production without passing the pipeline. No exceptions for "just a small change".</p>
-                        <p>This is also the stage to establish a branching strategy, a pull request review process, and a deployment approval workflow. These aren't bureaucracy for its own sake — they're the mechanisms that keep accidental changes from reaching production and ensure that at least one other set of eyes has seen every change.</p>
+                        <p>This is also the stage to establish a branching strategy, a pull request review process, and a deployment approval workflow. These aren't bureaucracy for its own sake; they're the mechanisms that keep accidental changes from reaching production and ensure that at least one other set of eyes has seen every change.</p>
                     </div>
                 </div>
             </div>
@@ -351,7 +383,7 @@
                     <div class="step-title">Monitoring &amp; Alerting</div>
                     <span class="step-duration">Typical duration: 1–3 days</span>
                     <div class="step-body">
-                        <p>You cannot fix what you cannot see. Production monitoring should cover uptime checks (external monitoring that simulates a user accessing your service every minute), error tracking (Sentry, Datadog, or similar — capturing every exception with full context), performance monitoring (p50/p95/p99 latency for critical endpoints), and business metrics (user signups, key actions, revenue events — whatever matters to the health of the product).</p>
+                        <p>You cannot fix what you cannot see. Production monitoring should cover uptime checks (external monitoring that simulates a user accessing your service every minute), error tracking (Sentry, Datadog, or similar, capturing every exception with full context), performance monitoring (p50/p95/p99 latency for critical endpoints), and business metrics (user signups, key actions, revenue events, or whatever matters to the health of the product).</p>
                         <p>Alerting should be calibrated carefully. Too many alerts means alerts get ignored; too few means you miss real problems. Start with: page on downtime (immediately), alert on elevated error rates (within minutes), warn on performance degradation. Review and tune over the first few weeks in production.</p>
                         <div class="step-warning"><strong>Common gap:</strong> Monitoring that tells you the server is up but not whether the application is working correctly. A server can be running and accepting requests while serving error pages to 100% of users. Monitor what users experience, not just what the server reports.</div>
                     </div>
@@ -438,7 +470,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="../index.html" class="logo">
-                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px;">
+                    <img class="logo-icon" src="../images/D.png" alt="Diffian" style="background: white; border-radius: 999px; padding: 4px 14px; height: 108px;">
                 </a>
                 <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
             </div>
@@ -480,6 +512,10 @@ const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
+erver.observe(el));
 </script>
 </body>
 </html>
