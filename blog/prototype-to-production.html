@@ -241,6 +241,47 @@
 
             <p>None of these are binary — each exists on a spectrum, and what's "good enough" depends on the application. A low-stakes internal tool has different requirements than a healthcare platform or a fintech service. The steps below are universal; the depth of implementation should be calibrated to risk.</p>
 
+            <div class="article-image reveal">
+                <svg width="600" height="120" viewBox="0 0 600 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Roadmap Path -->
+                    <path d="M40 60H560" stroke="var(--dark-card-border)" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 12" />
+                    
+                    <!-- Stages -->
+                    <g>
+                        <!-- Stage 1 -->
+                        <circle cx="50" cy="60" r="20" fill="var(--gradient-blue)" stroke="var(--dark-bg)" stroke-width="4" />
+                        <text x="50" y="65" font-family="var(--font-sans)" font-size="12" font-weight="800" fill="white" text-anchor="middle">1</text>
+                        <text x="50" y="100" font-family="var(--font-mono)" font-size="9" fill="var(--text-muted)" text-anchor="middle">REVIEW</text>
+                        
+                        <!-- Stage 2 -->
+                        <circle cx="150" cy="60" r="20" fill="var(--gradient-blue)" stroke="var(--dark-bg)" stroke-width="4" />
+                        <text x="150" y="65" font-family="var(--font-sans)" font-size="12" font-weight="800" fill="white" text-anchor="middle">2</text>
+                        <text x="150" y="100" font-family="var(--font-mono)" font-size="9" fill="var(--text-muted)" text-anchor="middle">SECURITY</text>
+                        
+                        <!-- Stage 3 -->
+                        <circle cx="250" cy="60" r="20" fill="var(--gradient-blue)" stroke="var(--dark-bg)" stroke-width="4" />
+                        <text x="250" y="65" font-family="var(--font-sans)" font-size="12" font-weight="800" fill="white" text-anchor="middle">3</text>
+                        <text x="250" y="100" font-family="var(--font-mono)" font-size="9" fill="var(--text-muted)" text-anchor="middle">INFRA</text>
+                        
+                        <!-- Stage 4 -->
+                        <circle cx="350" cy="60" r="20" fill="var(--gradient-blue)" stroke="var(--dark-bg)" stroke-width="4" />
+                        <text x="350" y="65" font-family="var(--font-sans)" font-size="12" font-weight="800" fill="white" text-anchor="middle">4</text>
+                        <text x="350" y="100" font-family="var(--font-mono)" font-size="9" fill="var(--text-muted)" text-anchor="middle">CI/CD</text>
+                        
+                        <!-- Stage 5 -->
+                        <circle cx="450" cy="60" r="20" fill="var(--gradient-blue)" stroke="var(--dark-bg)" stroke-width="4" />
+                        <text x="450" y="65" font-family="var(--font-sans)" font-size="12" font-weight="800" fill="white" text-anchor="middle">5</text>
+                        <text x="450" y="100" font-family="var(--font-mono)" font-size="9" fill="var(--text-muted)" text-anchor="middle">MONITOR</text>
+                        
+                        <!-- Stage 6 -->
+                        <circle cx="550" cy="60" r="20" fill="var(--teal-bright)" stroke="var(--dark-bg)" stroke-width="4" />
+                        <text x="550" y="65" font-family="var(--font-sans)" font-size="12" font-weight="800" fill="var(--text-primary)" text-anchor="middle">6</text>
+                        <text x="550" y="100" font-family="var(--font-mono)" font-size="9" fill="var(--teal-dark)" text-anchor="middle">SHIP</text>
+                    </g>
+                </svg>
+                <div class="article-image-caption">Fig 1: The Six Stages of Production Hardening</div>
+            </div>
+
             <h2>The Six Stages</h2>
 
             <div class="step-card">

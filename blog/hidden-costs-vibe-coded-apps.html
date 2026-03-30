@@ -220,6 +220,45 @@
 
             <p>Vibe coding tools are optimised for speed and functional correctness. They produce code that works — in the happy path, on the developer's machine, with expected inputs and no adversarial users. They're not optimised for what happens when a user tries to access someone else's data, or when traffic spikes, or when a dependency has a known vulnerability, or when a regulator asks to see your data processing records.</p>
 
+            <div class="article-image reveal">
+                <svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sky -->
+                    <rect width="600" height="180" fill="var(--dark-bg)" />
+                    <!-- Water -->
+                    <rect y="180" width="600" height="220" fill="var(--blue-electric)" fill-opacity="0.05" />
+                    <line x1="0" y1="180" x2="600" y2="180" stroke="var(--blue-electric)" stroke-opacity="0.2" stroke-width="2" />
+                    
+                    <!-- Iceberg Above -->
+                    <path d="M220 180L300 60L380 180H220Z" fill="var(--teal-bright)" fill-opacity="0.8" />
+                    <text x="310" y="100" font-family="var(--font-sans)" font-size="14" font-weight="700" fill="var(--text-primary)">Vibe Code (80%)</text>
+                    <text x="310" y="120" font-family="var(--font-sans)" font-size="11" fill="var(--text-secondary)">UI, Features, Logic</text>
+                    
+                    <!-- Iceberg Below -->
+                    <path d="M220 180L300 360L380 180H220Z" fill="var(--blue-electric)" fill-opacity="0.3" />
+                    <text x="310" y="240" font-family="var(--font-sans)" font-size="14" font-weight="700" fill="var(--blue-electric)">Production Ready (20%)</text>
+                    
+                    <!-- Labels -->
+                    <g opacity="0.8">
+                        <circle cx="260" cy="270" r="3" fill="var(--blue-electric)" />
+                        <text x="270" y="274" font-family="var(--font-mono)" font-size="10" fill="var(--text-secondary)">SECURITY HARDENING</text>
+                        
+                        <circle cx="260" cy="295" r="3" fill="var(--blue-electric)" />
+                        <text x="270" y="299" font-family="var(--font-mono)" font-size="10" fill="var(--text-secondary)">CI/CD PIPELINES</text>
+                        
+                        <circle cx="260" cy="320" r="3" fill="var(--blue-electric)" />
+                        <text x="270" y="324" font-family="var(--font-mono)" font-size="10" fill="var(--text-secondary)">MONITORING & ALERTS</text>
+                        
+                        <circle cx="260" cy="345" r="3" fill="var(--blue-electric)" />
+                        <text x="270" y="349" font-family="var(--font-mono)" font-size="10" fill="var(--text-secondary)">COMPLIANCE & BACKUPS</text>
+                    </g>
+                    
+                    <!-- Annotation Line -->
+                    <path d="M180 100 Q 150 100 150 130 T 150 180" stroke="var(--text-muted)" stroke-dasharray="4 4" fill="none" />
+                    <text x="100" y="90" font-family="var(--font-mono)" font-size="10" fill="var(--text-muted)">VISIBLY COMPLETE</text>
+                </svg>
+                <div class="article-image-caption">Fig 1: The Iceberg of Production Readiness</div>
+            </div>
+
             <p>The 80% — the working prototype — is real and valuable. The 20% is not a minor cleanup job. It's the part that determines whether your application is safe to put in front of real users, whether it will still work under load, whether it will stay up when things go wrong, and whether you'll hear about downtime from your monitoring system or from angry users on social media.</p>
 
             <blockquote>"We shipped on a Friday. By Monday morning we had 3,000 users and no idea the app had been leaking session tokens since launch."</blockquote>
@@ -313,8 +352,11 @@
         <div class="article-cta-section reveal">
             <div class="article-cta">
                 <h2>Don't let the 20% sink the 80%.</h2>
-                <p>We audit vibe-coded applications for security, compliance, and production readiness — then fix what we find. Fixed-price packages from £350.</p>
-                <a href="../index.html#contact">Get a free assessment <i class="fas fa-arrow-right"></i></a>
+                <p>We audit vibe-coded applications for security, compliance, and production readiness. Not sure where to start?</p>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                    <a href="../index.html#contact" style="background:white; color:var(--blue-electric);">Get an assessment</a>
+                    <a href="https://calendar.app.google/qLVD3eYN1NbVcHmi9" target="_blank" style="background:transparent; border:1px solid white; color:white;">Book a 15-min call</a>
+                </div>
             </div>
         </div>
     </div>
