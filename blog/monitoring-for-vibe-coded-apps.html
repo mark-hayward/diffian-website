@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer data-domain="diffian.com" src="https://plausible.io/js/script.js"></script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHPD1F8CQH"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VHPD1F8CQH');</script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w6ff8ysyas");</script>
+    <title>Monitoring for Vibe-Coded Apps: A Founder's Guide | Diffian</title>
+    <meta name="description" content="Your vibe-coded app is live but you have no idea if it's working. Learn why monitoring matters, what to track, and how to set up error tracking, uptime alerts, and observability without an engineering team.">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Your Vibe-Coded App Is Live — Now What? A Founder's Guide to Monitoring">
+    <meta property="og:description" content="Most vibe-coded apps ship with zero monitoring. Here's what breaks when you can't see what's happening, and how to fix it before your users tell you.">
+    <meta property="og:url" content="https://diffian.com/blog/monitoring-for-vibe-coded-apps.html">
+    <meta property="article:published_time" content="2026-04-04">
+    <meta property="article:author" content="Mark Hayward">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Your Vibe-Coded App Is Live — Now What? A Founder's Guide to Monitoring">
+    <meta name="twitter:description" content="Most vibe-coded apps ship with zero monitoring. Here's how to fix that before your users tell you something is broken.">
+    <link rel="canonical" href="https://diffian.com/blog/monitoring-for-vibe-coded-apps.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Your Vibe-Coded App Is Live — Now What? A Founder's Guide to Monitoring",
+      "description": "Most vibe-coded apps ship with zero monitoring. Learn what to track, which tools to use, and how to set up observability without a dedicated engineering team.",
+      "author": { "@type": "Person", "name": "Mark Hayward", "url": "https://diffian.com" },
+      "publisher": { "@type": "Organization", "name": "Diffian", "url": "https://diffian.com" },
+      "datePublished": "2026-04-04",
+      "dateModified": "2026-04-04",
+      "url": "https://diffian.com/blog/monitoring-for-vibe-coded-apps.html",
+      "mainEntityOfPage": "https://diffian.com/blog/monitoring-for-vibe-coded-apps.html",
+      "keywords": "monitoring, observability, vibe coding, error tracking, uptime monitoring, Sentry, production monitoring, AI-generated apps, founders, alerting"
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --blue-electric: oklch(53% 0.22 255);
+            --teal-bright: oklch(82% 0.16 168);
+            --teal-dark: oklch(60% 0.16 168);
+            --cyan-glow: oklch(83% 0.14 210);
+            --dark-bg: oklch(98.5% 0.005 270);
+            --dark-card: oklch(100% 0 0);
+            --dark-card-border: oklch(88% 0.012 270);
+            --dark-surface: oklch(96% 0.008 270);
+            --text-primary: oklch(13% 0.02 270);
+            --text-secondary: oklch(40% 0.015 270);
+            --text-muted: oklch(58% 0.012 270);
+            --shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.06), 0 4px 16px oklch(0% 0 0 / 0.04);
+            --shadow-md: 0 2px 8px oklch(0% 0 0 / 0.07), 0 8px 28px oklch(0% 0 0 / 0.05);
+            --gradient-accent: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
+            --gradient-blue: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
+            --gradient-cta: linear-gradient(135deg, var(--teal-bright), var(--cyan-glow));
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px;
+            --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px;
+            --space-5: 40px; --space-6: 48px; --space-8: 64px;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; border-radius: 4px; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-sans); background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .gradient-text { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 0; transition: background 0.3s ease, padding 0.3s ease; }
+        .navbar.scrolled { background: oklch(100% 0 0 / 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--dark-card-border); box-shadow: 0 1px 12px oklch(0% 0 0 / 0.06); padding: 12px 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: var(--gradient-blue); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; color: white; position: relative; overflow: hidden; }
+        .logo-icon::after { content: ''; position: absolute; inset: 2px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); }
+        .logo-text { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); }
+        .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        .nav-cta { padding: 10px 24px; background: var(--gradient-cta); color: var(--dark-bg) !important; font-weight: 700 !important; border-radius: 100px; transition: transform 0.2s, box-shadow 0.2s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,214,160,0.3); }
+        .mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: oklch(100% 0 0 / 0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--dark-card-border); box-shadow: 0 8px 24px oklch(0% 0 0 / 0.08); }
+            .nav-links.open { display: flex; }
+        }
+        .article-hero { padding: 120px 0 60px; background: linear-gradient(135deg, oklch(99% 0.004 270) 0%, oklch(97% 0.014 285) 100%); border-bottom: 1px solid var(--dark-card-border); }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 24px; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--text-primary); }
+        .breadcrumb-sep { color: var(--dark-card-border); }
+        .article-tag { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-dark); background: oklch(95% 0.025 168); padding: 4px 10px; border-radius: 100px; display: inline-block; margin-bottom: 16px; }
+        .article-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; max-width: 840px; margin-bottom: 24px; }
+        .article-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .article-author { display: flex; align-items: center; gap: 10px; }
+        .article-author-avatar { width: 40px; height: 40px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 0.9rem; flex-shrink: 0; }
+        .article-author-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+        .article-author-role { font-size: var(--text-xs); color: var(--text-muted); }
+        .article-meta-divider { width: 1px; height: 28px; background: var(--dark-card-border); }
+        .article-meta-item { font-size: var(--text-sm); color: var(--text-muted); }
+        .article-layout { padding: 64px 0 0; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+        .article-body { font-size: 1.0625rem; line-height: 1.78; color: var(--text-secondary); }
+        .article-body h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--text-primary); margin: 2.5rem 0 1rem; }
+        .article-body h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin: 1.75rem 0 0.6rem; }
+        .article-body p { margin-bottom: 1.4rem; }
+        .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body strong { color: var(--text-primary); font-weight: 600; }
+        .article-body blockquote { border-left: 3px solid var(--teal-dark); padding: 16px 24px; margin: 2rem 0; background: var(--dark-surface); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-style: italic; color: var(--text-primary); font-size: 1.05rem; line-height: 1.6; }
+        .article-body a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
+        .article-body a:hover { color: var(--blue-electric); }
+        .monitoring-layer { background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-lg); padding: 28px 32px; margin: 2rem 0; box-shadow: var(--shadow-sm); display: flex; gap: 20px; }
+        .monitoring-layer-icon { width: 40px; height: 40px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; color: white; flex-shrink: 0; margin-top: 2px; }
+        .monitoring-layer-content { flex: 1; }
+        .monitoring-layer-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .monitoring-layer-body { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.7; }
+        .monitoring-layer-body p { margin-bottom: 0.75rem; }
+        .monitoring-layer-body ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+        .monitoring-layer-body li { margin-bottom: 0.4rem; }
+        @media (max-width: 560px) { .monitoring-layer { flex-direction: column; } }
+        .share-section { margin-top: 48px; padding: 28px 32px; background: var(--dark-surface); border-radius: var(--radius-lg); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .share-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+        .share-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 100px; font-size: var(--text-xs); font-weight: 600; text-decoration: none; transition: transform 0.2s, opacity 0.2s; cursor: pointer; border: none; font-family: var(--font-sans); }
+        .share-btn:hover { transform: translateY(-1px); opacity: 0.85; }
+        .share-btn--twitter { background: #000; color: white; }
+        .share-btn--linkedin { background: #0A66C2; color: white; }
+        .share-btn--copy { background: var(--dark-card); color: var(--text-secondary); border: 1px solid var(--dark-card-border) !important; }
+        .author-bio { margin-top: 40px; padding: 32px; background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-lg); display: flex; gap: 24px; align-items: flex-start; box-shadow: var(--shadow-sm); }
+        .author-bio-avatar { width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; color: white; flex-shrink: 0; }
+        .author-bio-name { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+        .author-bio-role { font-size: var(--text-xs); color: var(--teal-dark); font-family: var(--font-mono); margin-bottom: 10px; }
+        .author-bio-text { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.65; }
+        @media (max-width: 560px) { .author-bio { flex-direction: column; } }
+        .article-cta-section { padding: 60px 0; }
+        .article-cta { padding: 48px; background: linear-gradient(135deg, var(--blue-electric), var(--teal-dark)); border-radius: var(--radius-xl); text-align: center; }
+        .article-cta h2 { font-size: 1.75rem; font-weight: 800; margin-bottom: 12px; color: white; letter-spacing: -0.02em; }
+        .article-cta p { font-size: var(--text-base); color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto 24px; line-height: 1.6; }
+        .article-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: white; color: var(--blue-electric); font-weight: 700; border-radius: 100px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; font-size: var(--text-sm); }
+        .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        @media (max-width: 640px) { .article-cta { padding: 32px 24px; } .article-cta h2 { font-size: 1.5rem; } }
+        .related-section { padding: 60px 0 80px; border-top: 1px solid var(--dark-card-border); }
+        .related-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; }
+        .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } }
+        .related-card { padding: 24px; background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: block; }
+        .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+        .related-card-tag { font-size: 0.7rem; font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-dark); margin-bottom: 8px; display: block; }
+        .related-card-title { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+        .related-card-date { font-size: var(--text-xs); color: var(--text-muted); margin-top: 8px; display: block; }
+        .footer { padding: var(--space-8) 0 var(--space-4); background: oklch(97% 0.007 270); border-top: 1px solid var(--dark-card-border); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-brand p { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.65; margin-top: var(--space-1); max-width: 280px; }
+        .footer h4 { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: var(--space-2); }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul a { color: var(--text-secondary); text-decoration: none; font-size: var(--text-sm); transition: color 0.2s; }
+        .footer ul a:hover { color: var(--text-primary); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--dark-card-border); flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { font-size: var(--text-xs); color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <a href="../index.html" class="logo">
+            <div class="logo-icon">D</div>
+            <span class="logo-text">Diffian</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html#services">Services</a></li>
+            <li><a href="../index.html#how-it-works">Process</a></li>
+            <li><a href="../index.html#pricing">Pricing</a></li>
+            <li><a href="../index.html#why-us">Why Us</a></li>
+            <li><a href="../index.html#faq">FAQ</a></li>
+            <li><a href="./index.html" class="active">Blog</a></li>
+            <li><a href="../index.html#contact" class="nav-cta">Get Started</a></li>
+        </ul>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<header class="article-hero">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">Diffian</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="./index.html">Blog</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>Monitoring for Vibe-Coded Apps</span>
+        </nav>
+        <span class="article-tag">DevOps</span>
+        <h1>Your Vibe-Coded App Is Live — Now What? A Founder's Guide to Monitoring</h1>
+        <div class="article-meta">
+            <div class="article-author">
+                <div class="article-author-avatar">MH</div>
+                <div>
+                    <div class="article-author-name">Mark Hayward</div>
+                    <div class="article-author-role">Founder, Diffian</div>
+                </div>
+            </div>
+            <div class="article-meta-divider"></div>
+            <span class="article-meta-item">4 April 2026</span>
+            <div class="article-meta-divider"></div>
+            <span class="article-meta-item">9 min read</span>
+        </div>
+    </div>
+</header>
+
+<main class="article-layout">
+    <div class="article-container">
+        <article class="article-body reveal">
+
+            <p>You built an app with an AI coding tool. It works. You deployed it. Users are signing up. Everything looks great. But here is the question that separates hobby projects from real products: <strong>how would you know if it stopped working?</strong></p>
+
+            <p>Not tomorrow. Right now. If your database connection dropped five minutes ago, would you know? If your payment webhook started failing silently, would you find out before your users did? If response times doubled after your last deploy, would anything tell you?</p>
+
+            <p>For most vibe-coded applications, the honest answer is no. And that is not a criticism of the code — it is a gap in the infrastructure around the code. AI tools are excellent at generating application logic. They do not, by default, set up the systems that tell you whether that logic is behaving correctly in production.</p>
+
+            <h2>Why Monitoring Gets Skipped</h2>
+
+            <p>When you are building with AI coding tools, the feedback loop is immediate and visual. You describe what you want, the tool generates it, and you can see the result in your browser. This creates a natural bias toward visible features. You can see the login form. You can see the dashboard. You cannot see a dropped database connection or a memory leak.</p>
+
+            <p>Monitoring is invisible infrastructure. It produces no visible output until something goes wrong — and by then, the absence of monitoring means you are discovering the problem at the same time as your users. Often later, because your users will notice before you do.</p>
+
+            <p>The other reason monitoring gets skipped is that it feels like a later problem. The app works. Users are happy. Why spend time on something that only matters when things break? The answer is that things always break. The question is whether you find out in minutes or in hours.</p>
+
+            <h2>The Three Layers of Monitoring You Actually Need</h2>
+
+            <p>Monitoring can sound intimidating — dashboards, metrics, traces, logs, alerting rules. In practice, you need three things, and they are simpler than they sound.</p>
+
+            <div class="monitoring-layer">
+                <div class="monitoring-layer-icon"><i class="fas fa-heartbeat" style="font-size: 0.85rem;"></i></div>
+                <div class="monitoring-layer-content">
+                    <div class="monitoring-layer-title">Layer 1: Uptime Monitoring</div>
+                    <div class="monitoring-layer-body">
+                        <p>The most basic question: is your app reachable? Uptime monitoring pings your URL every minute or so and alerts you if it stops responding. This catches server crashes, DNS failures, expired SSL certificates, and deployment mistakes that take the whole site down.</p>
+                        <p><strong>Tools:</strong> UptimeRobot (free tier covers most needs), Better Stack, or Pingdom. Setup takes about five minutes. You enter your URL, set an alert threshold, and add your email or Slack channel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="monitoring-layer">
+                <div class="monitoring-layer-icon"><i class="fas fa-bug" style="font-size: 0.85rem;"></i></div>
+                <div class="monitoring-layer-content">
+                    <div class="monitoring-layer-title">Layer 2: Error Tracking</div>
+                    <div class="monitoring-layer-body">
+                        <p>Your app is up, but is it working correctly? Error tracking captures every unhandled exception, failed API call, and broken function — then groups them, shows you the stack trace, and tells you which users were affected.</p>
+                        <p><strong>Tools:</strong> Sentry is the standard. It has a generous free tier and integrates with every major framework. Adding it to a JavaScript app is a single script tag. For backend services, it is usually a few lines of initialisation code.</p>
+                        <p>Without error tracking, errors happen in silence. Your users see a blank screen or a cryptic error message and leave. With error tracking, you get a notification the moment something breaks, with enough context to fix it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="monitoring-layer">
+                <div class="monitoring-layer-icon"><i class="fas fa-chart-line" style="font-size: 0.85rem;"></i></div>
+                <div class="monitoring-layer-content">
+                    <div class="monitoring-layer-title">Layer 3: Performance and Health Metrics</div>
+                    <div class="monitoring-layer-body">
+                        <p>Your app is up and error-free, but is it fast? Performance monitoring tracks response times, page load speeds, and resource usage. It catches the slow degradations that do not trigger errors but drive users away — the API call that used to take 200 milliseconds and now takes three seconds.</p>
+                        <p><strong>Tools:</strong> Vercel Analytics or Netlify Analytics for frontend. Datadog, Grafana Cloud, or New Relic for backend infrastructure. Even basic CloudWatch metrics from AWS will tell you if your server is running out of memory or CPU.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>What Happens Without Monitoring: A Real Scenario</h2>
+
+            <p>Here is a scenario we see regularly. A founder ships a SaaS product built with an AI tool. It uses a third-party API for a core feature — maybe Stripe for payments, or an AI provider for text generation. The third-party API changes its response format slightly. The app does not crash, because the code handles the missing field gracefully by returning null. But the feature silently stops working.</p>
+
+            <p>Users notice. Some submit support tickets. Some just leave. The founder finds out three days later when they check their support inbox. By then, the damage is done — lost revenue, frustrated users, and a fire drill to find and fix the issue under pressure.</p>
+
+            <p>With basic error tracking, that broken API response would have triggered an alert within minutes. The fix might have been a ten-minute change. Instead, it became a three-day silent failure.</p>
+
+            <h2>The Vibe Coding Monitoring Blind Spot</h2>
+
+            <p>AI coding tools generate application code, not operational infrastructure. They will build you a beautiful dashboard, a working authentication system, and a functional checkout flow. They will not set up Sentry. They will not configure uptime alerts. They will not create a Grafana dashboard that shows your error rate after a deploy.</p>
+
+            <p>This is not a failing of the tools — it is a boundary of what they are designed to do. Building features and operating features are different disciplines. The first is about making things work. The second is about knowing they continue to work, and knowing quickly when they stop.</p>
+
+            <p>Most founders who build with AI tools are aware that security is a blind spot. Fewer realise that observability is an equally critical gap. You can have the most secure, well-architected app in the world, but if you cannot see what it is doing in production, you are operating blind.</p>
+
+            <h2>Setting Up Monitoring in an Afternoon</h2>
+
+            <p>The good news is that basic monitoring does not require an engineering team or a week of work. Here is a practical starting point that covers the essentials.</p>
+
+            <h3>Step 1: Uptime checks (15 minutes)</h3>
+            <p>Sign up for UptimeRobot or a similar service. Add monitors for your main URL and any critical API endpoints. Set the check interval to one minute. Point alerts at your email and, if you use it, a Slack channel. You will now know within minutes if your site goes down.</p>
+
+            <h3>Step 2: Error tracking (30 minutes)</h3>
+            <p>Create a Sentry account. Install the SDK for your framework — for most JavaScript frameworks this is an npm package and a few lines of initialisation. Deploy the change. Sentry will start capturing errors immediately, grouping them by type, showing you which code path triggered them, and tracking whether they are new or recurring.</p>
+
+            <h3>Step 3: Basic health endpoint (15 minutes)</h3>
+            <p>Add a simple health check endpoint to your backend — a route that returns a 200 status code when the app is running and its database connection is healthy. Point your uptime monitor at this endpoint instead of just the homepage. Now you are not just checking that the server responds, but that it can actually serve requests.</p>
+
+            <h3>Step 4: Deploy notifications (10 minutes)</h3>
+            <p>If you are using a CI/CD pipeline, add a notification step that posts to Slack or email whenever a deploy completes. This creates a timeline you can correlate with problems. When an error spikes, you can immediately see whether it started after a deploy — and which deploy.</p>
+
+            <h2>Beyond the Basics: When to Invest More</h2>
+
+            <p>The setup above covers the critical foundations. As your product grows, you will want to add more layers.</p>
+
+            <ul>
+                <li><strong>Structured logging</strong> gives you searchable records of what your application did, when, and for which user. When something goes wrong, logs are how you reconstruct what happened.</li>
+                <li><strong>APM (Application Performance Monitoring)</strong> shows you exactly where time is being spent in each request — which database query is slow, which external API call is the bottleneck.</li>
+                <li><strong>Alerting rules</strong> go beyond simple up-or-down checks to trigger on conditions like error rate exceeding a threshold, response time degrading, or a specific critical error occurring.</li>
+                <li><strong>Synthetic monitoring</strong> runs automated user journeys — log in, create a resource, check the output — on a schedule, so you know critical paths are working even when no real users are online.</li>
+            </ul>
+
+            <p>These are valuable, but they are second-order priorities. Get the three layers right first. You can always add sophistication later. You cannot retroactively know about the outage you missed yesterday.</p>
+
+            <h2>Monitoring Is Not Optional — It Is Operational Hygiene</h2>
+
+            <p>If you are charging money for your product, monitoring is not a nice-to-have. It is the operational equivalent of locking the front door. You would not run a physical shop without a way to know if the door was jammed shut. You should not run a SaaS product without a way to know if the checkout is broken.</p>
+
+            <p>The cost is negligible — most monitoring tools have free tiers that cover early-stage products. The time investment is an afternoon. The alternative is finding out about problems from angry users, lost transactions, and churned customers.</p>
+
+            <p>Your vibe-coded app got you to launch. Monitoring is what keeps you running after launch.</p>
+
+            <div class="share-section">
+                <span class="share-label">Share this article</span>
+                <div class="share-buttons">
+                    <a class="share-btn share-btn--twitter" href="https://twitter.com/intent/tweet?text=Your+Vibe-Coded+App+Is+Live+%E2%80%94+Now+What%3F+A+Founder%27s+Guide+to+Monitoring&url=https%3A%2F%2Fdiffian.com%2Fblog%2Fmonitoring-for-vibe-coded-apps.html" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-x-twitter"></i> Share on X
+                    </a>
+                    <a class="share-btn share-btn--linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fdiffian.com%2Fblog%2Fmonitoring-for-vibe-coded-apps.html" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+                    </a>
+                    <button class="share-btn share-btn--copy" id="copyLinkBtn">
+                        <i class="fas fa-link"></i> Copy link
+                    </button>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="author-bio-avatar">MH</div>
+                <div>
+                    <div class="author-bio-name">Mark Hayward</div>
+                    <div class="author-bio-role">Founder, Diffian</div>
+                    <p class="author-bio-text">Mark has spent a decade helping product teams ship software safely — from early-stage startups to enterprise engineering organisations. Diffian exists to bring that same rigour to the generation of products being built with AI coding tools.</p>
+                </div>
+            </div>
+
+        </article>
+
+        <section class="article-cta-section">
+            <div class="article-cta">
+                <h2>Flying blind in production?</h2>
+                <p>We set up monitoring, error tracking, and alerting for vibe-coded products — so you know what is happening before your users do. Usually in a week.</p>
+                <a href="../index.html#contact">Talk to us <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+    </div>
+
+    <section class="related-section">
+        <div class="container" style="max-width: 760px;">
+            <h2>More from the blog</h2>
+            <div class="related-grid">
+                <a class="related-card" href="./cicd-for-non-engineers.html">
+                    <span class="related-card-tag">DevOps</span>
+                    <span class="related-card-title">CI/CD for Non-Engineers: Why Your Deploy Process Matters More Than Your Code</span>
+                    <span class="related-card-date">4 April 2026</span>
+                </a>
+                <a class="related-card" href="./hidden-costs-vibe-coded-apps.html">
+                    <span class="related-card-tag">Security</span>
+                    <span class="related-card-title">The Hidden Costs of Shipping Vibe-Coded Apps Without Engineering Support</span>
+                    <span class="related-card-date">5 Feb 2026</span>
+                </a>
+                <a class="related-card" href="./prototype-to-production.html">
+                    <span class="related-card-tag">DevOps</span>
+                    <span class="related-card-title">From Prototype to Production: A Step-by-Step Guide</span>
+                    <span class="related-card-date">10 March 2026</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">D</div>
+                    <span class="logo-text">Diffian</span>
+                </a>
+                <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="../index.html#services">Code Review</a></li>
+                    <li><a href="../index.html#services">Security Hardening</a></li>
+                    <li><a href="../index.html#services">Cloud Infrastructure</a></li>
+                    <li><a href="../index.html#services">CI/CD Pipelines</a></li>
+                    <li><a href="../index.html#services">Monitoring</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="../index.html#why-us">About Us</a></li>
+                    <li><a href="../index.html#pricing">Pricing</a></li>
+                    <li><a href="../index.html#faq">FAQ</a></li>
+                    <li><a href="./index.html">Blog</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Diffian is a brand name of Cloudavian Ltd. Registered in England &amp; Wales. Company No. 10981878.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+document.getElementById('mobileToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+document.getElementById('copyLinkBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText('https://diffian.com/blog/monitoring-for-vibe-coded-apps.html').then(() => {
+        const btn = document.getElementById('copyLinkBtn');
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => { btn.innerHTML = '<i class="fas fa-link"></i> Copy link'; }, 2000);
+    });
+});
+</script>
+</body>
+</html>
