@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer data-domain="diffian.com" src="https://plausible.io/js/script.js"></script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHPD1F8CQH"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VHPD1F8CQH');</script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w6ff8ysyas");</script>
+    <title>Mythos Scores 93.9% on Coding Benchmarks — But Your Vibe-Coded App Still Needs Engineers | Diffian</title>
+    <meta name="description" content="Anthropic's Claude Mythos scored 93.9% on SWE-bench Verified and autonomously discovered thousands of zero-days. It's too dangerous to release publicly. Here's what that tells us about where AI coding is actually heading.">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Mythos Scores 93.9% on Coding Benchmarks — But Your Vibe-Coded App Still Needs Engineers">
+    <meta property="og:description" content="The most powerful coding AI ever built is restricted to 40 companies because of its security capabilities. Here's what that means for vibe coders.">
+    <meta property="og:url" content="https://diffian.com/blog/mythos-vibe-coding-still-needs-engineers.html">
+    <meta property="article:published_time" content="2026-04-09">
+    <meta property="article:author" content="Mark Hayward">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mythos Scores 93.9% on Coding Benchmarks — But Your Vibe-Coded App Still Needs Engineers">
+    <meta name="twitter:description" content="Anthropic's Mythos is the most powerful coding AI ever built. It's restricted to 40 companies. Here's what that tells vibe coders about the gap between capability and production.">
+    <link rel="canonical" href="https://diffian.com/blog/mythos-vibe-coding-still-needs-engineers.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Mythos Scores 93.9% on Coding Benchmarks — But Your Vibe-Coded App Still Needs Engineers",
+      "description": "Anthropic's Claude Mythos scored 93.9% on SWE-bench Verified and autonomously discovered thousands of zero-days. It's restricted to 40 companies. Here's what that means for vibe coders building production software.",
+      "author": { "@type": "Person", "name": "Mark Hayward", "url": "https://diffian.com" },
+      "publisher": { "@type": "Organization", "name": "Diffian", "url": "https://diffian.com" },
+      "datePublished": "2026-04-09",
+      "dateModified": "2026-04-09",
+      "url": "https://diffian.com/blog/mythos-vibe-coding-still-needs-engineers.html",
+      "mainEntityOfPage": "https://diffian.com/blog/mythos-vibe-coding-still-needs-engineers.html",
+      "keywords": "Claude Mythos, SWE-bench, AI coding benchmarks, vibe coding, production engineering, AI security, GPT-5, Gemini 3, coding AI 2026, vibe-coded apps"
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --blue-electric: oklch(53% 0.22 255);
+            --teal-bright: oklch(82% 0.16 168);
+            --teal-dark: oklch(60% 0.16 168);
+            --cyan-glow: oklch(83% 0.14 210);
+            --dark-bg: oklch(98.5% 0.005 270);
+            --dark-card: oklch(100% 0 0);
+            --dark-card-border: oklch(88% 0.012 270);
+            --dark-surface: oklch(96% 0.008 270);
+            --text-primary: oklch(13% 0.02 270);
+            --text-secondary: oklch(40% 0.015 270);
+            --text-muted: oklch(58% 0.012 270);
+            --shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.06), 0 4px 16px oklch(0% 0 0 / 0.04);
+            --shadow-md: 0 2px 8px oklch(0% 0 0 / 0.07), 0 8px 28px oklch(0% 0 0 / 0.05);
+            --gradient-accent: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
+            --gradient-blue: linear-gradient(135deg, var(--blue-electric), var(--teal-dark));
+            --gradient-cta: linear-gradient(135deg, var(--teal-bright), var(--cyan-glow));
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px;
+            --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px;
+            --space-5: 40px; --space-6: 48px; --space-8: 64px;
+            --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :focus-visible { outline: 2px solid var(--blue-electric); outline-offset: 3px; border-radius: 4px; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-sans); background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .gradient-text { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 0; transition: background 0.3s ease, padding 0.3s ease; }
+        .navbar.scrolled { background: oklch(100% 0 0 / 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--dark-card-border); box-shadow: 0 1px 12px oklch(0% 0 0 / 0.06); padding: 12px 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: var(--gradient-blue); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; color: white; position: relative; overflow: hidden; }
+        .logo-icon::after { content: ''; position: absolute; inset: 2px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); }
+        .logo-text { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); }
+        .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+        .nav-cta { padding: 10px 24px; background: var(--gradient-cta); color: var(--dark-bg) !important; font-weight: 700 !important; border-radius: 100px; transition: transform 0.2s, box-shadow 0.2s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,214,160,0.3); }
+        .mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: oklch(100% 0 0 / 0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid var(--dark-card-border); box-shadow: 0 8px 24px oklch(0% 0 0 / 0.08); }
+            .nav-links.open { display: flex; }
+        }
+        .article-hero { padding: 120px 0 60px; background: linear-gradient(135deg, oklch(99% 0.004 270) 0%, oklch(97% 0.014 285) 100%); border-bottom: 1px solid var(--dark-card-border); }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 24px; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--text-primary); }
+        .breadcrumb-sep { color: var(--dark-card-border); }
+        .article-tag { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-dark); background: oklch(95% 0.025 168); padding: 4px 10px; border-radius: 100px; display: inline-block; margin-bottom: 16px; }
+        .article-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; max-width: 840px; margin-bottom: 24px; }
+        .article-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .article-author { display: flex; align-items: center; gap: 10px; }
+        .article-author-avatar { width: 40px; height: 40px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 0.9rem; flex-shrink: 0; }
+        .article-author-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+        .article-author-role { font-size: var(--text-xs); color: var(--text-muted); }
+        .article-meta-divider { width: 1px; height: 28px; background: var(--dark-card-border); }
+        .article-meta-item { font-size: var(--text-sm); color: var(--text-muted); }
+        .article-layout { padding: 64px 0 0; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+        .article-body { font-size: 1.0625rem; line-height: 1.78; color: var(--text-secondary); }
+        .article-body h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--text-primary); margin: 2.5rem 0 1rem; }
+        .article-body h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin: 1.75rem 0 0.6rem; }
+        .article-body p { margin-bottom: 1.4rem; }
+        .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body strong { color: var(--text-primary); font-weight: 600; }
+        .article-body blockquote { border-left: 3px solid var(--teal-dark); padding: 16px 24px; margin: 2rem 0; background: var(--dark-surface); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-style: italic; color: var(--text-primary); font-size: 1.05rem; line-height: 1.6; }
+        .article-body a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
+        .article-body a:hover { color: var(--blue-electric); }
+        .article-feature-image { margin-bottom: 2rem; border-radius: var(--radius-lg); overflow: hidden; }
+        .article-feature-image img { width: 100%; height: auto; display: block; aspect-ratio: 16/9; object-fit: cover; }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 2rem 0; }
+        @media (max-width: 600px) { .stat-grid { grid-template-columns: 1fr; } }
+        .stat-card { background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-md); padding: 20px 24px; box-shadow: var(--shadow-sm); text-align: center; }
+        .stat-card-number { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; margin-bottom: 6px; }
+        .stat-card-label { font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; }
+        .benchmark-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: var(--text-sm); }
+        .benchmark-table th { text-align: left; font-size: var(--text-xs); font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); padding: 8px 12px; border-bottom: 2px solid var(--dark-card-border); }
+        .benchmark-table td { padding: 12px 12px; border-bottom: 1px solid var(--dark-card-border); color: var(--text-secondary); vertical-align: middle; }
+        .benchmark-table tr:last-child td { border-bottom: none; }
+        .benchmark-table tr:hover td { background: var(--dark-surface); }
+        .benchmark-table td:first-child { font-weight: 600; color: var(--text-primary); }
+        .benchmark-score { display: inline-flex; align-items: center; gap: 8px; }
+        .benchmark-bar { height: 6px; border-radius: 3px; background: var(--gradient-blue); display: inline-block; vertical-align: middle; }
+        .benchmark-restricted { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: oklch(55% 0.18 30); background: oklch(97% 0.04 30); border: 1px solid oklch(88% 0.06 30); padding: 2px 8px; border-radius: 100px; margin-left: 8px; }
+        .share-section { margin-top: 48px; padding: 28px 32px; background: var(--dark-surface); border-radius: var(--radius-lg); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .share-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+        .share-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 100px; font-size: var(--text-xs); font-weight: 600; text-decoration: none; transition: transform 0.2s, opacity 0.2s; cursor: pointer; border: none; font-family: var(--font-sans); }
+        .share-btn:hover { transform: translateY(-1px); opacity: 0.85; }
+        .share-btn--twitter { background: #000; color: white; }
+        .share-btn--linkedin { background: #0A66C2; color: white; }
+        .share-btn--copy { background: var(--dark-card); color: var(--text-secondary); border: 1px solid var(--dark-card-border) !important; }
+        .author-bio { margin-top: 40px; padding: 32px; background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-lg); display: flex; gap: 24px; align-items: flex-start; box-shadow: var(--shadow-sm); }
+        .author-bio-avatar { width: 60px; height: 60px; background: var(--gradient-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; color: white; flex-shrink: 0; }
+        .author-bio-name { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+        .author-bio-role { font-size: var(--text-xs); color: var(--teal-dark); font-family: var(--font-mono); margin-bottom: 10px; }
+        .author-bio-text { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.65; }
+        @media (max-width: 560px) { .author-bio { flex-direction: column; } }
+        .article-cta-section { padding: 60px 0; }
+        .article-cta { padding: 48px; background: linear-gradient(135deg, var(--blue-electric), var(--teal-dark)); border-radius: var(--radius-xl); text-align: center; }
+        .article-cta h2 { font-size: 1.75rem; font-weight: 800; margin-bottom: 12px; color: white; letter-spacing: -0.02em; }
+        .article-cta p { font-size: var(--text-base); color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto 24px; line-height: 1.6; }
+        .article-cta a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: white; color: var(--blue-electric); font-weight: 700; border-radius: 100px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; font-size: var(--text-sm); }
+        .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        @media (max-width: 640px) { .article-cta { padding: 32px 24px; } .article-cta h2 { font-size: 1.5rem; } }
+        .related-section { padding: 60px 0 80px; border-top: 1px solid var(--dark-card-border); }
+        .related-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; }
+        .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } }
+        .related-card { padding: 24px; background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: var(--radius-md); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: block; }
+        .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+        .related-card-tag { font-size: 0.7rem; font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-dark); margin-bottom: 8px; display: block; }
+        .related-card-title { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+        .related-card-date { font-size: var(--text-xs); color: var(--text-muted); margin-top: 8px; display: block; }
+        .footer { padding: var(--space-8) 0 var(--space-4); background: oklch(97% 0.007 270); border-top: 1px solid var(--dark-card-border); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-brand p { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.65; margin-top: var(--space-1); max-width: 280px; }
+        .footer h4 { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: var(--space-2); }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul a { color: var(--text-secondary); text-decoration: none; font-size: var(--text-sm); transition: color 0.2s; }
+        .footer ul a:hover { color: var(--text-primary); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--dark-card-border); flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { font-size: var(--text-xs); color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <a href="../index.html" class="logo">
+            <div class="logo-icon">D</div>
+            <span class="logo-text">Diffian</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html#services">Services</a></li>
+            <li><a href="../index.html#how-it-works">Process</a></li>
+            <li><a href="../index.html#pricing">Pricing</a></li>
+            <li><a href="../index.html#why-us">Why Us</a></li>
+            <li><a href="../index.html#faq">FAQ</a></li>
+            <li><a href="./index.html" class="active">Blog</a></li>
+            <li><a href="../index.html#contact" class="nav-cta">Get Started</a></li>
+        </ul>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<header class="article-hero">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">Diffian</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="./index.html">Blog</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>Mythos and Vibe Coding</span>
+        </nav>
+        <span class="article-tag">AI</span>
+        <h1>Mythos Scores 93.9% on Coding Benchmarks — But Your Vibe-Coded App Still Needs Engineers</h1>
+        <div class="article-meta">
+            <div class="article-author">
+                <div class="article-author-avatar">MH</div>
+                <div>
+                    <div class="article-author-name">Mark Hayward</div>
+                    <div class="article-author-role">Founder, Diffian</div>
+                </div>
+            </div>
+            <div class="article-meta-divider"></div>
+            <span class="article-meta-item">9 April 2026</span>
+            <div class="article-meta-divider"></div>
+            <span class="article-meta-item">7 min read</span>
+        </div>
+    </div>
+</header>
+
+<main class="article-layout">
+    <div class="article-container">
+        <article class="article-body reveal">
+
+            <div class="article-feature-image">
+                <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=1200&h=675" alt="Abstract AI neural network visualization with glowing nodes">
+            </div>
+
+            <p>On 7 April 2026, Anthropic quietly released the most capable coding AI ever built. Claude Mythos scored <strong>93.9% on SWE-bench Verified</strong>, the industry-standard benchmark for real-world software engineering tasks. It solved nearly 94 out of every 100 genuine software bugs. It scored 94.6% on GPQA Diamond, the hardest science reasoning benchmark available.</p>
+
+            <p>Anthropic also won't let you use it.</p>
+
+            <p>Mythos is restricted to around 40 organisations, including Apple, AWS, and Microsoft. The reason? Anthropic determined that Mythos is so capable at discovering security vulnerabilities that releasing it broadly would pose a net risk to the internet. The model autonomously found thousands of zero-day vulnerabilities during testing. Anthropic classified it as a dual-use threat and limited it to defensive cybersecurity research only.</p>
+
+            <p>Let that sink in for a moment. The best coding AI in existence is too dangerous to ship publicly.</p>
+
+            <p>While that news settles, let's look at what you actually have access to right now — and what all of this means if you are building production software with AI tools.</p>
+
+            <h2>The Coding AI Landscape in April 2026</h2>
+
+            <p>Mythos is impressive, but it exists in a separate category from the tools available to most developers. Here is where things actually stand:</p>
+
+            <table class="benchmark-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>SWE-bench / Arena Score</th>
+                        <th>Access</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Claude Mythos<span class="benchmark-restricted">Restricted</span></td>
+                        <td><span class="benchmark-score">93.9% <span class="benchmark-bar" style="width: 94px;"></span></span></td>
+                        <td>40 orgs only</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-5.4 mini</td>
+                        <td><span class="benchmark-score">Arena 1075 <span class="benchmark-bar" style="width: 88px;"></span></span></td>
+                        <td>Public</td>
+                    </tr>
+                    <tr>
+                        <td>Claude Sonnet 4.6</td>
+                        <td><span class="benchmark-score">Arena 1062 <span class="benchmark-bar" style="width: 85px;"></span></span></td>
+                        <td>Public</td>
+                    </tr>
+                    <tr>
+                        <td>Claude Opus 4.6</td>
+                        <td><span class="benchmark-score">~80% SWE-bench <span class="benchmark-bar" style="width: 80px;"></span></span></td>
+                        <td>Public</td>
+                    </tr>
+                    <tr>
+                        <td>MiniMax M2.5</td>
+                        <td><span class="benchmark-score">80.2% SWE-bench <span class="benchmark-bar" style="width: 80px;"></span></span></td>
+                        <td>Public</td>
+                    </tr>
+                    <tr>
+                        <td>Gemini 3.1 Pro</td>
+                        <td><span class="benchmark-score">78.8% SWE-bench <span class="benchmark-bar" style="width: 79px;"></span></span></td>
+                        <td>Public</td>
+                    </tr>
+                    <tr>
+                        <td>GLM-5</td>
+                        <td><span class="benchmark-score">77.8% SWE-bench <span class="benchmark-bar" style="width: 78px;"></span></span></td>
+                        <td>Open source</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>The numbers are remarkable. Even open-source models like GLM-5 are approaching 80% on SWE-bench. GPT-5.4 mini is leading the Chatbot Arena leaderboard. The gap between frontier models and open-source alternatives is closing fast.</p>
+
+            <p>For practical vibe coding, the tools available today are genuinely extraordinary. Claude Sonnet 4.6 and GPT-5.4 mini can build complex features from natural language descriptions. They produce working code at a pace that would have seemed impossible two years ago. The question is not whether these tools are capable. It is what capability actually means when you are trying to run software in production.</p>
+
+            <h2>The Paradox Nobody Talks About</h2>
+
+            <p>Here is something counterintuitive. As AI coding models get better, the gap between "it works" and "it's production-ready" gets wider, not narrower.</p>
+
+            <p>Think about what better models actually do. They build more complex systems, faster. A model at 80% SWE-bench can generate a working authentication system, a payment integration, a multi-tenant database schema, and a deployment configuration in an afternoon. That is genuinely useful. It is also a lot more surface area to secure, monitor, maintain, and scale.</p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-card-number">80%</div>
+                    <div class="stat-card-label">AI builds in an afternoon</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-number">20%</div>
+                    <div class="stat-card-label">The hardest part</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-number">100%</div>
+                    <div class="stat-card-label">Your responsibility</div>
+                </div>
+            </div>
+
+            <p>A model that writes 80% of your app in an afternoon still leaves you with the hardest 20%. That 20% is not random. It is the part that requires understanding your specific business context, your data sensitivity, your regulatory obligations, and your operational constraints. It is the part where generic training data does not help.</p>
+
+            <p>Better models also mean bigger applications built by people with less engineering background. The prototypes are more impressive. The gaps in production readiness are just as real. More surface area, same number of eyes on it.</p>
+
+            <blockquote>Faster development velocity is only an advantage if your quality assurance can keep pace. A model that builds three times faster creates three times the review burden, not three times the safety.</blockquote>
+
+            <h2>What Mythos Actually Tells Us</h2>
+
+            <p>The decision to restrict Mythos is significant beyond the headline number. Anthropic did not limit access because the model was too buggy or too expensive to run. They limited it because it was too good at finding security vulnerabilities. The model that can autonomously patch software bugs can also autonomously discover how to exploit them.</p>
+
+            <p>This has a direct implication for every vibe-coded application running today. The tools that sophisticated attackers have access to are advancing at the same pace as the tools developers use to build. Your AI-generated codebase is being written with models that score 80% on engineering benchmarks. The scanning tools being used to probe it for vulnerabilities are operating at a similar level of capability.</p>
+
+            <p>Security is not a problem that improves automatically as models get smarter. The attack surface and the attack tooling advance together. What changes is the scale and speed at which both operate.</p>
+
+            <p>Anthropic's decision to restrict Mythos is, in a strange way, a vote of confidence in the seriousness of the security problem. They built the most capable coding model ever created and concluded that broad access would cause net harm. That is not a casual assessment.</p>
+
+            <h2>What This Means If You Are Vibe Coding</h2>
+
+            <p>None of this is an argument against using AI coding tools. They are genuinely transformative. The ability to build functional software without writing every line by hand has opened up product development to a much wider group of people, and that is a good thing.</p>
+
+            <p>But there is a clear line in the risk profile of a vibe-coded application. On one side of that line: prototypes, internal tools, demos, personal projects. These carry lower stakes. The cost of a failure is manageable. On the other side: anything that handles real users, real data, or real money.</p>
+
+            <p>Once you cross that line, the questions that AI tools answer well (what should this code do?) become less important than the questions they answer poorly (is this code safe to run at scale, under adversarial conditions, against the compliance requirements of your industry?).</p>
+
+            <p>The models are not going to solve this by getting smarter. A model at 99% SWE-bench still does not know that your users are subject to GDPR, that your payment processor requires PCI DSS compliance, that your cloud provider's default configurations are not appropriate for production workloads, or that your error logs are currently exposing stack traces with sensitive data to anyone who looks.</p>
+
+            <p>That knowledge is contextual. It requires understanding your specific situation. It requires human judgement applied to your specific application.</p>
+
+            <h2>The Tools Are Getting Better. The Gap Is Not Closing.</h2>
+
+            <p>Mythos is a milestone. A model that can autonomously solve 94% of real-world engineering tasks is a genuinely remarkable achievement. The models available to you today — Sonnet 4.6, GPT-5.4 mini, Opus 4.6 — are already the best coding assistants that have ever existed.</p>
+
+            <p>Use them. Build with them. They will make you faster and your products more ambitious.</p>
+
+            <p>But the hardest parts of shipping software — the security review, the infrastructure hardening, the compliance posture, the monitoring, the incident response plan — are not going to be automated away by a better benchmark score. They require the kind of engineering judgement that comes from running production systems and seeing what breaks.</p>
+
+            <p>At Diffian, we work with founders who have built impressive things quickly with AI tools, and who need help closing the gap between "it works" and "it is ready for real users." If that sounds familiar, we should talk.</p>
+
+            <div class="share-section">
+                <span class="share-label">Share this article</span>
+                <div class="share-buttons">
+                    <a class="share-btn share-btn--twitter" href="https://twitter.com/intent/tweet?text=Mythos+Scores+93.9%25+on+Coding+Benchmarks+%E2%80%94+But+Your+Vibe-Coded+App+Still+Needs+Engineers&url=https%3A%2F%2Fdiffian.com%2Fblog%2Fmythos-vibe-coding-still-needs-engineers.html" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-x-twitter"></i> Share on X
+                    </a>
+                    <a class="share-btn share-btn--linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fdiffian.com%2Fblog%2Fmythos-vibe-coding-still-needs-engineers.html" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+                    </a>
+                    <button class="share-btn share-btn--copy" id="copyLinkBtn">
+                        <i class="fas fa-link"></i> Copy link
+                    </button>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="author-bio-avatar">MH</div>
+                <div>
+                    <div class="author-bio-name">Mark Hayward</div>
+                    <div class="author-bio-role">Founder, Diffian</div>
+                    <p class="author-bio-text">Mark has spent a decade helping product teams ship software safely, from early-stage startups to enterprise engineering organisations. Diffian exists to bring that same rigour to the generation of products being built with AI coding tools.</p>
+                </div>
+            </div>
+
+        </article>
+
+        <section class="article-cta-section">
+            <div class="article-cta">
+                <h2>Ready to close the gap?</h2>
+                <p>We help founders take their vibe-coded apps from working to production-grade. Security hardening, infrastructure setup, CI/CD, monitoring. Usually in a week.</p>
+                <a href="../index.html#contact">Talk to us <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+    </div>
+
+    <section class="related-section">
+        <div class="container" style="max-width: 760px;">
+            <h2>More from the blog</h2>
+            <div class="related-grid">
+                <a class="related-card" href="./vibe-coding-security-2026.html">
+                    <span class="related-card-tag">Security</span>
+                    <span class="related-card-title">Vibe Coding Security in 2026: The Risks Are Real and Growing</span>
+                    <span class="related-card-date">7 April 2026</span>
+                </a>
+                <a class="related-card" href="./hidden-costs-vibe-coded-apps.html">
+                    <span class="related-card-tag">Security</span>
+                    <span class="related-card-title">The Hidden Costs of Shipping Vibe-Coded Apps Without Engineering Support</span>
+                    <span class="related-card-date">5 Feb 2026</span>
+                </a>
+                <a class="related-card" href="./prototype-to-production.html">
+                    <span class="related-card-tag">DevOps</span>
+                    <span class="related-card-title">From Prototype to Production: A Step-by-Step Guide</span>
+                    <span class="related-card-date">10 March 2026</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="logo">
+                    <div class="logo-icon">D</div>
+                    <span class="logo-text">Diffian</span>
+                </a>
+                <p>From vibe code to production grade. Expert software engineering and DevOps, based in Cardiff, UK.</p>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="../index.html#services">Code Review</a></li>
+                    <li><a href="../index.html#services">Security Hardening</a></li>
+                    <li><a href="../index.html#services">Cloud Infrastructure</a></li>
+                    <li><a href="../index.html#services">CI/CD Pipelines</a></li>
+                    <li><a href="../index.html#services">Monitoring</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="../index.html#why-us">About Us</a></li>
+                    <li><a href="../index.html#pricing">Pricing</a></li>
+                    <li><a href="../index.html#faq">FAQ</a></li>
+                    <li><a href="./index.html">Blog</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Diffian is a brand name of Cloudavian Ltd. Registered in England &amp; Wales. Company No. 10981878.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+document.getElementById('mobileToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+document.getElementById('copyLinkBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText('https://diffian.com/blog/mythos-vibe-coding-still-needs-engineers.html').then(() => {
+        const btn = document.getElementById('copyLinkBtn');
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => { btn.innerHTML = '<i class="fas fa-link"></i> Copy link'; }, 2000);
+    });
+});
+</script>
+</body>
+</html>
