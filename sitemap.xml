@@ -8,9 +8,15 @@
   </url>
   <url>
     <loc>https://diffian.com/blog/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://diffian.com/blog/database-security-vibe-coded-apps.html</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://diffian.com/blog/vibe-coding-security-2026.html</loc>
