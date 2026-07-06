@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Plausible Analytics -->
+    <script defer data-domain="diffian.com" src="https://plausible.io/js/script.js"></script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHPD1F8CQH"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VHPD1F8CQH');</script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w6ff8ysyas");</script>
+    <title>How Diffian Speaks Welsh | Technology</title>
+    <meta name="description" content="How Diffian's Welsh text-to-speech works: a custom neural voice, per-word language detection, a national place-name lexicon, mutation-aware pronunciation and SSML control.">
+    <link rel="canonical" href="https://diffian.com/technology/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23d1232a'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='800' fill='%23ffffff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="How Diffian Speaks Welsh | Technology">
+    <meta property="og:description" content="A custom neural voice, per-word language detection, a national place-name lexicon and mutation-aware pronunciation.">
+    <meta property="og:url" content="https://diffian.com/technology/">
+    <meta property="og:site_name" content="Diffian">
+    <meta property="og:image" content="https://diffian.com/images/diffian.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=Gentium+Plus:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ground: #fcfdfc;
+            --tint: #f0f4f1;
+            --ink: #141f19;
+            --ink-soft: #3f4d45;
+            --muted: #66746b;
+            --rule: #d9e0da;
+            --accent: #d1232a;
+            --accent-deep: #9c1b20;
+            --amber: #ffb300;
+            --board: #0d120e;
+            --board-dim: #6b7566;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+        body {
+            font-family: 'Public Sans', system-ui, sans-serif;
+            color: var(--ink);
+            background: var(--ground);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .wrap-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+        a { color: var(--accent-deep); }
+        ::selection { background: var(--amber); color: var(--ink); }
+        h1, h2, h3 { font-family: 'Archivo', sans-serif; text-wrap: balance; }
+        .ipa { font-family: 'Gentium Plus', serif; }
+
+        header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(252,253,252,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--ink);
+        }
+        nav { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+        .brand {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.05rem;
+            letter-spacing: 0.14em; color: var(--ink); text-decoration: none;
+        }
+        .brand::before { content: ""; width: 13px; height: 13px; background: var(--accent); }
+        .nav-links { display: flex; gap: 26px; align-items: center; }
+        .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 0.92rem; }
+        .nav-links a:hover { color: var(--accent-deep); }
+        .nav-links a.cta { background: var(--ink); color: var(--ground); padding: 9px 18px; border-radius: 2px; }
+        .nav-links a.cta:hover { background: var(--accent); color: #fff; }
+
+        .page-hero { padding: 72px 0 52px; }
+        .kicker {
+            font-family: 'Archivo', sans-serif; font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+            margin-bottom: 16px;
+        }
+        h1 { font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 800; letter-spacing: -0.015em; line-height: 1.08; margin-bottom: 18px; }
+        .lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 38em; }
+
+        section { padding: 60px 0; }
+        section.tint { background: var(--tint); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+        h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
+        h3 { font-size: 1.05rem; font-weight: 700; margin: 28px 0 8px; }
+        p { color: var(--ink-soft); margin-bottom: 14px; max-width: 65ch; }
+        ul { color: var(--ink-soft); margin: 0 0 14px 22px; max-width: 62ch; }
+        li { margin-bottom: 8px; }
+
+        .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .col-item { border-top: 3px solid var(--ink); padding-top: 18px; }
+        .col-item h3 { margin-top: 0; }
+        .col-item p { font-size: 0.96rem; margin-bottom: 0; }
+
+        /* transcription specimen */
+        .specimen {
+            background: var(--board); border-radius: 4px; padding: 22px 24px; margin: 18px 0 24px;
+            max-width: 640px;
+        }
+        .specimen .spec-label {
+            font-family: 'Archivo', sans-serif; font-size: 0.68rem; font-weight: 600;
+            letter-spacing: 0.18em; text-transform: uppercase; color: var(--board-dim);
+            margin-bottom: 12px;
+        }
+        .specimen .spec-text { color: #fff; font-weight: 600; font-family: 'Archivo', sans-serif; font-size: 1.02rem; }
+        .specimen .spec-ipa { font-family: 'Gentium Plus', serif; color: var(--amber); font-size: 1.02rem; margin-top: 6px; }
+        .specimen .spec-note { color: var(--board-dim); font-size: 0.85rem; margin-top: 10px; }
+        .pron { font-family: 'Gentium Plus', serif; background: var(--tint); border: 1px solid var(--rule); border-radius: 2px; padding: 1px 7px; white-space: nowrap; }
+        section.tint .pron { background: #fff; }
+
+        .note {
+            font-size: 0.92rem; color: var(--muted); border-left: 3px solid var(--rule);
+            padding: 6px 0 6px 16px; max-width: 52em; margin-top: 32px;
+        }
+        .cta-band { text-align: center; padding: 76px 0; }
+        .cta-band p { margin-left: auto; margin-right: auto; }
+        .btn {
+            display: inline-block; padding: 13px 26px; border-radius: 2px;
+            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.98rem;
+            text-decoration: none; background: var(--accent); color: #fff;
+        }
+        .btn:hover { background: var(--accent-deep); }
+
+        footer { border-top: 2px solid var(--ink); padding: 34px 0; color: var(--muted); font-size: 0.88rem; }
+        .foot-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        footer a { color: var(--ink-soft); text-decoration: none; margin-left: 22px; font-weight: 600; }
+        footer a:hover { color: var(--accent-deep); }
+        a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        @media (max-width: 880px) {
+            .cols-3 { grid-template-columns: 1fr; }
+            .nav-links a:not(.cta) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="wrap">
+        <nav>
+            <a class="brand" href="/">DIFFIAN</a>
+            <div class="nav-links">
+                <a href="/#hear">Hear it</a>
+                <a href="/#sectors">Sectors</a>
+                <a href="/technology/">Technology</a>
+                <a class="cta" href="/#contact">Talk to us</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<div class="page-hero">
+    <div class="wrap-narrow">
+        <div class="kicker">Technology</div>
+        <h1>How Diffian speaks Welsh.</h1>
+        <p class="lede">Most speech engines treat text as one language at a time. Welsh public-service content doesn&#8217;t work that way, so we built an engine that reads the way Wales actually writes and speaks.</p>
+    </div>
+</div>
+
+<section class="tint">
+    <div class="wrap-narrow">
+        <h2>A voice we trained ourselves</h2>
+        <p>Diffian&#8217;s voice, <strong>Bronwen</strong>, is a custom neural voice trained on our own recorded corpus. We went this way for a simple reason: we verified that none of the major cloud vendors can train a custom voice that speaks Welsh. Welsh simply isn&#8217;t in their custom-voice programmes. If you want a voice that is both distinctively yours and genuinely Welsh, it has to be built, not bought.</p>
+        <p>Because the model is ours end to end:</p>
+        <ul>
+            <li>It produces natural 24&nbsp;kHz audio and runs comfortably on <strong>CPU-only servers</strong>. A warm request generates a clip in well under a second, with no GPU bill attached.</li>
+            <li>There is <strong>no per-character licensing</strong> and no usage meter owned by someone else.</li>
+            <li>It can be deployed wherever your data governance requires, including entirely inside your own network.</li>
+        </ul>
+        <p>The same training pipeline that produced Bronwen can produce a bespoke voice for your organisation.</p>
+    </div>
+</section>
+
+<section>
+    <div class="wrap-narrow">
+        <h2>Pronunciation engineering, not just synthesis</h2>
+        <p>The synthesis model is only half the work. The other half is deciding, for every single word, <em>how it should be said</em>. Diffian&#8217;s front end works per word, and exposes its decisions as phonetic transcription you can inspect and correct.</p>
+
+        <h3>Per-word language detection</h3>
+        <p>Every word is classified before it reaches the voice, so Welsh place names inside English sentences are read the Welsh way. This is the engine&#8217;s actual output:</p>
+        <div class="specimen">
+            <div class="spec-label">Input &rarr; phonetic transcription</div>
+            <div class="spec-text">The next stop is Pen-y-lan Road.</div>
+            <div class="spec-ipa">&#240;&#601; n&#712;&#603;kst st&#712;&#594;p &#618;z p&#712;&#603;n&#601;l&#712;an &#633;&#712;&#601;&#650;d</div>
+            <div class="spec-note">An English sentence. The Welsh compound keeps its Welsh sounds, in one voice.</div>
+        </div>
+        <p>When automatic detection isn&#8217;t what you want, language can be marked explicitly per word or per phrase with SSML tags, so editorial control always wins.</p>
+
+        <h3>A national place-name lexicon</h3>
+        <p>We mined the national transport dataset for Wales to build a curated lexicon of thousands of Welsh place names, cross-checked against an English dictionary so names like <em>Penny</em>, <em>Lloyd</em> or <em>Trevor</em> aren&#8217;t misread as Welsh. Hyphenated compounds (<span class="pron">Pen-y-lan</span>) and the Welsh article are handled as units.</p>
+
+        <h3>Mutation-aware pronunciation</h3>
+        <p>Welsh initial consonant mutations change the start of words in ordinary sentences. <span class="pron">Caerdydd</span> appears as <span class="pron">Gaerdydd</span> or <span class="pron">Nghaerdydd</span> depending on grammar, and our pronunciation overrides cover mutated forms explicitly, so real sentences sound right, not just dictionary citations.</p>
+
+        <h3>Exact overrides when you need them</h3>
+        <p>For the long tail, every word can carry an exact phonetic spelling, and the engine exposes its phoneme output so corrections are precise rather than guesswork. Combined with SSML support for pauses, prosody, substitutions and bilingual number expansion, a Welsh language officer&#8217;s review can be applied word by word and regenerated in seconds.</p>
+    </div>
+</section>
+
+<section class="tint">
+    <div class="wrap">
+        <div class="wrap-narrow" style="padding:0; margin-bottom:40px;">
+            <h2>Three ways to deploy</h2>
+            <p>Same engine, same voice, delivered the way your infrastructure and governance need it.</p>
+        </div>
+        <div class="cols-3">
+            <div class="col-item">
+                <h3>Managed API</h3>
+                <p>A simple HTTP endpoint: send text or SSML, receive audio. Generated clips are cached, so repeated content returns in milliseconds. We run it, you integrate it.</p>
+            </div>
+            <div class="col-item">
+                <h3>Self-hosted</h3>
+                <p>The full engine runs on your own servers. CPU-only, no GPU fleet, no external calls. The right fit where content or data can&#8217;t leave your estate.</p>
+            </div>
+            <div class="col-item">
+                <h3>Offline audio bundles</h3>
+                <p>For announcement hardware, we pre-generate complete audio sets and package them for standard annunciator systems. Vehicles sync at the depot and play offline, GPS-triggered, with no on-vehicle connectivity required.</p>
+            </div>
+        </div>
+        <div class="wrap-narrow" style="padding:0;">
+            <p class="note">Proof of scale: our national announcement corpus already covers 1,391 bus routes and 52,284 stops across Wales, every stop name voiced in Welsh and English.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-band">
+    <div class="wrap-narrow">
+        <h2>Send us your hardest sentence.</h2>
+        <p style="margin-bottom:28px;">Place names, mutations, mixed languages. We&#8217;ll send it back spoken, usually the same day.</p>
+        <a class="btn" href="/#contact">Talk to us</a>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="wrap foot-row">
+        <div>&copy; 2026 Diffian &middot; Cardiff, Wales &middot; <span lang="cy">Caerdydd, Cymru</span></div>
+        <div>
+            <a href="/">Home</a>
+            <a href="mailto:hello@diffian.com">hello@diffian.com</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
