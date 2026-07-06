@@ -13,19 +13,20 @@
     <title>Welsh Text-to-Speech for Public Bodies | Diffian</title>
     <meta name="description" content="Bilingual Welsh and English text-to-speech for councils, health boards, contact centres and transport operators. Pronounces Welsh place names properly in both languages. Hear it speak.">
     <link rel="canonical" href="https://diffian.com/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23d1232a'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='20' font-weight='800' fill='%23ffffff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Welsh Text-to-Speech for Public Services | Diffian">
-    <meta property="og:description" content="Bilingual Welsh and English text-to-speech that gets every place name, mutation and mixed-language sentence right. Built in Cardiff.">
+    <meta property="og:title" content="Welsh Text-to-Speech for Public Bodies | Diffian">
+    <meta property="og:description" content="Bilingual Welsh and English text-to-speech that gets every place name, mutation and mixed-language sentence right.">
     <meta property="og:url" content="https://diffian.com/">
     <meta property="og:site_name" content="Diffian">
     <meta property="og:image" content="https://diffian.com/images/diffian.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Welsh Text-to-Speech for Public Services | Diffian">
+    <meta name="twitter:title" content="Welsh Text-to-Speech for Public Bodies | Diffian">
     <meta name="twitter:description" content="Bilingual Welsh and English text-to-speech that gets every place name, mutation and mixed-language sentence right.">
     <meta name="twitter:image" content="https://diffian.com/images/diffian.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=Gentium+Plus:ital@0;1&family=Doto:wght@700;900&display=swap" rel="stylesheet">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -34,7 +35,7 @@
       "serviceType": "Text-to-speech service",
       "url": "https://diffian.com",
       "image": "https://diffian.com/images/diffian.png",
-      "description": "Bilingual Welsh and English text-to-speech for transport announcements, contact centres, IVR and public services.",
+      "description": "Bilingual Welsh and English text-to-speech for councils, health boards, contact centres and transport operators.",
       "areaServed": "GB",
       "provider": {
         "@type": "Organization",
@@ -51,189 +52,207 @@
     </script>
     <style>
         :root {
-            --ink: #131a20;
-            --ink-soft: #3c4a56;
-            --muted: #67757f;
-            --paper: #faf8f5;
-            --card: #ffffff;
-            --line: #e6e1da;
-            --red: #c8362e;
-            --red-dark: #a52a24;
-            --green: #1e6b52;
-            --green-soft: #e8f2ee;
-            --radius: 14px;
+            --ground: #fcfdfc;
+            --tint: #f0f4f1;
+            --ink: #141f19;
+            --ink-soft: #3f4d45;
+            --muted: #66746b;
+            --rule: #d9e0da;
+            --accent: #d1232a;
+            --accent-deep: #9c1b20;
+            --amber: #ffb300;
+            --board: #0d120e;
+            --board-dim: #6b7566;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
         body {
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Public Sans', system-ui, sans-serif;
             color: var(--ink);
-            background: var(--paper);
+            background: var(--ground);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-        a { color: var(--red); }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        a { color: var(--accent-deep); }
+        ::selection { background: var(--amber); color: var(--ink); }
 
-        /* ── Nav ── */
+        h1, h2, h3, .display { font-family: 'Archivo', sans-serif; text-wrap: balance; }
+        .ipa { font-family: 'Gentium Plus', serif; }
+
+        /* ── Header ── */
         header {
             position: sticky; top: 0; z-index: 50;
-            background: rgba(250,248,245,0.92);
+            background: rgba(252,253,252,0.95);
             backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--line);
+            border-bottom: 2px solid var(--ink);
         }
-        nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .brand { font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
-        .brand span { color: var(--red); }
-        .nav-links { display: flex; gap: 28px; align-items: center; }
-        .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
-        .nav-links a:hover { color: var(--ink); }
+        nav { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+        .brand {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.05rem;
+            letter-spacing: 0.14em; color: var(--ink); text-decoration: none;
+        }
+        .brand::before { content: ""; width: 13px; height: 13px; background: var(--accent); }
+        .nav-links { display: flex; gap: 26px; align-items: center; }
+        .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 0.92rem; }
+        .nav-links a:hover { color: var(--accent-deep); }
         .nav-links a.cta {
-            background: var(--ink); color: #fff; padding: 9px 18px; border-radius: 8px;
+            background: var(--ink); color: var(--ground); padding: 9px 18px; border-radius: 2px;
         }
-        .nav-links a.cta:hover { background: var(--red); }
+        .nav-links a.cta:hover { background: var(--accent); color: #fff; }
 
         /* ── Hero ── */
-        .hero { padding: 88px 0 72px; }
-        .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
-        .eyebrow {
-            display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
-            text-transform: uppercase; color: var(--green); background: var(--green-soft);
-            padding: 5px 12px; border-radius: 999px; margin-bottom: 20px;
+        .hero { padding: 84px 0 76px; }
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+        .kicker {
+            font-family: 'Archivo', sans-serif; font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+            margin-bottom: 16px;
         }
-        .hero .welsh-line { font-size: 1.05rem; font-weight: 600; color: var(--red); margin-bottom: 10px; }
-        h1 { font-size: clamp(2.1rem, 4.5vw, 3.1rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 20px; }
-        .hero p.lede { font-size: 1.15rem; color: var(--ink-soft); max-width: 34em; margin-bottom: 32px; }
-        .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+        .hero .welsh-line { font-family: 'Gentium Plus', serif; font-style: italic; font-size: 1.15rem; color: var(--ink-soft); margin-bottom: 12px; }
+        h1 { font-size: clamp(2.2rem, 4.6vw, 3.3rem); font-weight: 800; letter-spacing: -0.015em; line-height: 1.06; margin-bottom: 22px; }
+        .hero p.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 32em; margin-bottom: 34px; }
+        .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
         .btn {
-            display: inline-block; padding: 13px 26px; border-radius: 9px; font-weight: 600;
-            text-decoration: none; font-size: 1rem;
+            display: inline-block; padding: 13px 26px; border-radius: 2px;
+            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.98rem;
+            text-decoration: none; letter-spacing: 0.01em;
         }
-        .btn-primary { background: var(--red); color: #fff; }
-        .btn-primary:hover { background: var(--red-dark); }
-        .btn-ghost { border: 1.5px solid var(--line); color: var(--ink); background: var(--card); }
-        .btn-ghost:hover { border-color: var(--ink-soft); }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--accent-deep); }
+        .btn-ghost { border: 2px solid var(--ink); color: var(--ink); }
+        .btn-ghost:hover { background: var(--ink); color: var(--ground); }
 
-        /* announcement card */
-        .announce-card {
-            background: var(--ink); color: #fff; border-radius: var(--radius);
-            padding: 28px; box-shadow: 0 24px 60px -24px rgba(19,26,32,0.5);
+        /* destination board */
+        .board {
+            background: var(--board); border-radius: 4px; padding: 22px 24px 26px;
+            box-shadow: 0 30px 60px -30px rgba(13,18,14,0.55);
         }
-        .announce-card .label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #9fb0bc; margin-bottom: 18px; }
-        .announce-line { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .announce-line.playable {
-            display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
-            background: none; border: none; border-bottom: 1px solid rgba(255,255,255,0.1);
-            color: #fff; font-family: inherit; cursor: pointer;
+        .board .board-head {
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Archivo', sans-serif; font-size: 0.68rem; font-weight: 600;
+            letter-spacing: 0.18em; text-transform: uppercase; color: var(--board-dim);
+            border-bottom: 1px solid #232b24; padding-bottom: 12px; margin-bottom: 6px;
         }
-        .announce-line.playable:hover .play-dot { background: var(--red); }
-        .play-dot {
-            flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%;
-            background: rgba(255,255,255,0.14); color: #fff; font-size: 0.6rem;
+        .board .board-head .live { color: var(--amber); }
+        .board-line {
+            display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+            background: none; border: none; border-bottom: 1px solid #1a211b;
+            padding: 16px 0; cursor: pointer; font-family: inherit;
+        }
+        .board-line:last-of-type { border-bottom: none; }
+        .board-play {
+            flex: 0 0 auto; width: 34px; height: 34px; border: 1.5px solid var(--amber);
+            border-radius: 2px; color: var(--amber); font-size: 0.62rem;
             display: inline-flex; align-items: center; justify-content: center;
+            transition: background 0.15s, color 0.15s;
         }
-        .announce-line.playing .play-dot { background: var(--red); }
-        .announce-line:last-child, .announce-line.playable:last-of-type { border-bottom: none; }
-        .announce-line .lang { font-size: 0.72rem; font-weight: 600; color: var(--paper); background: rgba(200,54,46,0.85); border-radius: 4px; padding: 2px 7px; margin-right: 10px; vertical-align: 2px; }
-        .announce-line .lang.en { background: rgba(30,107,82,0.9); }
-        .announce-line .text { font-size: 1.05rem; font-weight: 500; }
-        .wave { display: flex; gap: 3px; align-items: flex-end; height: 26px; margin-top: 10px; }
-        .wave i { width: 4px; border-radius: 2px; background: linear-gradient(180deg, #e2635c, #c8362e); animation: pulse 1.4s ease-in-out infinite; }
-        .wave i:nth-child(2n) { animation-delay: 0.2s; }
-        .wave i:nth-child(3n) { animation-delay: 0.45s; }
-        .wave i:nth-child(5n) { animation-delay: 0.7s; }
-        @keyframes pulse { 0%,100% { height: 30%; } 50% { height: 100%; } }
-        @media (prefers-reduced-motion: reduce) { .wave i { animation: none; height: 60%; } }
+        .board-line:hover .board-play, .board-line.playing .board-play { background: var(--amber); color: var(--board); }
+        .board-line .board-lang {
+            flex: 0 0 auto; font-family: 'Doto', monospace; font-weight: 900; font-size: 0.8rem;
+            color: var(--board-dim); letter-spacing: 0.1em;
+        }
+        .board-line .board-text {
+            font-family: 'Doto', monospace; font-weight: 700; font-size: 1.18rem;
+            color: var(--amber); letter-spacing: 0.02em;
+        }
+        .board-foot {
+            font-family: 'Archivo', sans-serif; font-size: 0.68rem; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--board-dim); margin-top: 14px;
+        }
 
         /* ── Sections ── */
-        section { padding: 72px 0; }
-        section.alt { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .kicker { color: var(--red); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
-        h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; }
-        .section-lede { font-size: 1.1rem; color: var(--ink-soft); max-width: 44em; margin-bottom: 44px; }
+        section { padding: 76px 0; }
+        section.tint { background: var(--tint); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+        h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 16px; max-width: 24em; }
+        .section-lede { font-size: 1.08rem; color: var(--ink-soft); max-width: 42em; margin-bottom: 46px; }
 
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-        .card {
-            background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-            padding: 26px;
-        }
-        section.alt .card { background: var(--paper); }
-        .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-        .card p { color: var(--ink-soft); font-size: 0.97rem; }
-        .card .example {
-            margin-top: 14px; font-size: 0.85rem; background: var(--green-soft); color: var(--green);
-            border-radius: 8px; padding: 10px 12px;
-        }
+        .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .cols-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .col-item { border-top: 3px solid var(--ink); padding-top: 18px; }
+        .col-item h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 10px; }
+        .col-item p { color: var(--ink-soft); font-size: 0.96rem; }
+        .col-item .fix { margin-top: 12px; font-size: 0.9rem; color: var(--ink-soft); }
+        .col-item .fix strong { color: var(--accent-deep); font-weight: 700; }
 
-        /* audio demos */
-        .demo-list { display: grid; gap: 14px; max-width: 820px; }
-        .demo-item {
-            display: flex; align-items: center; gap: 16px; width: 100%; text-align: left;
-            background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-            padding: 16px 20px; font-family: inherit; cursor: pointer;
+        /* audio demo rows */
+        .demo-rows { border-top: 2px solid var(--ink); max-width: 900px; }
+        .demo-row {
+            display: flex; align-items: flex-start; gap: 20px; width: 100%; text-align: left;
+            background: none; border: none; border-bottom: 1px solid var(--rule);
+            padding: 22px 4px; cursor: pointer; font-family: inherit;
         }
-        section.alt .demo-item { background: var(--paper); }
-        .demo-item:hover { border-color: var(--red); }
+        .demo-row:hover { background: var(--tint); }
         .demo-play {
-            flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%;
-            background: var(--red); color: #fff; font-size: 0.8rem;
+            flex: 0 0 auto; width: 44px; height: 44px; margin-top: 3px;
+            background: var(--accent); color: #fff; font-size: 0.72rem; border-radius: 2px;
             display: inline-flex; align-items: center; justify-content: center;
             transition: background 0.15s;
         }
-        .demo-item.playing .demo-play { background: var(--ink); }
-        .demo-item .demo-text { font-size: 1.02rem; font-weight: 600; color: var(--ink); }
-        .demo-item .demo-why { font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
-        .demo-item .lang-tag {
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; color: #fff;
-            background: var(--red); border-radius: 4px; padding: 2px 7px; margin-right: 8px; vertical-align: 1px;
+        .demo-row.playing .demo-play { background: var(--ink); }
+        .demo-text { font-family: 'Archivo', sans-serif; font-size: 1.08rem; font-weight: 600; color: var(--ink); }
+        .demo-ipa { display: block; font-family: 'Gentium Plus', serif; font-size: 0.98rem; color: var(--muted); margin-top: 4px; }
+        .demo-why { display: block; font-size: 0.88rem; color: var(--ink-soft); margin-top: 6px; }
+        .lang-chip {
+            display: inline-block; font-family: 'Archivo', sans-serif; font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.08em; color: #fff; background: var(--ink);
+            padding: 2px 7px; margin-right: 10px; vertical-align: 2px;
         }
-        .demo-item .lang-tag.en { background: var(--green); }
 
-        /* stats band */
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; text-align: center; }
-        .stat .num { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
-        .stat .num em { font-style: normal; color: var(--red); }
-        .stat .lbl { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
+        /* stats board */
+        .stats-band { background: var(--board); padding: 56px 0; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
+        .stat .num {
+            font-family: 'Doto', monospace; font-weight: 900; font-size: 2.4rem;
+            color: var(--amber); font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+        }
+        .stat .lbl { color: var(--board-dim); font-size: 0.9rem; margin-top: 8px; max-width: 16em; }
 
-        /* compliance */
-        .compliance { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 20px; }
+        /* compliance small print */
         .note {
-            font-size: 0.92rem; color: var(--muted); border-left: 3px solid var(--line);
-            padding: 6px 0 6px 16px; max-width: 52em;
+            font-size: 0.92rem; color: var(--muted); border-left: 3px solid var(--rule);
+            padding: 6px 0 6px 16px; max-width: 52em; margin-top: 36px;
         }
 
         /* contact */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
-        form label { display: block; font-weight: 600; font-size: 0.9rem; margin: 18px 0 6px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: start; }
+        form label {
+            display: block; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.78rem;
+            letter-spacing: 0.1em; text-transform: uppercase; margin: 20px 0 7px;
+        }
         form input, form textarea {
-            width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 9px;
-            font-family: inherit; font-size: 1rem; background: var(--card); color: var(--ink);
+            width: 100%; padding: 12px 14px; border: 1.5px solid var(--rule); border-radius: 2px;
+            font-family: inherit; font-size: 1rem; background: #fff; color: var(--ink);
         }
-        form input:focus, form textarea:focus { outline: none; border-color: var(--red); }
+        form input:focus, form textarea:focus, .demo-row:focus-visible, .board-line:focus-visible, a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent); outline-offset: 2px;
+        }
         form button {
-            margin-top: 22px; width: 100%; padding: 14px; background: var(--red); color: #fff;
-            border: none; border-radius: 9px; font-family: inherit; font-size: 1.05rem; font-weight: 700; cursor: pointer;
+            margin-top: 24px; width: 100%; padding: 15px; background: var(--accent); color: #fff;
+            border: none; border-radius: 2px; font-family: 'Archivo', sans-serif;
+            font-size: 1rem; font-weight: 700; letter-spacing: 0.02em; cursor: pointer;
         }
-        form button:hover { background: var(--red-dark); }
+        form button:hover { background: var(--accent-deep); }
         form button:disabled { opacity: 0.7; cursor: default; }
         #contactSuccess {
-            display: none; margin-top: 22px; background: var(--green-soft); color: var(--green);
-            border-radius: 9px; padding: 16px; font-weight: 600; text-align: center;
+            display: none; margin-top: 24px; background: var(--tint); color: var(--ink);
+            border: 1.5px solid var(--ink); border-radius: 2px; padding: 16px; font-weight: 600; text-align: center;
         }
 
-        footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: 0.9rem; }
+        footer { border-top: 2px solid var(--ink); padding: 34px 0; color: var(--muted); font-size: 0.88rem; }
         .foot-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        footer a { color: var(--ink-soft); text-decoration: none; margin-left: 20px; }
-        footer a:hover { color: var(--ink); }
+        footer a { color: var(--ink-soft); text-decoration: none; margin-left: 22px; font-weight: 600; }
+        footer a:hover { color: var(--accent-deep); }
 
-        @media (max-width: 860px) {
-            .hero-grid, .grid-3, .grid-2, .compliance, .contact-grid { grid-template-columns: 1fr; }
+        @media (max-width: 880px) {
+            .hero-grid, .cols-3, .cols-2, .contact-grid { grid-template-columns: 1fr; }
             .stats { grid-template-columns: repeat(2, 1fr); }
             .nav-links a:not(.cta) { display: none; }
             .hero { padding: 56px 0 48px; }
             section { padding: 56px 0; }
+            .board-line .board-text { font-size: 1rem; }
         }
     </style>
 </head>
@@ -242,7 +261,7 @@
 <header>
     <div class="wrap">
         <nav>
-            <a class="brand" href="/">diffian<span>.</span></a>
+            <a class="brand" href="/">DIFFIAN</a>
             <div class="nav-links">
                 <a href="#hear">Hear it</a>
                 <a href="#sectors">Sectors</a>
@@ -258,54 +277,52 @@
 <section class="hero">
     <div class="wrap hero-grid">
         <div>
-            <span class="eyebrow">Made in Cardiff &middot; <span lang="cy">Wedi&#8217;i wneud yng Nghaerdydd</span></span>
+            <div class="kicker">Welsh-first text to speech</div>
             <div class="welsh-line" lang="cy">Llais Cymraeg i&#8217;ch gwasanaeth.</div>
             <h1>Welsh text-to-speech that gets every word right.</h1>
-            <p class="lede">Diffian is a bilingual Welsh and English text-to-speech service for the organisations that serve Wales &mdash; councils, health boards, contact centres and transport operators. Our own neural voice, our own engine, engineered for how Welsh is actually spoken.</p>
+            <p class="lede">Diffian is a bilingual Welsh and English text-to-speech service for the organisations that serve Wales: councils, health boards, contact centres and transport operators. Our own neural voice and our own engine, built for how Welsh is actually spoken.</p>
             <div class="btn-row">
                 <a class="btn btn-primary" href="#hear">Hear it speak</a>
                 <a class="btn btn-ghost" href="#contact">Talk to us</a>
             </div>
         </div>
-        <div class="announce-card" aria-label="Example bilingual announcement">
-            <div class="label">Announcement &middot; Ela voice &middot; tap to play</div>
-            <button class="announce-line playable" data-audio="/audio/announce_cy.mp3" aria-label="Play Welsh announcement">
-                <span class="play-dot" aria-hidden="true">&#9654;</span>
-                <span class="lang">CY</span>
-                <span class="text" lang="cy">Yn cyrraedd Caerfyrddin nawr.</span>
+        <div class="board" aria-label="Example bilingual announcement, tap a line to play">
+            <div class="board-head"><span>Announcement</span><span class="live">Bronwen &middot; live</span></div>
+            <button class="board-line" data-audio="/audio/announce_cy.mp3" aria-label="Play Welsh announcement">
+                <span class="board-play" aria-hidden="true">&#9654;</span>
+                <span class="board-lang">CY</span>
+                <span class="board-text" lang="cy">Yn cyrraedd Caerfyrddin nawr.</span>
             </button>
-            <button class="announce-line playable" data-audio="/audio/announce_en.mp3" aria-label="Play English announcement">
-                <span class="play-dot" aria-hidden="true">&#9654;</span>
-                <span class="lang en">EN</span>
-                <span class="text">Now arriving at Carmarthen.</span>
+            <button class="board-line" data-audio="/audio/announce_en.mp3" aria-label="Play English announcement">
+                <span class="board-play" aria-hidden="true">&#9654;</span>
+                <span class="board-lang">EN</span>
+                <span class="board-text">Now arriving at Carmarthen.</span>
             </button>
-            <div class="wave" aria-hidden="true">
-                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-            </div>
+            <div class="board-foot">Generated on CPU &middot; Bronwen voice &middot; 24 kHz</div>
         </div>
     </div>
 </section>
 
-<section class="alt" id="why">
+<section class="tint" id="why">
     <div class="wrap">
         <div class="kicker">The problem</div>
-        <h2>Generic TTS engines fail in Welsh.</h2>
-        <p class="section-lede">Welsh isn&#8217;t English with different words. Real-world Welsh service content mixes two languages in a single sentence, and the big cloud voices weren&#8217;t built for it &mdash; none of the major vendors will even train a custom voice that speaks Welsh.</p>
-        <div class="grid-3">
-            <div class="card">
+        <h2>Generic speech engines fail in Welsh.</h2>
+        <p class="section-lede">Welsh isn&#8217;t English with different words. Real service content mixes two languages in a single sentence, and the big cloud voices weren&#8217;t built for it. None of the major vendors will even train a custom voice that speaks Welsh.</p>
+        <div class="cols-3">
+            <div class="col-item">
                 <h3>Mixed-language sentences</h3>
                 <p>Announcements, IVR menus and service messages switch between Welsh and English constantly. Single-language voices read one of them wrong every time.</p>
-                <div class="example">Diffian detects the language word by word &mdash; English words read in English, Welsh words in Welsh, in one natural voice.</div>
+                <p class="fix"><strong>Diffian:</strong> the language is detected word by word, so each word is read in its own language by one natural voice.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>Place names</h3>
-                <p>Llanelli, Pen-y-lan, Aberystwyth, Cwmbr&#226;n. English voices mangle Welsh place names &mdash; and Welsh speakers notice instantly.</p>
-                <div class="example">A curated lexicon of thousands of Welsh place names, built from national transport data, so names sound right inside English sentences too.</div>
+                <p>Llanelli, Pen-y-lan, Aberystwyth, Cwmbr&#226;n. English voices mangle Welsh place names, and Welsh speakers notice instantly.</p>
+                <p class="fix"><strong>Diffian:</strong> a curated lexicon of thousands of Welsh place names, built from national transport data.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>Mutations</h3>
-                <p>Welsh words change their first letters with grammar: Caerdydd becomes <em>Gaerdydd</em> or <em>Nghaerdydd</em> depending on context. Engines that only know dictionary forms get real sentences wrong.</p>
-                <div class="example">Pronunciation entries cover mutated forms, with per-word phoneme overrides where standard rules fall short.</div>
+                <p>Welsh words change their first letters with grammar. Caerdydd becomes <em>Gaerdydd</em> or <em>Nghaerdydd</em> depending on context, and engines that only know dictionary forms get real sentences wrong.</p>
+                <p class="fix"><strong>Diffian:</strong> pronunciation entries cover mutated forms, with per-word overrides where rules fall short.</p>
             </div>
         </div>
     </div>
@@ -315,130 +332,125 @@
     <div class="wrap">
         <div class="kicker">Hear it</div>
         <h2>Don&#8217;t take our word for it. Take our voice&#8217;s.</h2>
-        <p class="section-lede">Every clip below was generated by Ela, our own neural voice &mdash; the same engine your service would use. Listen for the things generic TTS gets wrong.</p>
-        <div class="demo-list">
-            <button class="demo-item" data-audio="/audio/calls_at_en.mp3">
+        <p class="section-lede">Every clip was generated by Bronwen, our own neural voice, on the same engine your service would use. The line underneath each sentence is the engine&#8217;s actual phonetic output.</p>
+        <div class="demo-rows">
+            <button class="demo-row" data-audio="/audio/calls_at_en.mp3">
                 <span class="demo-play" aria-hidden="true">&#9654;</span>
                 <span>
-                    <span class="demo-text"><span class="lang-tag en">EN</span>&#8220;This service calls at Llanelli, Machynlleth, and Aberystwyth.&#8221;</span>
-                    <span class="demo-why">An English sentence &mdash; with every Welsh place name pronounced the Welsh way.</span>
+                    <span class="demo-text"><span class="lang-chip">EN</span>&#8220;This service calls at Llanelli, Machynlleth, and Aberystwyth.&#8221;</span>
+                    <span class="demo-ipa" aria-hidden="true">&#240;&#618;s s&#712;&#604;&#720;v&#618;s k&#712;&#596;&#720;lz at &#620;an&#712;&#603;&#620;&#616;, max&#712;&#652;n&#620;&#603;&#952;, and &#716;ab&#603;r&#712;&#652;stu&#616;&#952;</span>
+                    <span class="demo-why">An English sentence where every Welsh place name keeps its Welsh sounds. Note the &#620;, the true Welsh &#8220;ll&#8221;.</span>
                 </span>
             </button>
-            <button class="demo-item" data-audio="/audio/croeso_gaerdydd.mp3">
+            <button class="demo-row" data-audio="/audio/croeso_gaerdydd.mp3">
                 <span class="demo-play" aria-hidden="true">&#9654;</span>
                 <span>
-                    <span class="demo-text"><span class="lang-tag">CY</span><span lang="cy">&#8220;Croeso i Gaerdydd.&#8221;</span></span>
-                    <span class="demo-why">A mutated place name &mdash; Caerdydd appears as &#8220;Gaerdydd&#8221; here, and is still said correctly.</span>
+                    <span class="demo-text"><span class="lang-chip">CY</span><span lang="cy">&#8220;Croeso i Gaerdydd.&#8221;</span></span>
+                    <span class="demo-ipa" aria-hidden="true">kr&#712;&#596;&#616;s&#596; &#712;&#616; &#609;a&#618;rd&#712;i&#720;&#240;</span>
+                    <span class="demo-why">A mutated place name. Caerdydd appears here as &#8220;Gaerdydd&#8221; and is still said correctly.</span>
                 </span>
             </button>
-            <button class="demo-item" data-audio="/audio/ivr_cy.mp3">
+            <button class="demo-row" data-audio="/audio/ivr_cy.mp3">
                 <span class="demo-play" aria-hidden="true">&#9654;</span>
                 <span>
-                    <span class="demo-text"><span class="lang-tag">CY</span><span lang="cy">&#8220;Pwyswch un am wasanaeth yn Gymraeg.&#8221;</span></span>
-                    <span class="demo-why">An IVR prompt &mdash; give your phone lines a fluent Welsh-first voice.</span>
+                    <span class="demo-text"><span class="lang-chip">CY</span><span lang="cy">&#8220;Pwyswch un am wasanaeth yn Gymraeg.&#8221;</span></span>
+                    <span class="demo-ipa" aria-hidden="true">p&#712;u&#616;s&#650;x &#712;&#616;&#720;n am was&#712;an&#593;&#616;&#952; &#601;n &#609;&#712;&#652;mr&#593;&#616;&#609;</span>
+                    <span class="demo-why">An IVR prompt. Give your phone lines a fluent Welsh-first voice.</span>
                 </span>
             </button>
-            <button class="demo-item" data-audio="/audio/placenames_en.mp3">
+            <button class="demo-row" data-audio="/audio/placenames_en.mp3">
                 <span class="demo-play" aria-hidden="true">&#9654;</span>
                 <span>
-                    <span class="demo-text"><span class="lang-tag en">EN</span>&#8220;The next stop is Pen-y-lan Road.&#8221;</span>
-                    <span class="demo-why">Hyphenated Welsh compounds handled as one name, inside an English sentence.</span>
-                </span>
-            </button>
-            <button class="demo-item" data-audio="/audio/mixed_cy.mp3">
-                <span class="demo-play" aria-hidden="true">&#9654;</span>
-                <span>
-                    <span class="demo-text"><span class="lang-tag">CY</span><span lang="cy">&#8220;Mae&#8217;r bws yn gadael o Heath Park.&#8221;</span></span>
-                    <span class="demo-why">The reverse case &mdash; an English name inside a Welsh sentence, read in English.</span>
+                    <span class="demo-text"><span class="lang-chip">EN</span>&#8220;The next stop is Pen-y-lan Road.&#8221;</span>
+                    <span class="demo-ipa" aria-hidden="true">&#240;&#601; n&#712;&#603;kst st&#712;&#594;p &#618;z p&#712;&#603;n&#601;l&#712;an &#633;&#712;&#601;&#650;d</span>
+                    <span class="demo-why">Hyphenated Welsh compounds are handled as one name, inside an English sentence.</span>
                 </span>
             </button>
         </div>
     </div>
 </section>
 
-<section class="alt" id="product">
+<section class="tint" id="product">
     <div class="wrap">
         <div class="kicker">What we built</div>
         <h2>Our own voice. Our own engine. Built for Welsh from the ground up.</h2>
-        <p class="section-lede">When we found that no cloud vendor could give us a custom voice that speaks Welsh, we trained our own. Ela is a natural, modern neural voice that belongs to us &mdash; which means it can belong to your service, with no per-character licensing and no vendor lock-in.</p>
-        <div class="grid-2">
-            <div class="card">
-                <h3>Ela &mdash; a voice you can own</h3>
-                <p>A custom-trained neural voice producing 24&nbsp;kHz audio, efficient enough to run on ordinary CPU servers. Self-host it on your own infrastructure or consume it as a managed API &mdash; your content never has to leave your estate.</p>
+        <p class="section-lede">When we found that no cloud vendor could give us a custom voice that speaks Welsh, we trained our own. Bronwen is a natural, modern neural voice that belongs to us, which means it can belong to your service. No per-character licensing and no vendor lock-in.</p>
+        <div class="cols-2">
+            <div class="col-item">
+                <h3>Bronwen, a voice you can own</h3>
+                <p>A custom-trained neural voice producing 24&nbsp;kHz audio, efficient enough to run on ordinary CPU servers. Self-host it on your own infrastructure or consume it as a managed API. Your content never has to leave your estate.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>Bilingual by design</h3>
-                <p>Per-word language detection handles code-switching automatically, with explicit control when you need it. One request, one voice, both languages &mdash; correctly.</p>
+                <p>Per-word language detection handles code-switching automatically, with explicit control when you need it. One request, one voice, both languages, correctly.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>Fine control</h3>
-                <p>An SSML subset covers pauses, prosody, substitutions and exact phoneme overrides, plus Welsh and English number expansion &mdash; so your Welsh language officer&#8217;s corrections can be applied precisely and regenerated in seconds.</p>
+                <p>An SSML subset covers pauses, prosody, substitutions and exact phoneme overrides, plus Welsh and English number expansion. Your Welsh language officer&#8217;s corrections can be applied precisely and regenerated in seconds.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>Delivery that fits your hardware</h3>
-                <p>A simple HTTP API for live generation, or pre-generated offline audio bundles for annunciators, queue systems and kiosks &mdash; GPS-triggered on-vehicle playback needs no connectivity at all.</p>
+                <p>A simple HTTP API for live generation, or pre-generated offline audio bundles for annunciators, queue systems and kiosks. GPS-triggered on-vehicle playback needs no connectivity at all.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section>
-    <div class="wrap">
-        <div class="stats">
-            <div class="stat"><div class="num">52,<em>284</em></div><div class="lbl">Welsh bus stops already voiced, bilingually</div></div>
-            <div class="stat"><div class="num">1,<em>391</em></div><div class="lbl">routes in our national announcement corpus</div></div>
-            <div class="stat"><div class="num">&lt;<em>1s</em></div><div class="lbl">to generate a clip &mdash; on CPU, no GPUs needed</div></div>
-            <div class="stat"><div class="num">24<em>kHz</em></div><div class="lbl">natural neural audio, tuned for announcements</div></div>
-        </div>
+<div class="stats-band" aria-label="Scale figures">
+    <div class="wrap stats">
+        <div class="stat"><div class="num">52,284</div><div class="lbl">Welsh bus stops already voiced, bilingually</div></div>
+        <div class="stat"><div class="num">1,391</div><div class="lbl">routes in our national announcement corpus</div></div>
+        <div class="stat"><div class="num">&lt;1s</div><div class="lbl">to generate a clip on CPU, no GPUs needed</div></div>
+        <div class="stat"><div class="num">24kHz</div><div class="lbl">natural neural audio, tuned for announcements</div></div>
     </div>
-</section>
+</div>
 
-<section class="alt" id="sectors">
+<section id="sectors">
     <div class="wrap">
         <div class="kicker">Sectors</div>
         <h2>Anywhere your organisation speaks, it can speak Welsh well.</h2>
-        <p class="section-lede">Built for the public bodies of Wales &mdash; and proven on the hardest case first, public transport announcements at national scale.</p>
-        <div class="grid-3">
-            <div class="card">
+        <p class="section-lede">Built for the public bodies of Wales, and proven on the hardest case first: public transport announcements at national scale.</p>
+        <div class="cols-3">
+            <div class="col-item">
                 <h3>Councils &amp; public bodies</h3>
-                <p>Councils, health boards, national parks and museums: tannoy announcements, wayfinding, queue systems and digital services, generated in both languages from a single source &mdash; with every place name in your area said properly.</p>
+                <p>Councils, health boards, national parks and museums: tannoy announcements, wayfinding, queue systems and digital services, generated in both languages from a single source, with every place name in your area said properly.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>Contact centres &amp; IVR</h3>
-                <p>Telephone services are consistently among the weakest areas in Welsh Language Commissioner compliance testing. Give your IVR menus, queue messages and automated lines a fluent Welsh-first voice &mdash; without recruiting for it.</p>
+                <p>Telephone services are consistently among the weakest areas in Welsh Language Commissioner compliance testing. Give your IVR menus, queue messages and automated lines a fluent Welsh-first voice, without recruiting for it.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>Public transport</h3>
-                <p>The Public Service Vehicles (Accessible Information) Regulations 2023 require audible next-stop announcements, with deadlines from October 2026. Diffian generates complete bilingual announcement sets and packages them for standard on-vehicle annunciator hardware.</p>
+                <p>The Public Service Vehicles (Accessible Information) Regulations 2023 require audible next-stop announcements, with deadlines from October 2026. Diffian generates complete bilingual announcement sets packaged for standard on-vehicle annunciator hardware.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section id="compliance">
+<section class="tint" id="compliance">
     <div class="wrap">
         <div class="kicker">Compliance</div>
         <h2>Built around the rules Welsh public services work to.</h2>
-        <div class="compliance">
-            <div class="card">
+        <div class="cols-2">
+            <div class="col-item">
                 <h3>Welsh Language Standards</h3>
-                <p>Welsh-first service delivery for public bodies in Wales. Diffian generates Welsh and English from one workflow, with Welsh leading &mdash; the way the Standards expect it.</p>
+                <p>Welsh-first service delivery for public bodies in Wales. Diffian generates Welsh and English from one workflow, with Welsh leading, the way the Standards expect it.</p>
             </div>
-            <div class="card">
+            <div class="col-item">
                 <h3>PSV Accessible Information Regulations 2023</h3>
                 <p>Audible and visible route information on local bus services. Our announcement templates and offline bundles were designed for exactly this requirement.</p>
             </div>
         </div>
-        <p class="note">Honest small print: no tool certifies you as compliant by itself. We recommend editorial review of final wording by your Welsh language officer &mdash; and because regeneration takes seconds, incorporating that review is painless rather than a studio re-booking.</p>
+        <p class="note">Honest small print: no tool certifies you as compliant by itself. We recommend editorial review of final wording by your Welsh language officer. Because regeneration takes seconds, incorporating that review is painless rather than a studio re-booking.</p>
     </div>
 </section>
 
-<section class="alt" id="contact">
+<section id="contact">
     <div class="wrap contact-grid">
         <div>
             <div class="kicker">Contact</div>
             <h2>Hear it before you decide.</h2>
-            <p class="section-lede" style="margin-bottom:20px;">Tell us what your organisation needs to say in Welsh, and we&#8217;ll send back your own words in Ela&#8217;s voice &mdash; usually the same day. No commitment, no procurement forms.</p>
+            <p class="section-lede" style="margin-bottom:20px;">Tell us what your organisation needs to say in Welsh and we&#8217;ll send back your own words in Bronwen&#8217;s voice, usually the same day. No commitment, no procurement forms.</p>
             <p style="color:var(--ink-soft);">Prefer email? <a href="mailto:hello@diffian.com">hello@diffian.com</a></p>
         </div>
         <div>
@@ -450,8 +462,8 @@
                 <label for="cf-email">Email</label>
                 <input id="cf-email" type="email" name="email" required autocomplete="email">
                 <label for="cf-msg">What would you like it to say?</label>
-                <textarea id="cf-msg" name="message" rows="4" placeholder="e.g. your IVR welcome message, or a sample announcement — in Welsh, English or both" required></textarea>
-                <button type="submit" id="contactSubmitBtn">Send &mdash; and hear it back</button>
+                <textarea id="cf-msg" name="message" rows="4" placeholder="e.g. your IVR welcome message, or a sample announcement, in Welsh, English or both" required></textarea>
+                <button type="submit" id="contactSubmitBtn">Send, and hear it back</button>
                 <div id="contactSuccess">Diolch! We&#8217;ll be in touch shortly.</div>
             </form>
         </div>
@@ -471,7 +483,7 @@
 </footer>
 
 <script>
-// ── Audio demos: one shared player, click to toggle ────────────────
+// Audio demos: one shared player, click to toggle
 const player = new Audio();
 let currentBtn = null;
 function stopPlayback() {
@@ -513,12 +525,12 @@ if (contactForm) {
             } else {
                 const data = await res.json();
                 alert((data.errors || []).map(e => e.message).join(', ') || 'Submission failed. Please try again.');
-                btn.textContent = 'Send — and hear it back';
+                btn.textContent = 'Send, and hear it back';
                 btn.disabled = false;
             }
         } catch {
-            alert('Network error — please try again or email hello@diffian.com.');
-            btn.textContent = 'Send — and hear it back';
+            alert('Network error. Please try again or email hello@diffian.com.');
+            btn.textContent = 'Send, and hear it back';
             btn.disabled = false;
         }
     });
