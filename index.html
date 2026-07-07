@@ -202,6 +202,53 @@
             padding: 2px 7px; margin-right: 10px; vertical-align: 2px;
         }
 
+        /* try-it panel */
+        .tryit {
+            background: var(--board); border-radius: 4px; padding: 28px;
+            margin-top: 40px; max-width: 900px;
+        }
+        .tryit-head {
+            display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            flex-wrap: wrap; margin-bottom: 16px;
+        }
+        .tryit-title {
+            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fcfdfc;
+        }
+        .tryit-tabs { display: flex; gap: 8px; }
+        .tryit-tabs button {
+            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.78rem;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            background: none; border: 1.5px solid var(--board-dim); color: var(--board-dim);
+            border-radius: 2px; padding: 6px 12px; cursor: pointer;
+        }
+        .tryit-tabs button.active { border-color: var(--amber); color: var(--amber); }
+        .tryit textarea {
+            width: 100%; min-height: 92px; padding: 14px; border: 1.5px solid #2a332b;
+            border-radius: 2px; background: #131a14; color: #fcfdfc;
+            font-family: 'Public Sans', system-ui, sans-serif; font-size: 1rem; line-height: 1.5;
+            resize: vertical;
+        }
+        .tryit textarea.code { font-family: 'Gentium Plus', serif; font-size: 1.02rem; }
+        .tryit textarea:focus { outline: none; border-color: var(--amber); }
+        .tryit-row { display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+        .tryit select {
+            background: #131a14; color: #fcfdfc; border: 1.5px solid #2a332b; border-radius: 2px;
+            font-family: inherit; font-size: 0.92rem; padding: 10px 12px;
+        }
+        .tryit-go {
+            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.95rem;
+            background: var(--amber); color: var(--board); border: none; border-radius: 2px;
+            padding: 11px 22px; cursor: pointer;
+        }
+        .tryit-go:hover { background: #ffc233; }
+        .tryit-go:disabled { opacity: 0.6; cursor: default; }
+        .tryit-hint { font-size: 0.8rem; color: var(--board-dim); margin-top: 12px; }
+        .tryit-out { margin-top: 16px; display: none; }
+        .tryit-out .ipa { color: var(--amber); font-size: 1rem; word-break: break-word; }
+        .tryit-out a { color: var(--board-dim); font-size: 0.85rem; }
+        .tryit-err { margin-top: 14px; display: none; font-size: 0.9rem; color: #e2635c; }
+        .tryit-err a { color: #e2635c; }
+
         /* stats board */
         .stats-band { background: var(--board); padding: 56px 0; }
         .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
@@ -368,7 +415,31 @@
                 </span>
             </button>
         </div>
-        <p style="margin-top:28px; font-size:1.02rem;">Want your own words in Bronwen&#8217;s voice? <a href="#contact" style="font-weight:700;">Send us a sentence</a> and we&#8217;ll return it spoken, usually the same day.</p>
+        <div class="tryit" id="tryit">
+            <div class="tryit-head">
+                <div class="tryit-title">Now type your own.</div>
+                <div class="tryit-tabs" role="tablist">
+                    <button type="button" class="active" data-mode="std">Text</button>
+                    <button type="button" data-mode="ssml">SSML</button>
+                </div>
+            </div>
+            <label for="tryText" style="position:absolute; left:-9999px;">Text to speak</label>
+            <textarea id="tryText" maxlength="300">Mae'r trên nesaf i Fangor yn gadael o blatfform dau.</textarea>
+            <div class="tryit-row">
+                <select id="tryLang" aria-label="Language">
+                    <option value="cy" selected>Cymraeg</option>
+                    <option value="en">English</option>
+                </select>
+                <button type="button" class="tryit-go" id="tryGo">Speak it</button>
+            </div>
+            <div class="tryit-hint" id="tryHint">Generated live by Bronwen on our engine. Try a place name, a mutation, or a mixed-language sentence.</div>
+            <div class="tryit-out" id="tryOut">
+                <div class="ipa" id="tryIpa"></div>
+                <a id="tryDl" download="bronwen.wav" href="#">Download WAV</a>
+            </div>
+            <div class="tryit-err" id="tryErr"></div>
+        </div>
+        <p style="margin-top:24px; font-size:1.02rem;">Need a bespoke voice or a full announcement pack? <a href="#contact" style="font-weight:700;">Talk to us</a>.</p>
     </div>
 </section>
 
@@ -505,6 +576,71 @@ document.querySelectorAll('[data-audio]').forEach(btn => {
         if (typeof gtag === 'function') gtag('event', 'audio_demo_play', { clip: btn.getAttribute('data-audio') });
     });
 });
+
+// Live try-it demo against the Bronwen engine
+(function () {
+    const TTS_BASE = 'https://d9jzgtlho3s3h.cloudfront.net';
+    const STD_DEFAULT = "Mae'r trên nesaf i Fangor yn gadael o blatfform dau.";
+    const SSML_DEFAULT = '<speak>\n  Yn cyrraedd <prosody rate="slow">Llandysul</prosody> nawr.\n  <break time="400ms"/>\n  <lang xml:lang="en-GB">Now arriving at Llandysul.</lang>\n</speak>';
+    const text = document.getElementById('tryText');
+    const go = document.getElementById('tryGo');
+    const out = document.getElementById('tryOut');
+    const ipa = document.getElementById('tryIpa');
+    const dl = document.getElementById('tryDl');
+    const err = document.getElementById('tryErr');
+    const hint = document.getElementById('tryHint');
+    let mode = 'std';
+
+    document.querySelectorAll('.tryit-tabs button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            mode = btn.dataset.mode;
+            document.querySelectorAll('.tryit-tabs button').forEach(b => b.classList.toggle('active', b === btn));
+            text.classList.toggle('code', mode === 'ssml');
+            text.maxLength = mode === 'ssml' ? 600 : 300;
+            const other = mode === 'ssml' ? STD_DEFAULT : SSML_DEFAULT;
+            if (!text.value.trim() || text.value === other) text.value = mode === 'ssml' ? SSML_DEFAULT : STD_DEFAULT;
+            hint.textContent = mode === 'ssml'
+                ? 'Supports <break>, <prosody>, <lang>, <sub>, <phoneme> and <say-as> tags.'
+                : 'Generated live by Bronwen on our engine. Try a place name, a mutation, or a mixed-language sentence.';
+        });
+    });
+
+    function decodePhonemes(raw) {
+        return raw
+            .replace(/\\x([0-9a-fA-F]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)))
+            .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+    }
+
+    go.addEventListener('click', async () => {
+        if (!text.value.trim()) return;
+        stopPlayback();
+        err.style.display = 'none';
+        go.disabled = true;
+        go.textContent = 'Generating…';
+        try {
+            const res = await fetch(TTS_BASE + '/tts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text.value, lang: document.getElementById('tryLang').value, name_lang: 'auto', ssml: mode === 'ssml' })
+            });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const ph = res.headers.get('X-Phonemes') || '';
+            const url = URL.createObjectURL(await res.blob());
+            player.src = url;
+            player.play();
+            ipa.textContent = ph ? decodePhonemes(ph) : '';
+            dl.href = url;
+            out.style.display = 'block';
+            if (typeof gtag === 'function') gtag('event', 'tts_live_generate', { mode: mode });
+        } catch {
+            err.innerHTML = 'The live engine didn&#8217;t respond. Try again in a minute, or <a href="#contact">send us your sentence</a> and we&#8217;ll return it spoken.';
+            err.style.display = 'block';
+        } finally {
+            go.disabled = false;
+            go.textContent = 'Speak it';
+        }
+    });
+})();
 
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
