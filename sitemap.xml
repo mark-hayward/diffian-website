@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://diffian.com/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diffian.com/"/>
+    <xhtml:link rel="alternate" hreflang="cy" href="https://diffian.com/cy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://diffian.com/"/>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://diffian.com/cy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diffian.com/"/>
+    <xhtml:link rel="alternate" hreflang="cy" href="https://diffian.com/cy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://diffian.com/"/>
+    <lastmod>2026-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://diffian.com/technology/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diffian.com/technology/"/>
+    <xhtml:link rel="alternate" hreflang="cy" href="https://diffian.com/cy/technoleg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://diffian.com/technology/"/>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://diffian.com/cy/technoleg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diffian.com/technology/"/>
+    <xhtml:link rel="alternate" hreflang="cy" href="https://diffian.com/cy/technoleg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://diffian.com/technology/"/>
+    <lastmod>2026-07-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
