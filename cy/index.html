@@ -560,8 +560,17 @@
 // Audio demos: one shared player, click to toggle
 const player = new Audio();
 let currentBtn = null;
+// The live demo streams one WAV per sentence. They're scheduled on a Web Audio
+// timeline rather than played through <audio> so they join without gaps.
+let streamCtx = null, streamNodes = [];
+function stopStream() {
+    streamNodes.forEach(n => { try { n.stop(); } catch (e) { /* already finished */ } });
+    streamNodes = [];
+    if (streamCtx) { streamCtx.close().catch(() => {}); streamCtx = null; }
+}
 function stopPlayback() {
     player.pause();
+    stopStream();
     if (currentBtn) currentBtn.classList.remove('playing');
     currentBtn = null;
 }
@@ -597,7 +606,9 @@ document.querySelectorAll('[data-audio]').forEach(btn => {
             mode = btn.dataset.mode;
             document.querySelectorAll('.tryit-tabs button').forEach(b => b.classList.toggle('active', b === btn));
             text.classList.toggle('code', mode === 'ssml');
-            text.maxLength = mode === 'ssml' ? 600 : 300;
+            // 400 keeps SSML render time under API Gateway's hard 30s integration
+            // timeout (~0.8s + 0.058s/char). Raise once the origin is a Function URL.
+            text.maxLength = mode === 'ssml' ? 400 : 300;
             const other = mode === 'ssml' ? STD_DEFAULT : SSML_DEFAULT;
             if (!text.value.trim() || text.value === other) text.value = mode === 'ssml' ? SSML_DEFAULT : STD_DEFAULT;
             hint.textContent = mode === 'ssml'
@@ -612,28 +623,88 @@ document.querySelectorAll('[data-audio]').forEach(btn => {
             .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
     }
 
+    // Stream framing: [4-byte big-endian length][complete WAV], one frame per
+    // sentence. Each frame is self-contained, so it decodes the moment it lands.
+    function concat(a, b) {
+        const c = new Uint8Array(a.length + b.length); c.set(a); c.set(b, a.length); return c;
+    }
+    function wavPcm(bytes) {
+        const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+        let off = 12;                                   // past 'RIFF' <size> 'WAVE'
+        while (off + 8 <= bytes.byteLength) {
+            const id = String.fromCharCode(bytes[off], bytes[off + 1], bytes[off + 2], bytes[off + 3]);
+            const sz = dv.getUint32(off + 4, true);
+            if (id === 'data') return bytes.subarray(off + 8, off + 8 + sz);
+            off += 8 + sz + (sz & 1);                   // chunks are word-aligned
+        }
+        return new Uint8Array(0);
+    }
+    function joinWavs(frames) {                         // one WAV for download / replay
+        const datas = frames.map(wavPcm);
+        const total = datas.reduce((n, d) => n + d.length, 0);
+        const out = new Uint8Array(44 + total);
+        const dv = new DataView(out.buffer);
+        const put = (o, s) => { for (let i = 0; i < s.length; i++) out[o + i] = s.charCodeAt(i); };
+        put(0, 'RIFF'); dv.setUint32(4, 36 + total, true); put(8, 'WAVEfmt ');
+        dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+        dv.setUint32(24, 24000, true); dv.setUint32(28, 48000, true);
+        dv.setUint16(32, 2, true); dv.setUint16(34, 16, true);
+        put(36, 'data'); dv.setUint32(40, total, true);
+        let o = 44;
+        datas.forEach(d => { out.set(d, o); o += d.length; });
+        return new Blob([out], { type: 'audio/wav' });
+    }
+
     go.addEventListener('click', async () => {
         if (!text.value.trim()) return;
         stopPlayback();
         err.style.display = 'none';
         go.disabled = true;
         go.textContent = 'Wrthi’n cynhyrchu…';
+        // built inside the click handler so it counts as a user gesture
+        streamCtx = new (window.AudioContext || window.webkitAudioContext)();
         try {
-            const res = await fetch(TTS_BASE + '/tts', {
+            const res = await fetch(TTS_BASE + '/tts/stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: text.value, lang: document.getElementById('tryLang').value, name_lang: 'auto', ssml: mode === 'ssml' })
             });
             if (!res.ok) throw new Error('HTTP ' + res.status);
             const ph = res.headers.get('X-Phonemes') || '';
-            const url = URL.createObjectURL(await res.blob());
-            player.src = url;
-            player.play();
             ipa.textContent = ph ? decodePhonemes(ph) : '';
-            dl.href = url;
             out.style.display = 'block';
+
+            const reader = res.body.getReader();
+            const frames = [];
+            let buf = new Uint8Array(0), playAt = 0, started = false;
+            for (;;) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                buf = concat(buf, value);
+                while (buf.length >= 4) {
+                    const n = new DataView(buf.buffer, buf.byteOffset, 4).getUint32(0);
+                    if (buf.length < 4 + n) break;
+                    const frame = buf.slice(4, 4 + n);
+                    buf = buf.slice(4 + n);
+                    frames.push(frame);
+                    if (!streamCtx) return;             // stopped part-way through
+                    // decodeAudioData detaches the buffer it's given, so hand it a copy
+                    const audio = await streamCtx.decodeAudioData(frame.slice().buffer);
+                    const node = streamCtx.createBufferSource();
+                    node.buffer = audio;
+                    node.connect(streamCtx.destination);
+                    if (!started) { playAt = streamCtx.currentTime + 0.1; started = true; go.textContent = 'Yn llefaru…'; }
+                    node.start(playAt);
+                    playAt += audio.duration;
+                    streamNodes.push(node);
+                }
+            }
+            const url = URL.createObjectURL(joinWavs(frames));
+            player.src = url;                           // Web Audio already played it
+            dl.href = url;
             if (typeof gtag === 'function') gtag('event', 'tts_live_generate', { mode: mode });
         } catch {
+            stopStream();
             err.innerHTML = 'Wnaeth y peiriant byw ddim ymateb. Rhowch gynnig arall arni mewn munud, neu <a href="#contact">anfonwch eich brawddeg atom</a> ac fe’i dychwelwn wedi’i llefaru.';
             err.style.display = 'block';
         } finally {
