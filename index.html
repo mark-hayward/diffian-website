@@ -645,8 +645,10 @@ document.querySelectorAll('[data-audio]').forEach(btn => {
         }
         return new Uint8Array(0);
     }
-    function joinWavs(frames) {                         // one WAV for download / replay
-        const datas = frames.map(wavPcm);
+    function joinWavs(frames, gapSec) {                 // one WAV for download / replay
+        const gap = new Uint8Array(Math.round((gapSec || 0) * 24000) * 2);   // 16-bit silence
+        const datas = [];
+        frames.forEach((f, i) => { if (i) datas.push(gap); datas.push(wavPcm(f)); });
         const total = datas.reduce((n, d) => n + d.length, 0);
         const out = new Uint8Array(44 + total);
         const dv = new DataView(out.buffer);
@@ -695,13 +697,15 @@ document.querySelectorAll('[data-audio]').forEach(btn => {
                 // never schedule in the past: if a render came back late, start it now
                 const at = Math.max(playAt, streamCtx.currentTime + 0.05);
                 node.start(at);
-                playAt = at + audio.duration;
+                // 0.32s between sentences, matching the pause the server inserts when it
+                // renders a paragraph in one request — without it they run together
+                playAt = at + audio.duration + (isSsml ? 0 : 0.32);
                 streamNodes.push(node);
                 go.textContent = 'Speaking…';
                 ipa.textContent = phonemes.join(' | ');
                 out.style.display = 'block';
             }
-            const url = URL.createObjectURL(joinWavs(frames));
+            const url = URL.createObjectURL(joinWavs(frames, isSsml ? 0 : 0.32));
             player.src = url;                           // Web Audio already played it
             dl.href = url;
             if (typeof gtag === 'function') gtag('event', 'tts_live_generate', { mode: mode });
