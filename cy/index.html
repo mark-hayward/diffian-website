@@ -623,10 +623,18 @@ document.querySelectorAll('[data-audio]').forEach(btn => {
             .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
     }
 
-    // Stream framing: [4-byte big-endian length][complete WAV], one frame per
-    // sentence. Each frame is self-contained, so it decodes the moment it lands.
-    function concat(a, b) {
-        const c = new Uint8Array(a.length + b.length); c.set(a); c.set(b, a.length); return c;
+    // Each sentence is fetched as its own WAV and scheduled the moment it lands, so
+    // audio starts after the first sentence renders (~2.5s) rather than after the whole
+    // paragraph (~7s for three sentences, ~20s for seven). Measured per-sentence render
+    // time is 0.75-0.89x its own playback duration, so sequential requests keep pace.
+    //
+    // The server can already do this in one request via /tts/stream, and that version is
+    // better — it shares one sampled voice style across the whole paragraph, where
+    // separate requests each sample their own. But streaming needs a Lambda Function URL
+    // on RESPONSE_STREAM, and API Gateway buffers the response. Switch back when that
+    // route works.
+    function splitSentences(t) {
+        return (t.match(/[^.!?]+[.!?]*/g) || []).map(s => s.trim()).filter(Boolean);
     }
     function wavPcm(bytes) {
         const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
@@ -664,40 +672,36 @@ document.querySelectorAll('[data-audio]').forEach(btn => {
         // built inside the click handler so it counts as a user gesture
         streamCtx = new (window.AudioContext || window.webkitAudioContext)();
         try {
-            const res = await fetch(TTS_BASE + '/tts/stream', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: text.value, lang: document.getElementById('tryLang').value, name_lang: 'auto', ssml: mode === 'ssml' })
-            });
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const ph = res.headers.get('X-Phonemes') || '';
-            ipa.textContent = ph ? decodePhonemes(ph) : '';
-            out.style.display = 'block';
-
-            const reader = res.body.getReader();
-            const frames = [];
-            let buf = new Uint8Array(0), playAt = 0, started = false;
-            for (;;) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                buf = concat(buf, value);
-                while (buf.length >= 4) {
-                    const n = new DataView(buf.buffer, buf.byteOffset, 4).getUint32(0);
-                    if (buf.length < 4 + n) break;
-                    const frame = buf.slice(4, 4 + n);
-                    buf = buf.slice(4 + n);
-                    frames.push(frame);
-                    if (!streamCtx) return;             // stopped part-way through
-                    // decodeAudioData detaches the buffer it's given, so hand it a copy
-                    const audio = await streamCtx.decodeAudioData(frame.slice().buffer);
-                    const node = streamCtx.createBufferSource();
-                    node.buffer = audio;
-                    node.connect(streamCtx.destination);
-                    if (!started) { playAt = streamCtx.currentTime + 0.1; started = true; go.textContent = 'Yn llefaru…'; }
-                    node.start(playAt);
-                    playAt += audio.duration;
-                    streamNodes.push(node);
-                }
+            const isSsml = mode === 'ssml';
+            const lang = document.getElementById('tryLang').value;
+            // SSML can't be split without cutting tags in half, so it stays one request
+            const parts = isSsml ? [text.value] : splitSentences(text.value);
+            const frames = [], phonemes = [];
+            let playAt = 0;
+            for (const part of parts) {
+                const res = await fetch(TTS_BASE + '/tts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: part, lang: lang, name_lang: 'auto', ssml: isSsml })
+                });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                if (!streamCtx) return;                 // stopped part-way through
+                phonemes.push(decodePhonemes(res.headers.get('X-Phonemes') || ''));
+                const bytes = new Uint8Array(await res.arrayBuffer());
+                frames.push(bytes);
+                // decodeAudioData detaches the buffer it's given, so hand it a copy
+                const audio = await streamCtx.decodeAudioData(bytes.slice().buffer);
+                const node = streamCtx.createBufferSource();
+                node.buffer = audio;
+                node.connect(streamCtx.destination);
+                // never schedule in the past: if a render came back late, start it now
+                const at = Math.max(playAt, streamCtx.currentTime + 0.05);
+                node.start(at);
+                playAt = at + audio.duration;
+                streamNodes.push(node);
+                go.textContent = 'Yn llefaru…';
+                ipa.textContent = phonemes.join(' | ');
+                out.style.display = 'block';
             }
             const url = URL.createObjectURL(joinWavs(frames));
             player.src = url;                           // Web Audio already played it
