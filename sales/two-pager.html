@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fi, gan Diffian — Two-Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;600;700&family=Gentium+Plus:ital@0;1&family=Doto:wght@700;900&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --ground: #fcfdfc;
+        --tint: #f0f4f1;
+        --ink: #141f19;
+        --ink-soft: #3f4d45;
+        --muted: #66746b;
+        --rule: #d9e0da;
+        --accent: #d1232a;
+        --accent-deep: #9c1b20;
+        --amber: #ffb300;
+        --board: #0d120e;
+        --board-dim: #8a958b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body {
+        font-family: 'Public Sans', system-ui, sans-serif;
+        color: var(--ink); background: #b9c0ba;
+        font-size: 9.2pt; line-height: 1.45;
+    }
+    h1, h2, h3, .kicker { font-family: 'Archivo', sans-serif; }
+
+    .page {
+        width: 210mm; height: 297mm; background: var(--ground);
+        margin: 10mm auto; padding: 13mm 15mm 11mm;
+        box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+        display: flex; flex-direction: column;
+        position: relative; overflow: hidden;
+    }
+    @page { size: A4; margin: 0; }
+    @media print {
+        body { background: none; }
+        .page { margin: 0; box-shadow: none; page-break-after: always; }
+        .page:last-child { page-break-after: auto; }
+    }
+
+    /* shared */
+    .kicker {
+        font-size: 7.2pt; font-weight: 700; letter-spacing: 0.18em;
+        text-transform: uppercase; color: var(--accent); margin-bottom: 4pt;
+    }
+    .rule-top { border-top: 2.2pt solid var(--ink); padding-top: 6pt; }
+    .muted { color: var(--muted); }
+
+    /* header */
+    .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9mm; }
+    .head img { height: 9mm; width: auto; display: block; }
+    .head .contact { font-size: 8pt; color: var(--muted); text-align: right; line-height: 1.5; }
+    .head .contact b { color: var(--ink-soft); font-weight: 600; }
+
+    /* hero */
+    .welsh-line { font-family: 'Gentium Plus', serif; font-style: italic; font-size: 11pt; color: var(--ink-soft); margin-bottom: 3pt; }
+    h1 { font-size: 28pt; font-weight: 800; letter-spacing: -0.015em; line-height: 1.06; margin-bottom: 7pt; }
+    .lede { font-size: 11pt; color: var(--ink-soft); max-width: 118mm; }
+    .hero { display: flex; gap: 10mm; align-items: center; margin-bottom: 11mm; }
+    .hero > div:first-child { flex: 1.15; }
+
+    /* dot-matrix board */
+    .board {
+        flex: 1; background: var(--board); border-radius: 3mm; padding: 8mm 8mm 7mm;
+        color: var(--amber);
+    }
+    .board-head {
+        display: flex; justify-content: space-between;
+        font-family: 'Archivo', sans-serif; font-size: 6.4pt; font-weight: 600;
+        letter-spacing: 0.18em; text-transform: uppercase; color: var(--board-dim);
+        border-bottom: 0.6pt solid #232b24; padding-bottom: 3.5pt; margin-bottom: 2pt;
+    }
+    .board-head .live { color: var(--amber); }
+    .board-line { display: flex; gap: 4mm; align-items: baseline; padding: 6.5pt 0; border-bottom: 0.6pt solid #1a211b; }
+    .board-line:last-of-type { border-bottom: none; }
+    .board-lang { font-family: 'Doto', monospace; font-weight: 900; font-size: 7.4pt; color: var(--board-dim); }
+    .board-text { font-family: 'Doto', monospace; font-weight: 700; font-size: 12.5pt; letter-spacing: 0.02em; }
+    .board-foot {
+        font-family: 'Archivo', sans-serif; font-size: 6.4pt; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--board-dim); margin-top: 4.5pt;
+    }
+
+    /* sections */
+    section { margin-bottom: 7mm; }
+    h2 { font-size: 13.5pt; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 5pt; }
+    .cols { display: flex; gap: 6mm; }
+    .cols > div { flex: 1; }
+    .col-item { border-top: 2pt solid var(--ink); padding-top: 4.5pt; }
+    .col-item h3 { font-size: 9.6pt; font-weight: 700; margin-bottom: 2.5pt; }
+    .col-item p { font-size: 8.6pt; color: var(--ink-soft); }
+    .col-item .fix { margin-top: 3pt; font-size: 8.4pt; }
+    .col-item .fix b { color: var(--accent-deep); }
+    .pron { font-family: 'Gentium Plus', serif; }
+
+    .vendor-strip {
+        background: var(--tint); border-left: 2.2pt solid var(--accent);
+        padding: 5pt 8pt; font-size: 8.8pt; color: var(--ink-soft); margin-top: 5mm;
+    }
+
+    /* proof band */
+    .proof {
+        background: var(--board); border-radius: 3mm; color: var(--ground);
+        padding: 7mm 8mm; margin-top: auto;
+    }
+    .proof .kicker { color: var(--amber); }
+    .proof h2 { color: var(--ground); }
+    .proof p { color: #b7c1b8; font-size: 8.8pt; max-width: 165mm; }
+    .stats { display: flex; gap: 6mm; margin-top: 5mm; }
+    .stat { flex: 1; }
+    .stat .num {
+        font-family: 'Doto', monospace; font-weight: 900; font-size: 19pt;
+        color: var(--amber); font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+    }
+    .stat .lbl { color: var(--board-dim); font-size: 7.6pt; margin-top: 2pt; line-height: 1.35; }
+
+    /* page 2 */
+    .sector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5mm 6mm; }
+    .why-list { list-style: none; }
+    .why-list li { padding: 4.5pt 0 4.5pt 0; border-top: 0.7pt solid var(--rule); font-size: 8.8pt; color: var(--ink-soft); }
+    .why-list li:first-child { border-top: 2pt solid var(--ink); }
+    .why-list b { color: var(--ink); font-family: 'Archivo', sans-serif; font-size: 9.2pt; }
+
+    .compliance { display: flex; gap: 6mm; }
+    .note {
+        font-size: 8.2pt; color: var(--muted); border-left: 2pt solid var(--rule);
+        padding: 2pt 0 2pt 7pt; margin-top: 4mm;
+    }
+
+    .cta {
+        background: var(--accent); border-radius: 3mm; color: #fff;
+        padding: 6.5mm 8mm; margin-top: auto;
+        display: flex; justify-content: space-between; align-items: center; gap: 8mm;
+    }
+    .cta h2 { color: #fff; margin-bottom: 2pt; }
+    .cta p { font-size: 9pt; color: #ffd9db; }
+    .cta .links { text-align: right; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 10pt; white-space: nowrap; line-height: 1.7; }
+    .cta .links span { display: block; }
+
+    .foot {
+        display: flex; justify-content: space-between; margin-top: 5mm;
+        font-size: 7.6pt; color: var(--muted);
+    }
+
+    /* page 1 runs larger so the page owns its space */
+    .p1 h2 { font-size: 15.5pt; }
+    .p1 .kicker { font-size: 7.8pt; }
+    .p1 .col-item h3 { font-size: 10.6pt; }
+    .p1 .col-item p { font-size: 9.4pt; }
+    .p1 .col-item .fix { font-size: 9.2pt; margin-top: 4pt; }
+    .p1 section { margin-bottom: 9mm; }
+    .p1 .vendor-strip { font-size: 9.6pt; padding: 7pt 10pt; margin-top: 6mm; }
+    .p1 .proof { padding: 9mm; }
+    .p1 .proof p { font-size: 9.6pt; }
+    .p1 .stat .num { font-size: 22pt; }
+    .p1 .stat .lbl { font-size: 8.2pt; margin-top: 3pt; }
+    .p1 .stats { margin-top: 6mm; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ PAGE 1 ══════════════════ -->
+<div class="page p1">
+    <div class="head">
+        <img src="/images/logo.png" alt="Diffian">
+        <div class="contact"><b>diffian.com</b><br>hello@diffian.com</div>
+    </div>
+
+    <div class="hero">
+        <div>
+            <div class="kicker">Fi &middot; Welsh-first text-to-speech</div>
+            <div class="welsh-line">Llais Cymraeg i&rsquo;ch gwasanaeth.</div>
+            <h1>A Welsh voice for your&nbsp;service.</h1>
+            <p class="lede">Fi is Diffian&rsquo;s bilingual Welsh and English text-to-speech
+            service; say it &ldquo;vee&rdquo;, the Welsh word for &ldquo;me&rdquo;.
+            Phone lines, appointment reminders, announcements, accessible information:
+            wherever your service speaks, it can speak Welsh properly. Our own neural
+            voice and our own engine, built for how Welsh is actually spoken.</p>
+        </div>
+        <div class="board">
+            <div class="board-head"><span>Service message</span><span class="live">Carys &middot; live</span></div>
+            <div class="board-line">
+                <span class="board-lang">CY</span>
+                <span class="board-text" lang="cy">Pwyswch un am wasanaeth yn Gymraeg.</span>
+            </div>
+            <div class="board-line">
+                <span class="board-lang">EN</span>
+                <span class="board-text">Press one for service in Welsh.</span>
+            </div>
+            <div class="board-foot">Generated on CPU &middot; Carys voice &middot; 24 kHz</div>
+        </div>
+    </div>
+
+    <section>
+        <div class="kicker">The problem</div>
+        <h2>Generic speech engines fail in Welsh.</h2>
+        <div class="cols">
+            <div class="col-item">
+                <h3>Mixed-language sentences</h3>
+                <p>Real service content switches between Welsh and English constantly.
+                Single-language voices read one of them wrong every time.</p>
+                <p class="fix"><b>Fi:</b> the language is detected word by word, so each
+                word is read in its own language by one natural voice.</p>
+            </div>
+            <div class="col-item">
+                <h3>Place names</h3>
+                <p>Llanelli, Pen-y-lan, Cwmbr&acirc;n. The Welsh <i>ll</i>
+                (<span class="pron">&#620;</span>) is a consonant English simply doesn&rsquo;t
+                contain, and Welsh speakers notice instantly.</p>
+                <p class="fix"><b>Fi:</b> a national lexicon of Welsh place names, with
+                the genuine Welsh sounds.</p>
+            </div>
+            <div class="col-item">
+                <h3>Mutations</h3>
+                <p>Welsh words change their first letter with grammar: Caerdydd becomes
+                <i>Gaerdydd</i> or <i>Nghaerdydd</i>. Dictionary-form engines get ordinary
+                sentences wrong.</p>
+                <p class="fix"><b>Fi:</b> pronunciation entries cover the mutated forms
+                explicitly.</p>
+            </div>
+        </div>
+        <div class="vendor-strip">
+            <b>And you can&rsquo;t buy your way out of it.</b> When we last checked, in May 2026,
+            no major cloud vendor would train a custom voice that speaks Welsh. You could have
+            a voice that belongs to Microsoft, or a voice that belongs to you and can&rsquo;t
+            speak Welsh. Not both.
+        </div>
+    </section>
+
+    <div class="proof">
+        <div class="kicker">Proven at national scale</div>
+        <h2>We proved it on the hardest case first.</h2>
+        <p>Before selling this to anyone, we generated bilingual audio for every bus stop
+        name in Wales, on ordinary CPU. Not tuned on a demo sentence: run across every
+        settlement, street and interchange name in the country.</p>
+        <div class="stats">
+            <div class="stat"><div class="num">1,391</div><div class="lbl">routes covered</div></div>
+            <div class="stat"><div class="num">52,284</div><div class="lbl">stop entries processed</div></div>
+            <div class="stat"><div class="num">23,928</div><div class="lbl">unique bilingual clips generated</div></div>
+            <div class="stat"><div class="num">3,136</div><div class="lbl">words in the Welsh place-name lexicon it built</div></div>
+        </div>
+    </div>
+
+    <div class="foot">
+        <span>Fi, gan Diffian &middot; Caerdydd, Cymru</span>
+        <span>1 / 2</span>
+    </div>
+</div>
+
+<!-- ══════════════════ PAGE 2 ══════════════════ -->
+<div class="page">
+    <section>
+        <div class="kicker">Where Fi fits</div>
+        <h2>Anywhere your organisation speaks, it can speak Welsh well.</h2>
+        <div class="sector-grid">
+            <div class="col-item">
+                <h3>Contact centres &amp; IVR</h3>
+                <p>Few organisations can staff every phone line with Welsh speakers. Give
+                IVR menus, queue messages and automated lines a fluent Welsh-first voice,
+                without recruiting for it.</p>
+            </div>
+            <div class="col-item">
+                <h3>Health boards</h3>
+                <p>Appointment reminders, outpatient queue calling, spoken patient
+                information, Welsh-first telephone services. Patient-derived text never has
+                to leave your network: CPU-only self-hosting materially simplifies the DPIA.</p>
+            </div>
+            <div class="col-item">
+                <h3>Councils &amp; public bodies</h3>
+                <p>Tannoy and wayfinding announcements, queue systems and digital services,
+                both languages from one source, with every place name in your area said
+                properly.</p>
+            </div>
+            <div class="col-item">
+                <h3>Public transport</h3>
+                <p>The PSV Accessible Information Regulations 2023 require audible next-stop
+                announcements on local bus services, with deadlines from October 2026. Fi
+                generates complete bilingual announcement sets for standard annunciator
+                hardware.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="kicker">Why Fi is different</div>
+        <h2>One voice. Both languages. Yours.</h2>
+        <ul class="why-list">
+            <li><b>Bilingual and brandable at once.</b> &nbsp;One voice speaks both languages,
+            so its English says your Welsh place and department names properly, and its Welsh
+            is not a different speaker. Carys is ready today; the same pipeline can train a
+            voice that belongs to your organisation alone. That is the promise in the name:
+            Fi is Welsh for &ldquo;me&rdquo;.</li>
+            <li><b>Deployed where your governance requires.</b> &nbsp;Managed API, self-hosted
+            on your own infrastructure, or pre-generated offline audio bundles. Content never
+            has to leave your estate, and there is no per-character meter, so cost doesn&rsquo;t
+            scale with how much Welsh you produce.</li>
+            <li><b>Editorial control that actually lands.</b> &nbsp;Every request returns the
+            phonetic transcription the engine used, so your Welsh language officer can inspect
+            and correct it word by word. Corrections are permanent, apply everywhere at once,
+            and regenerate in seconds.</li>
+            <li><b>Real Welsh, all the way down.</b> &nbsp;Genuine Welsh consonants, mutation-aware
+            pronunciation, and Welsh number grammar implemented properly: <i>dau</i> and
+            <i>dwy</i> by the noun&rsquo;s gender, traditional vigesimal ordinals, 24-hour times.</li>
+        </ul>
+    </section>
+
+    <section>
+        <div class="kicker">Compliance</div>
+        <h2>Built around the rules services in Wales work to.</h2>
+        <div class="compliance">
+            <div class="col-item">
+                <h3>Welsh Language Standards</h3>
+                <p>Welsh-first delivery, including telephone and automated services. Welsh and
+                English from one workflow, with Welsh leading.</p>
+            </div>
+            <div class="col-item">
+                <h3>Accessible information</h3>
+                <p>Spoken versions of written patient and service information, in the
+                recipient&rsquo;s language of choice.</p>
+            </div>
+            <div class="col-item">
+                <h3>PSV Regulations 2023</h3>
+                <p>Audible route information on local bus services, deadlines from
+                October 2026.</p>
+            </div>
+        </div>
+        <p class="note">No supplier can certify you as compliant, and we won&rsquo;t claim to.
+        What we provide is the generation capability and an audit trail: deterministic,
+        inspectable output, with editorial sign-off remaining yours. Our tooling is built to
+        make that sign-off fast, not to bypass it.</p>
+    </section>
+
+    <div class="cta">
+        <div>
+            <h2>Hear it before you decide.</h2>
+            <p>Type your own sentence into the live demo, or browse the national sample
+            journeys. Place names, mutations, mixed languages: bring whatever you think
+            will break it.</p>
+        </div>
+        <div class="links">
+            <span>diffian.com</span>
+            <span>diffian.com/samples</span>
+            <span>hello@diffian.com</span>
+        </div>
+    </div>
+
+    <div class="foot">
+        <span>Fi, gan Diffian &middot; Caerdydd, Cymru &middot; hello@diffian.com</span>
+        <span>2 / 2</span>
+    </div>
+</div>
+
+</body>
+</html>
