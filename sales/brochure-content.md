@@ -163,7 +163,6 @@ We built the hardest case first: every bus stop in Wales.
 | Routes covered | **1,391** |
 | Stop entries processed | **52,284** |
 | Unique bilingual clips generated | **23,928** |
-| Welsh place-name lexicon | **3,136 words** |
 | Generated on | Ordinary CPU, no GPU |
 
 Built from the national public transport dataset, with a stop-name disambiguator that
@@ -279,8 +278,7 @@ build unless stated.
 | Claim | Basis |
 |---|---|
 | 1,391 routes / 52,284 stop entries / 23,928 unique clips | Generated corpus manifest |
-| 3,136-word Welsh place-name lexicon | Built from national transport data + gov.wales bilingual ward names (Open Government Licence) |
-| ɬ appears 577 times in the lexicon | Measured across all 3,136 entries |
+| ɬ appears 577 times in the lexicon | Measured across the lexicon's 3,136 entries |
 | 24 kHz audio, CPU-only inference | Engine configuration |
 | No cloud vendor offers Welsh custom-voice training | Verified against Microsoft's published locale lists, May 2026. Welsh absent from custom-voice training, cross-lingual transfer and personal-voice locale lists. **Re-verify before use — vendor docs change.** |
 | Mutation coverage (Caerdydd / Gaerdydd / Nghaerdydd / Chaerdydd) | Pronunciation override table |
@@ -302,6 +300,12 @@ build unless stated.
 | Curated route stop lists | Proof-of-concept, curated from public timetables. Must be verified against operator timetables and the national dataset before any operator deployment. Already flagged in the data files. |
 
 ### Deliberately not claimed
+
+- **The lexicon size (3,136 words) as a headline number.** Removed from customer-facing
+  material 2026-08-19: it invites the wrong comparison, because the authoritative source
+  should be the Welsh Language Commissioner's standardised place-name list, which is much
+  larger. Adopting that list is an open engine task; quote a lexicon figure again only
+  once it's built from the Commissioner's list.
 
 - Compliance certification of any kind
 - A male voice — experiments exist, nothing production-ready
