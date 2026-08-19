@@ -65,12 +65,8 @@
             border-bottom: 2px solid var(--ink);
         }
         nav { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-        .brand {
-            display: inline-flex; align-items: center; gap: 10px;
-            font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.05rem;
-            letter-spacing: 0.14em; color: var(--ink); text-decoration: none;
-        }
-        .brand::before { content: ""; width: 13px; height: 13px; background: var(--accent); }
+        .brand { display: inline-flex; align-items: center; }
+        .brand img { height: 32px; width: auto; display: block; }
         .nav-links { display: flex; gap: 26px; align-items: center; }
         .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 0.92rem; }
         .nav-links a:hover { color: var(--accent-deep); }
@@ -150,7 +146,7 @@
 <header>
     <div class="wrap">
         <nav>
-            <a class="brand" href="/cy/">DIFFIAN</a>
+            <a class="brand" href="/cy/"><img src="/images/logo.png" alt="Diffian" width="461" height="128"></a>
             <div class="nav-links">
                 <a href="/cy/#hear">Gwrando</a>
                 <a href="/cy/#sectors">Sectorau</a>
@@ -168,21 +164,21 @@
     <div class="wrap-narrow">
         <div class="kicker">Technoleg</div>
         <h1>Sut mae Diffian yn siarad Cymraeg.</h1>
-        <p class="lede">Mae’r rhan fwyaf o beiriannau lleferydd yn trin testun fel un iaith ar y tro. Nid felly mae cynnwys gwasanaethau cyhoeddus Cymru’n gweithio, felly fe adeiladon ni beiriant sy’n darllen fel y mae Cymru’n ysgrifennu ac yn siarad go iawn.</p>
+        <p class="lede">Mae’r rhan fwyaf o beiriannau lleferydd yn trin testun fel un iaith ar y tro. Nid felly mae cynnwys gwasanaethau cyhoeddus Cymru’n gweithio, felly fe adeiladon ni Fi: peiriant sy’n darllen fel y mae Cymru’n ysgrifennu ac yn siarad go iawn.</p>
     </div>
 </div>
 
 <section class="tint">
     <div class="wrap-narrow">
         <h2>Llais a hyfforddwyd gennym ni ein hunain</h2>
-        <p>Llais niwral pwrpasol yw llais Diffian, <strong>Bronwen</strong>, wedi’i hyfforddi ar ein corpws recordiedig ein hunain. Aethon ni’r ffordd hon am reswm syml: fe gadarnhaon ni na all yr un o’r prif gyflenwyr cwmwl hyfforddi llais pwrpasol sy’n siarad Cymraeg. Yn syml, nid yw’r Gymraeg yn eu rhaglenni lleisiau pwrpasol. Os ydych chi eisiau llais sy’n unigryw i chi ac yn wirioneddol Gymraeg, rhaid ei adeiladu, nid ei brynu.</p>
+        <p>Llais niwral pwrpasol yw llais Diffian, <strong>Carys</strong>, wedi’i hyfforddi ar ein corpws recordiedig ein hunain. Aethon ni’r ffordd hon am reswm syml: fe gadarnhaon ni, ddiwethaf ym Mai 2026, na all yr un o’r prif gyflenwyr cwmwl hyfforddi llais pwrpasol sy’n siarad Cymraeg. Yn syml, nid yw’r Gymraeg yn eu rhaglenni lleisiau pwrpasol. Os ydych chi eisiau llais sy’n unigryw i chi ac yn wirioneddol Gymraeg, rhaid ei adeiladu, nid ei brynu.</p>
         <p>Gan mai ni piau’r model o’r dechrau i’r diwedd:</p>
         <ul>
-            <li>Mae’n cynhyrchu sain naturiol 24&nbsp;kHz ac yn rhedeg yn gyfforddus ar weinyddion <strong>CPU yn unig</strong>. Mae cais cynnes yn cynhyrchu clip ymhell o dan eiliad, heb unrhyw fil GPU.</li>
+            <li>Mae’n cynhyrchu sain naturiol 24&nbsp;kHz ac yn rhedeg yn gyfforddus ar weinyddion <strong>CPU yn unig</strong>. Daw brawddeg yn ôl mewn ychydig eiliadau, a set gyhoeddiadau lawn mewn munudau, heb unrhyw fil GPU.</li>
             <li>Nid oes <strong>trwyddedu fesul nod</strong> nac unrhyw fesurydd defnydd sy’n eiddo i rywun arall.</li>
             <li>Gellir ei osod lle bynnag y mae eich llywodraethu data yn ei fynnu, gan gynnwys yn gyfan gwbl y tu mewn i’ch rhwydwaith eich hun.</li>
         </ul>
-        <p>Gall yr un biblinell hyfforddi ag a gynhyrchodd Bronwen gynhyrchu llais pwrpasol i’ch sefydliad chi.</p>
+        <p>Gall yr un biblinell hyfforddi ag a gynhyrchodd Carys gynhyrchu llais pwrpasol i’ch sefydliad chi: un llais, wedi’i hyfforddi’n ddwyieithog, fel bod ei Saesneg yn ynganu eich enwau Cymraeg yn iawn a’i Gymraeg heb fod yn siaradwr gwahanol. <a href="/cy/#own-voice">Darllenwch am gael eich llais eich hun</a>.</p>
     </div>
 </section>
 
@@ -208,7 +204,7 @@
         <p>Mae treigladau dechreuol y Gymraeg yn newid dechrau geiriau mewn brawddegau cyffredin. Mae <span class="pron">Caerdydd</span> yn ymddangos fel <span class="pron">Gaerdydd</span> neu <span class="pron">Nghaerdydd</span> yn ôl y ramadeg, ac mae ein cofnodion ynganu yn cynnwys y ffurfiau treigledig yn benodol, fel bod brawddegau go iawn yn swnio’n iawn, nid ffurfiau geiriadur yn unig.</p>
 
         <h3>Dewisiadau union pan fo’u hangen</h3>
-        <p>Ar gyfer y gynffon hir, gall pob gair gario sillafiad ffonetig union, ac mae’r peiriant yn dangos ei allbwn ffonemau fel bod cywiriadau’n fanwl gywir yn hytrach nag yn ddyfalu. Ynghyd â chefnogaeth SSML ar gyfer seibiau, goslef, amnewidiadau ac ehangu rhifau’n ddwyieithog, gellir gweithredu adolygiad swyddog iaith fesul gair a’i ailgynhyrchu mewn eiliadau.</p>
+        <p>Ar gyfer y gynffon hir, gall pob gair gario sillafiad ffonetig union, ac mae’r peiriant yn dangos ei allbwn ffonemau fel bod cywiriadau’n fanwl gywir yn hytrach nag yn ddyfalu. Ynghyd â chefnogaeth SSML ar gyfer seibiau, goslef, amnewidiadau ac ehangu rhifau’n ddwyieithog, gellir gweithredu adolygiad swyddog iaith fesul gair a’i ailgynhyrchu mewn eiliadau. Mae ehangu rhifau’n dilyn gramadeg Cymraeg go iawn: rhaid dewis rhwng <em>dau</em> a <em>dwy</em> yn ôl cenedl yr enw, ac mae’r trefnolion traddodiadol yn cyfrif fesul ugain. Fe weithredon ni hyn yn hytrach na thrawslythrennu’r Saesneg.</p>
     </div>
 </section>
 

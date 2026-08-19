@@ -3,8 +3,17 @@
 Source copy for a printed / PDF brochure. Audience: NHS Wales health boards first,
 then councils, contact centres and transport operators.
 
-**Voice name is Bronwen in all customer-facing material** (Ela / ElaV2 are internal
-build names — never use them externally).
+**Voice name is Carys in all customer-facing material** (Ela / ElaV2 are internal
+build names — never use them externally). Renamed from Bronwen on 2026-08-19: Carys
+reads correctly on first sight in English and Welsh, is visibly Welsh (the *-ys*),
+comes from *caru* ("to love"), and avoids confusion with the separate "Bronwyn"
+assistant. If any old material says Bronwen, it's out of date.
+
+**The product is Fi** — pronounced "vee", the Welsh word for "me" — decided 2026-08-19.
+Three tiers, used consistently: **Diffian** the company, **Fi** the service/engine,
+**Carys** (or the customer's own voice) the voice. Give the pronunciation at first
+mention in anything English-facing. The name is the bespoke-voice pitch in one
+syllable: a voice that is *me*. Clearance is still pending — see substantiation.
 
 Every factual claim is listed in [Claim substantiation](#claim-substantiation) at the
 end, marked verified or needs-checking. **Read that section before this goes to a
@@ -61,9 +70,15 @@ Microsoft, or a voice that belongs to you and can't speak Welsh. Not both.
 A bilingual Welsh and English text-to-speech service, built around a neural voice we
 trained ourselves.
 
-**Bronwen, a voice you can own.** A custom-trained neural voice producing 24 kHz audio,
+**Carys, a voice you can own.** A custom-trained neural voice producing 24 kHz audio,
 efficient enough to run on ordinary CPU servers. No GPU fleet. No per-character
 licensing. No usage meter owned by someone else.
+
+The selling point is the combination: the voice is *bilingual and brandable at once*.
+One voice speaks both languages, so a branded voice doesn't force a choice between
+sounding like your organisation and saying Welsh correctly — its English pronounces
+Welsh place names properly because Welsh is native to the same voice. Lead with this;
+the ownership economics are the supporting argument, not the headline.
 
 **Bilingual by design.** Every word is classified before it reaches the voice, so Welsh
 place names inside English sentences are read the Welsh way — one request, one voice,
@@ -109,9 +124,11 @@ speaker gets Welsh audio rather than an English voice attempting it.
 
 ### Why this is different from a generic supplier
 
-- **The voice can be yours.** The same pipeline that produced Bronwen can produce a
+- **The voice can be yours.** The same pipeline that produced Carys can produce a
   bespoke voice for your health board — a distinct, consistent identity across every
-  automated channel.
+  automated channel. And because it is trained bilingual like Carys, it is one voice
+  in both languages: its English says your Welsh place and department names properly,
+  and its Welsh is not a different speaker.
 - **Nothing has to leave your network.** CPU-only self-hosting means patient-derived
   text never crosses a third-party boundary. That materially simplifies the DPIA.
 - **No per-character meter.** Cost doesn't scale with how much Welsh you produce, which
@@ -267,7 +284,7 @@ build unless stated.
 | 24 kHz audio, CPU-only inference | Engine configuration |
 | No cloud vendor offers Welsh custom-voice training | Verified against Microsoft's published locale lists, May 2026. Welsh absent from custom-voice training, cross-lingual transfer and personal-voice locale lists. **Re-verify before use — vendor docs change.** |
 | Mutation coverage (Caerdydd / Gaerdydd / Nghaerdydd / Chaerdydd) | Pronunciation override table |
-| Deterministic output, verifiable by hash | Voice style is seeded from the text, so identical input gives identical audio |
+| Deterministic output, verifiable by hash | Voice style is seeded from the text and (since 2026-08-18) computed in float64 on one thread, so the style is bit-stable on every host. Waveform bytes are identical per host class; across CPU generations samples can differ at ~-56 dB (inaudible). Say "the same text always produces the same speech"; only promise hash-identical audio within one deployment |
 | Welsh number gender and vigesimal ordinals implemented | In the number expansion module |
 | PSV Accessible Information Regulations 2023, October 2026 deadlines | UK legislation |
 
@@ -281,6 +298,7 @@ build unless stated.
 | Cost comparison versus a voice artist | We have credible figures for the cloud-vendor route, not for studio recording. Don't quote a saving until we can source it. |
 | Any quality score, MOS or accuracy percentage | **We have none.** An automated speech-recognition sweep over 12,024 clips exists, but it was built to rank clips worst-first for human review, not to measure quality — Welsh speech recognition is itself weak, so the absolute figures mean little. **Never present it as an accuracy metric.** |
 | First-language listening panel results | Framework built, dialect-stratified, **not yet run**. §10 says so; keep it that way. |
+| **"Fi" name clearance** | UK IPO trademark search (classes 9/42), Companies House, domain, and a fluent-speaker connotation check are all **pending** as of 2026-08-19. Web search found no voice-tech collision, and "Vee" spellings were rejected (crowded voice-AI space, no V in the Welsh alphabet). Confirm before print. |
 | Curated route stop lists | Proof-of-concept, curated from public timetables. Must be verified against operator timetables and the national dataset before any operator deployment. Already flagged in the data files. |
 
 ### Deliberately not claimed

@@ -64,12 +64,8 @@
             border-bottom: 2px solid var(--ink);
         }
         nav { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-        .brand {
-            display: inline-flex; align-items: center; gap: 10px;
-            font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.05rem;
-            letter-spacing: 0.14em; color: var(--ink); text-decoration: none;
-        }
-        .brand::before { content: ""; width: 13px; height: 13px; background: var(--accent); }
+        .brand { display: inline-flex; align-items: center; }
+        .brand img { height: 32px; width: auto; display: block; }
         .nav-links { display: flex; gap: 26px; align-items: center; }
         .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 0.92rem; }
         .nav-links a:hover { color: var(--accent-deep); }
@@ -149,7 +145,7 @@
 <header>
     <div class="wrap">
         <nav>
-            <a class="brand" href="/">DIFFIAN</a>
+            <a class="brand" href="/"><img src="/images/logo.png" alt="Diffian" width="461" height="128"></a>
             <div class="nav-links">
                 <a href="/#hear">Hear it</a>
                 <a href="/#sectors">Sectors</a>
@@ -167,21 +163,21 @@
     <div class="wrap-narrow">
         <div class="kicker">Technology</div>
         <h1>How Diffian speaks Welsh.</h1>
-        <p class="lede">Most speech engines treat text as one language at a time. Welsh public-service content doesn&#8217;t work that way, so we built an engine that reads the way Wales actually writes and speaks.</p>
+        <p class="lede">Most speech engines treat text as one language at a time. Welsh public-service content doesn&#8217;t work that way, so we built Fi: an engine that reads the way Wales actually writes and speaks.</p>
     </div>
 </div>
 
 <section class="tint">
     <div class="wrap-narrow">
         <h2>A voice we trained ourselves</h2>
-        <p>Diffian&#8217;s voice, <strong>Bronwen</strong>, is a custom neural voice trained on our own recorded corpus. We went this way for a simple reason: we verified that none of the major cloud vendors can train a custom voice that speaks Welsh. Welsh simply isn&#8217;t in their custom-voice programmes. If you want a voice that is both distinctively yours and genuinely Welsh, it has to be built, not bought.</p>
+        <p>Diffian&#8217;s voice, <strong>Carys</strong>, is a custom neural voice trained on our own recorded corpus. We went this way for a simple reason: we verified, most recently in May 2026, that none of the major cloud vendors can train a custom voice that speaks Welsh. Welsh simply isn&#8217;t in their custom-voice programmes. If you want a voice that is both distinctively yours and genuinely Welsh, it has to be built, not bought.</p>
         <p>Because the model is ours end to end:</p>
         <ul>
-            <li>It produces natural 24&nbsp;kHz audio and runs comfortably on <strong>CPU-only servers</strong>. A warm request generates a clip in well under a second, with no GPU bill attached.</li>
+            <li>It produces natural 24&nbsp;kHz audio and runs comfortably on <strong>CPU-only servers</strong>. A sentence comes back in a few seconds, a full announcement set in minutes, with no GPU bill attached.</li>
             <li>There is <strong>no per-character licensing</strong> and no usage meter owned by someone else.</li>
             <li>It can be deployed wherever your data governance requires, including entirely inside your own network.</li>
         </ul>
-        <p>The same training pipeline that produced Bronwen can produce a bespoke voice for your organisation.</p>
+        <p>The same training pipeline that produced Carys can produce a bespoke voice for your organisation: one voice, trained bilingual, so its English says your Welsh names properly and its Welsh is not a different speaker. <a href="/#own-voice">Read about having your own voice</a>.</p>
     </div>
 </section>
 
@@ -207,7 +203,7 @@
         <p>Welsh initial consonant mutations change the start of words in ordinary sentences. <span class="pron">Caerdydd</span> appears as <span class="pron">Gaerdydd</span> or <span class="pron">Nghaerdydd</span> depending on grammar, and our pronunciation overrides cover mutated forms explicitly, so real sentences sound right, not just dictionary citations.</p>
 
         <h3>Exact overrides when you need them</h3>
-        <p>For the long tail, every word can carry an exact phonetic spelling, and the engine exposes its phoneme output so corrections are precise rather than guesswork. Combined with SSML support for pauses, prosody, substitutions and bilingual number expansion, a Welsh language officer&#8217;s review can be applied word by word and regenerated in seconds.</p>
+        <p>For the long tail, every word can carry an exact phonetic spelling, and the engine exposes its phoneme output so corrections are precise rather than guesswork. Combined with SSML support for pauses, prosody, substitutions and bilingual number expansion, a Welsh language officer&#8217;s review can be applied word by word and regenerated in seconds. Number expansion follows real Welsh grammar: <em>dau</em> and <em>dwy</em> are both &#8220;two&#8221;, and which is correct depends on the noun&#8217;s gender, while traditional ordinals are vigesimal, counting in twenties. We implemented this rather than transliterating English.</p>
     </div>
 </section>
 
