@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="cy">
+<head>
+<meta charset="UTF-8">
+<title>Fi, gan Diffian — Taflen Ddwy Dudalen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;600;700&family=Gentium+Plus:ital@0;1&family=Doto:wght@700;900&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --ground: #fcfdfc;
+        --tint: #f0f4f1;
+        --ink: #141f19;
+        --ink-soft: #3f4d45;
+        --muted: #66746b;
+        --rule: #d9e0da;
+        --accent: #d1232a;
+        --accent-deep: #9c1b20;
+        --amber: #ffb300;
+        --board: #0d120e;
+        --board-dim: #8a958b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body {
+        font-family: 'Public Sans', system-ui, sans-serif;
+        color: var(--ink); background: #b9c0ba;
+        font-size: 9.2pt; line-height: 1.45;
+    }
+    h1, h2, h3, .kicker { font-family: 'Archivo', sans-serif; }
+
+    .page {
+        width: 210mm; height: 297mm; background: var(--ground);
+        margin: 10mm auto; padding: 13mm 15mm 11mm;
+        box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+        display: flex; flex-direction: column;
+        position: relative; overflow: hidden;
+    }
+    @page { size: A4; margin: 0; }
+    @media print {
+        body { background: none; }
+        .page { margin: 0; box-shadow: none; page-break-after: always; }
+        .page:last-child { page-break-after: auto; }
+    }
+
+    /* shared */
+    .kicker {
+        font-size: 9pt; font-weight: 700; letter-spacing: 0.01em;
+        color: var(--accent); margin-bottom: 3pt;
+    }
+    .rule-top { border-top: 2.2pt solid var(--ink); padding-top: 6pt; }
+    .muted { color: var(--muted); }
+
+    /* header */
+    .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9mm; }
+    .head img { height: 9mm; width: auto; display: block; }
+    .head .contact { font-size: 8pt; color: var(--muted); text-align: right; line-height: 1.5; }
+    .head .contact b { color: var(--ink-soft); font-weight: 600; }
+
+    /* hero */
+    .welsh-line { font-family: 'Gentium Plus', serif; font-style: italic; font-size: 11pt; color: var(--ink-soft); margin-bottom: 3pt; }
+    h1 { font-size: 28pt; font-weight: 800; letter-spacing: -0.015em; line-height: 1.06; margin-bottom: 7pt; }
+    .lede { font-size: 11pt; color: var(--ink-soft); max-width: 118mm; }
+    .hero { display: flex; gap: 10mm; align-items: center; margin-bottom: 11mm; }
+    .hero > div:first-child { flex: 1.15; }
+
+    /* dot-matrix board */
+    .board {
+        flex: 1; background: var(--board); border-radius: 3mm; padding: 8mm 8mm 7mm;
+        color: var(--amber);
+    }
+    .board-head {
+        display: flex; justify-content: space-between;
+        font-family: 'Archivo', sans-serif; font-size: 8pt; font-weight: 700;
+        letter-spacing: 0.01em; color: var(--board-dim);
+        border-bottom: 0.6pt solid #232b24; padding-bottom: 4pt; margin-bottom: 2pt;
+    }
+    .board-head .live { color: var(--amber); }
+    .board-line { display: flex; gap: 4mm; align-items: baseline; padding: 6.5pt 0; border-bottom: 0.6pt solid #1a211b; }
+    .board-line:last-of-type { border-bottom: none; }
+    .board-lang { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 7.4pt; letter-spacing: 0.08em; color: var(--board-dim); }
+    .board-text { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 12pt; letter-spacing: 0.01em; line-height: 1.35; }
+    .board-foot {
+        font-family: 'Archivo', sans-serif; font-size: 6.4pt; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--board-dim); margin-top: 4.5pt;
+    }
+
+    /* sections */
+    section { margin-bottom: 7mm; }
+    h2 { font-size: 13.5pt; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 5pt; }
+    .cols { display: flex; gap: 6mm; }
+    .cols > div { flex: 1; }
+    .col-item { border-top: 2pt solid var(--ink); padding-top: 4.5pt; }
+    .col-item h3 { font-size: 9.6pt; font-weight: 700; margin-bottom: 2.5pt; }
+    .col-item p { font-size: 8.6pt; color: var(--ink-soft); }
+    .col-item .fix { margin-top: 3pt; font-size: 8.4pt; }
+    .col-item .fix b { color: var(--accent-deep); }
+    .pron { font-family: 'Gentium Plus', serif; }
+
+    .vendor-strip {
+        background: var(--tint); border-left: 2.2pt solid var(--accent);
+        padding: 5pt 8pt; font-size: 8.8pt; color: var(--ink-soft); margin-top: 5mm;
+    }
+
+    /* proof band */
+    .proof {
+        background: var(--board); border-radius: 3mm; color: var(--ground);
+        padding: 7mm 8mm; margin-top: auto;
+    }
+    .proof .kicker { color: var(--amber); }
+    .proof h2 { color: var(--ground); }
+    .proof p { color: #b7c1b8; font-size: 8.8pt; max-width: 165mm; }
+    .stats { display: flex; gap: 6mm; margin-top: 5mm; }
+    .stat { flex: 1; }
+    .stat .num {
+        font-family: 'Doto', monospace; font-weight: 900; font-size: 19pt;
+        color: var(--amber); font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+    }
+    .stat .lbl { color: var(--board-dim); font-size: 7.6pt; margin-top: 2pt; line-height: 1.35; }
+
+    /* page 2 */
+    .sector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5mm 6mm; }
+    .why-list { list-style: none; }
+    .why-list li { padding: 4.5pt 0 4.5pt 0; border-top: 0.7pt solid var(--rule); font-size: 8.8pt; color: var(--ink-soft); }
+    .why-list li:first-child { border-top: 2pt solid var(--ink); }
+    .why-list b { color: var(--ink); font-family: 'Archivo', sans-serif; font-size: 9.2pt; }
+
+    .compliance { display: flex; gap: 6mm; }
+    .note {
+        font-size: 8.2pt; color: var(--muted); border-left: 2pt solid var(--rule);
+        padding: 2pt 0 2pt 7pt; margin-top: 4mm;
+    }
+
+    .cta {
+        background: var(--accent); border-radius: 3mm; color: #fff;
+        padding: 6.5mm 8mm; margin-top: auto;
+        display: flex; justify-content: space-between; align-items: center; gap: 8mm;
+    }
+    .cta h2 { color: #fff; margin-bottom: 2pt; }
+    .cta p { font-size: 9pt; color: #ffd9db; }
+    .cta .links { text-align: right; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 10pt; white-space: nowrap; line-height: 1.7; }
+    .cta .links span { display: block; }
+
+    .foot {
+        display: flex; justify-content: space-between; margin-top: 5mm;
+        font-size: 7.6pt; color: var(--muted);
+    }
+
+    /* page 1 runs larger so the page owns its space */
+    .p1 h2 { font-size: 15.5pt; }
+    .p1 .kicker { font-size: 9.5pt; }
+    .p1 .col-item h3 { font-size: 10.6pt; }
+    .p1 .col-item p { font-size: 9.4pt; }
+    .p1 .col-item .fix { font-size: 9.2pt; margin-top: 4pt; }
+    .p1 section { margin-bottom: 9mm; }
+    .p1 .vendor-strip { font-size: 9.6pt; padding: 7pt 10pt; margin-top: 6mm; }
+    .p1 .proof { padding: 9mm; }
+    .p1 .proof p { font-size: 9.6pt; }
+    .p1 .stat .num { font-size: 22pt; }
+    .p1 .stat .lbl { font-size: 8.2pt; margin-top: 3pt; }
+    .p1 .stats { margin-top: 6mm; }
+
+    /* Welsh runs ~15% longer: tighten page 1 so the proof band fits */
+    .p1 .hero { margin-bottom: 6mm; }
+    .p1 .lede { font-size: 10.2pt; }
+    .p1 section { margin-bottom: 6mm; }
+    .p1 .vendor-strip { margin-top: 4mm; font-size: 9.2pt; }
+    .p1 .proof { padding: 7mm 9mm; }
+    .p1 .stats { margin-top: 4.5mm; }
+    .head { margin-bottom: 7mm; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ PAGE 1 ══════════════════ -->
+<div class="page p1">
+    <div class="head">
+        <img src="/images/logo.png" alt="Diffian">
+        <div class="contact"><b>diffian.com</b><br>hello@diffian.com</div>
+    </div>
+
+    <div class="hero">
+        <div>
+            <div class="kicker">Fi &middot; Testun-i-leferydd Cymraeg yn gyntaf</div>
+            <div class="welsh-line">A Welsh voice for your service.</div>
+            <h1>Llais Cymraeg i&rsquo;ch gwasanaeth.</h1>
+            <p class="lede">Fi yw gwasanaeth testun-i-leferydd dwyieithog Cymraeg a Saesneg
+            Diffian. Llinellau ff&ocirc;n, negeseuon atgoffa apwyntiadau, cyhoeddiadau,
+            gwybodaeth hygyrch: lle bynnag y mae eich gwasanaeth yn siarad, gall siarad
+            Cymraeg yn iawn. Ein llais niwral ein hunain a&rsquo;n peiriant ein hunain,
+            wedi&rsquo;u hadeiladu ar gyfer y Gymraeg fel y caiff ei siarad go iawn.</p>
+        </div>
+        <div class="board">
+            <div class="board-head"><span>Neges gwasanaeth</span><span class="live">Carys</span></div>
+            <div class="board-line">
+                <span class="board-lang">CY</span>
+                <span class="board-text" lang="cy">Pwyswch un am wasanaeth yn Gymraeg.</span>
+            </div>
+            <div class="board-line">
+                <span class="board-lang">EN</span>
+                <span class="board-text">Press one for service in Welsh.</span>
+            </div>
+            <!-- the actual waveform of the Welsh line above, spoken by Carys -->
+            <div style="border-top: 0.6pt solid #232b24; padding-top: 6pt; margin-top: 2pt;">
+<svg viewBox="0 0 329 34" preserveAspectRatio="none" style="width:100%;height:8mm;display:block;"><rect x="0" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="3" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="6" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="9" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="12" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="15" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="18" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="21" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="24" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="27" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="30" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="33" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="36" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="39" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="42" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="45" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="48" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="51" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="54" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="57" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="60" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="63" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="66" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="69" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="72" y="15.6" width="1.7" height="2.7" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="75" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="78" y="12.8" width="1.7" height="8.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="81" y="4.8" width="1.7" height="24.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="84" y="6.3" width="1.7" height="21.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="87" y="13.0" width="1.7" height="8.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="90" y="6.1" width="1.7" height="21.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="93" y="7.7" width="1.7" height="18.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="96" y="1.0" width="1.7" height="32.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="99" y="8.0" width="1.7" height="18.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="102" y="9.5" width="1.7" height="15.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="105" y="9.6" width="1.7" height="14.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="108" y="13.8" width="1.7" height="6.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="111" y="13.9" width="1.7" height="6.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="114" y="13.2" width="1.7" height="7.7" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="117" y="14.4" width="1.7" height="5.2" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="120" y="12.6" width="1.7" height="8.9" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="123" y="7.6" width="1.7" height="18.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="126" y="2.8" width="1.7" height="28.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="129" y="7.3" width="1.7" height="19.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="132" y="9.3" width="1.7" height="15.5" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="135" y="8.9" width="1.7" height="16.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="138" y="9.0" width="1.7" height="16.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="141" y="11.9" width="1.7" height="10.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="144" y="13.0" width="1.7" height="8.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="147" y="12.5" width="1.7" height="9.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="150" y="12.0" width="1.7" height="10.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="153" y="8.0" width="1.7" height="18.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="156" y="6.8" width="1.7" height="20.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="159" y="3.6" width="1.7" height="26.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="162" y="6.3" width="1.7" height="21.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="165" y="13.0" width="1.7" height="8.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="168" y="14.3" width="1.7" height="5.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="171" y="14.5" width="1.7" height="5.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="174" y="14.7" width="1.7" height="4.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="177" y="15.6" width="1.7" height="2.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="180" y="9.0" width="1.7" height="15.9" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="183" y="7.4" width="1.7" height="19.2" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="186" y="5.9" width="1.7" height="22.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="189" y="8.9" width="1.7" height="16.2" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="192" y="13.8" width="1.7" height="6.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="195" y="11.4" width="1.7" height="11.2" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="198" y="10.4" width="1.7" height="13.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="201" y="11.4" width="1.7" height="11.2" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="204" y="13.2" width="1.7" height="7.5" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="207" y="11.1" width="1.7" height="11.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="210" y="11.2" width="1.7" height="11.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="213" y="11.5" width="1.7" height="10.9" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="216" y="12.3" width="1.7" height="9.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="219" y="14.4" width="1.7" height="5.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="222" y="16.0" width="1.7" height="2.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="225" y="15.9" width="1.7" height="2.2" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="228" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="231" y="16.0" width="1.7" height="1.9" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="234" y="16.0" width="1.7" height="2.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="237" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="240" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="243" y="13.3" width="1.7" height="7.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="246" y="13.9" width="1.7" height="6.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="249" y="15.1" width="1.7" height="3.9" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="252" y="14.9" width="1.7" height="4.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="255" y="14.9" width="1.7" height="4.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="258" y="10.9" width="1.7" height="12.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="261" y="12.6" width="1.7" height="8.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="264" y="13.2" width="1.7" height="7.5" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="267" y="15.1" width="1.7" height="3.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="270" y="15.1" width="1.7" height="3.8" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="273" y="15.0" width="1.7" height="4.0" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="276" y="14.8" width="1.7" height="4.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="279" y="11.0" width="1.7" height="12.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="282" y="10.4" width="1.7" height="13.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="285" y="11.9" width="1.7" height="10.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="288" y="12.5" width="1.7" height="9.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="291" y="12.8" width="1.7" height="8.4" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="294" y="13.9" width="1.7" height="6.1" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="297" y="14.7" width="1.7" height="4.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="300" y="15.7" width="1.7" height="2.5" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="303" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="306" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="309" y="14.8" width="1.7" height="4.3" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="312" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="315" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="318" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="321" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="324" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/><rect x="327" y="16.2" width="1.7" height="1.6" rx="0.85" fill="#ffb300" opacity="0.9"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="kicker">Y broblem</div>
+        <h2>Mae peiriannau lleferydd generig yn methu yn y Gymraeg.</h2>
+        <div class="cols">
+            <div class="col-item">
+                <h3>Brawddegau cymysg eu hiaith</h3>
+                <p>Mae cynnwys gwasanaethau go iawn yn neidio rhwng y Gymraeg a&rsquo;r Saesneg drwy&rsquo;r amser. Mae lleisiau un iaith yn darllen un o&rsquo;r ddwy yn anghywir bob tro.</p>
+                <p class="fix"><b>Fi:</b> caiff yr iaith ei chanfod fesul gair, felly caiff pob gair ei ddarllen yn ei iaith ei hun gan un llais naturiol.</p>
+            </div>
+            <div class="col-item">
+                <h3>Enwau lleoedd</h3>
+                <p>Llanelli, Pen-y-lan, Cwmbr&acirc;n. Mae lleisiau Saesneg yn llurgunio enwau
+                lleoedd Cymru, ac mae siaradwyr Cymraeg yn sylwi ar unwaith.</p>
+                <p class="fix"><b>Fi:</b> geiriadur cenedlaethol o enwau lleoedd Cymru, gyda&rsquo;r seiniau Cymraeg dilys.</p>
+            </div>
+            <div class="col-item">
+                <h3>Treigladau</h3>
+                <p>Mae geiriau Cymraeg yn newid eu llythyren gyntaf gyda&rsquo;r ramadeg: mae Caerdydd yn troi&rsquo;n <i>Gaerdydd</i> neu <i>Nghaerdydd</i>. Mae peiriannau ffurfiau-geiriadur yn cael brawddegau cyffredin yn anghywir.</p>
+                <p class="fix"><b>Fi:</b> mae&rsquo;r cofnodion ynganu&rsquo;n cynnwys y ffurfiau treigledig yn benodol.</p>
+            </div>
+        </div>
+        <div class="vendor-strip">
+            <b>Defnyddiwch ein llais ni, neu perchnogwch eich un chi.</b> Dechreuwch gyda Carys, sy&rsquo;n barod heddiw. Neu fe hyfforddwn lais pwrpasol i&rsquo;ch sefydliad o recordiadau siaradwr o&rsquo;ch dewis chi: un llais, eich brand chi, yn siarad Cymraeg a Saesneg, gyda&rsquo;ch enwau lleoedd a gwasanaethau&rsquo;n cael eu dweud yn iawn yn y ddwy.
+        </div>
+    </section>
+
+    <div class="proof">
+        <div class="kicker">Wedi&rsquo;i brofi ar raddfa genedlaethol</div>
+        <h2>Y prawf cyntaf: pob arhosfan bws yng Nghymru.</h2>
+        <p>Mae&rsquo;r Rheoliadau Gwybodaeth Hygyrch (PSV) yn mynnu cyhoeddiadau clywadwy am yr arhosfan nesaf ar wasanaethau bysiau lleol o fis Hydref 2026. Yng Nghymru, mae hynny&rsquo;n golygu dweud enw pob anheddiad, stryd a chyfnewidfa yn gywir, yn y ddwy iaith. Cafodd Fi ei adeiladu i ddatrys yn union hynny, yna&rsquo;i redeg ar draws set ddata amserlenni&rsquo;r wlad gyfan.</p>
+        <div class="stats">
+            <div class="stat"><div class="num">1,391</div><div class="lbl">llwybr wedi&rsquo;u cwmpasu</div></div>
+            <div class="stat"><div class="num">52,284</div><div class="lbl">cofnod arhosfan wedi&rsquo;u prosesu</div></div>
+            <div class="stat"><div class="num">23,928</div><div class="lbl">clip dwyieithog unigryw wedi&rsquo;u cynhyrchu</div></div>
+        </div>
+    </div>
+
+    <div class="foot">
+        <span>Fi, gan Diffian &middot; Caerdydd, Cymru</span>
+        <span>1 / 2</span>
+    </div>
+</div>
+
+<!-- ══════════════════ PAGE 2 ══════════════════ -->
+<div class="page">
+    <section>
+        <div class="kicker">Lle mae Fi&rsquo;n ffitio</div>
+        <h2>Lle bynnag y mae eich sefydliad yn siarad, gall siarad Cymraeg yn dda.</h2>
+        <div class="sector-grid">
+            <div class="col-item">
+                <h3>Canolfannau cyswllt ac IVR</h3>
+                <p>Ychydig o sefydliadau all staffio pob llinell ff&ocirc;n &acirc; siaradwyr Cymraeg. Rhowch lais rhugl, Cymraeg yn gyntaf, i ddewislenni IVR, negeseuon ciwio a llinellau awtomataidd, heb orfod recriwtio ar ei gyfer.</p>
+            </div>
+            <div class="col-item">
+                <h3>Byrddau iechyd</h3>
+                <p>Negeseuon atgoffa apwyntiadau, galw ciw cleifion allanol, gwybodaeth lafar i gleifion, gwasanaethau ff&ocirc;n Cymraeg yn gyntaf. Nid oes rhaid i destun cleifion adael eich rhwydwaith: gall y gwasanaeth redeg yn gyfan gwbl ar eich seilwaith eich hun, sy&rsquo;n symleiddio&rsquo;r DPIA yn sylweddol.</p>
+            </div>
+            <div class="col-item">
+                <h3>Cynghorau a chyrff cyhoeddus</h3>
+                <p>Cyhoeddiadau uchelseinydd a chanfod ffordd, systemau ciwio a gwasanaethau digidol, y ddwy iaith o un ffynhonnell, gyda phob enw lle yn eich ardal yn cael ei ddweud yn iawn.</p>
+            </div>
+            <div class="col-item">
+                <h3>Trafnidiaeth gyhoeddus</h3>
+                <p>Mae&rsquo;r Rheoliadau Gwybodaeth Hygyrch (PSV) 2023 yn mynnu cyhoeddiadau clywadwy am yr arhosfan nesaf ar wasanaethau bysiau lleol, gyda therfynau amser o fis Hydref 2026. Mae Fi&rsquo;n cynhyrchu setiau cyhoeddiadau dwyieithog cyflawn ar gyfer caledwedd gyhoeddi safonol.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="kicker">Pam mae Fi&rsquo;n wahanol</div>
+        <h2>Un llais. Y ddwy iaith. Eich un chi.</h2>
+        <ul class="why-list">
+            <li><b>Dwyieithog a brandadwy ar unwaith.</b> &nbsp;Mae un llais yn siarad y ddwy iaith, felly mae ei Saesneg yn ynganu eich enwau Cymraeg yn iawn ac nid llais gwahanol yw ei Gymraeg.</li>
+            <li><b>Wedi&rsquo;i osod lle mae eich llywodraethu&rsquo;n mynnu.</b> &nbsp;API a reolir, hunan-letya ar eich seilwaith eich hun, neu fwndeli sain all-lein: nid oes rhaid i gynnwys adael eich ystad.</li>
+            <li><b>Rheolaeth olygyddol sy&rsquo;n gweithio.</b> &nbsp;Mae pob cais yn dychwelyd y ffonemau a ddefnyddiodd y peiriant, felly gall eich swyddog iaith eu cywiro fesul gair, yn barhaol.</li>
+            <li><b>Cymraeg go iawn, drwyddi draw.</b> &nbsp;Cytseiniaid Cymraeg dilys, ynganu sy&rsquo;n deall treigladau, a gramadeg rhifau Cymraeg wedi&rsquo;i wneud yn iawn.</li>
+        </ul>
+    </section>
+
+    <section>
+        <div class="kicker">Cydymffurfio</div>
+        <h2>Wedi&rsquo;i adeiladu o gwmpas y rheolau y mae gwasanaethau yng Nghymru&rsquo;n gweithio oddi tanynt.</h2>
+        <div class="compliance">
+            <div class="col-item">
+                <h3>Safonau&rsquo;r Gymraeg</h3>
+                <p>Darparu Cymraeg yn gyntaf, gan gynnwys gwasanaethau ff&ocirc;n ac awtomataidd. Y Gymraeg a&rsquo;r Saesneg o un llif gwaith, gyda&rsquo;r Gymraeg yn arwain.</p>
+            </div>
+            <div class="col-item">
+                <h3>Gwybodaeth hygyrch</h3>
+                <p>Fersiynau llafar o wybodaeth ysgrifenedig i gleifion a defnyddwyr, yn newis iaith y derbynnydd.</p>
+            </div>
+            <div class="col-item">
+                <h3>Rheoliadau PSV 2023</h3>
+                <p>Gwybodaeth glywadwy am lwybrau ar wasanaethau bysiau lleol, terfynau amser o fis Hydref 2026.</p>
+            </div>
+        </div>
+        <p class="note">Rydym yn gweithio gyda swyddogion iaith Gymraeg eich sefydliad, fel bod pob clip yn cael ei archwilio, ei gymeradwyo ac ar frand cyn iddo gyrraedd y cyhoedd.</p>
+    </section>
+
+    <div class="cta">
+        <div>
+            <h2>Clywch ef cyn penderfynu.</h2>
+            <p>Teipiwch eich brawddeg eich hun i&rsquo;r demo byw, neu porwch y teithiau enghreifftiol cenedlaethol. Enwau lleoedd, treigladau, ieithoedd cymysg: dewch &acirc; beth bynnag rydych chi&rsquo;n meddwl fydd yn ei dorri.</p>
+        </div>
+        <div class="links">
+            <span>diffian.com</span>
+            <span>diffian.com/samples</span>
+            <span>hello@diffian.com</span>
+        </div>
+    </div>
+
+    <div class="foot">
+        <span>Fi, gan Diffian &middot; Caerdydd, Cymru &middot; hello@diffian.com</span>
+        <span>2 / 2</span>
+    </div>
+</div>
+
+</body>
+</html>

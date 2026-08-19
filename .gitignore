@@ -9,3 +9,4 @@ terraform.tfstate
 terraform.tfstate.backup
 *.tfvars
 cdk.out/
+sales/*.pdf
