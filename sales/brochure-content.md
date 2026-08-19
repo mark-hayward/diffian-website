@@ -30,7 +30,7 @@ Bilingual Welsh and English text-to-speech for the organisations that serve Wale
 
 Our own neural voice. Our own engine. Built for how Welsh is actually spoken.
 
-*Diffian · Caerdydd · diffian.com*
+*Fi, gan Diffian · Caerdydd · diffian.com*
 
 ---
 
@@ -65,10 +65,11 @@ Microsoft, or a voice that belongs to you and can't speak Welsh. Not both.
 
 ---
 
-## 3. What Diffian is
+## 3. What Fi is
 
-A bilingual Welsh and English text-to-speech service, built around a neural voice we
-trained ourselves.
+Fi — say it "vee"; it's the Welsh word for "me" — is Diffian's bilingual Welsh and
+English text-to-speech service, built around a neural voice we trained ourselves.
+Fi is the engine; Carys is its voice.
 
 **Carys, a voice you can own.** A custom-trained neural voice producing 24 kHz audio,
 efficient enough to run on ordinary CPU servers. No GPU fleet. No per-character
@@ -96,10 +97,9 @@ estate.
 
 ## 4. For NHS Wales
 
-Health boards are subject to the Welsh Language Standards, and telephone and automated
-services are consistently among the hardest areas to satisfy. Recruiting Welsh-speaking
-staff for every automated touchpoint isn't realistic. Recording a voice artist for a
-library that changes every month isn't either.
+Health boards are subject to the Welsh Language Standards, and few can staff every
+telephone line and automated touchpoint with Welsh speakers. Recording a voice artist
+for a library that changes every month isn't realistic either.
 
 ### Where it fits
 
@@ -294,7 +294,7 @@ build unless stated.
 |---|---|
 | **"A warm request generates a clip in well under a second"** (currently on the website) | **Does not match production.** Measured against the live endpoint: a short sentence takes ~2.4s, a 105-character clip ~7s. The sub-second figure is a local development machine, not the deployed service. **Fix the website too** — a customer running the demo will see the real number. Safer wording: *"a sentence in a few seconds, a full announcement set in minutes."* |
 | **"All Wales Standards for Accessible Communication and Information for People with Sensory Loss"** | Referenced in §9 by description rather than name because I could not verify the current title and status. Confirm the correct instrument before naming it to NHS Wales. |
-| Welsh Language Commissioner findings on telephone services | The website states telephone services are consistently among the weakest compliance areas. Cite a specific published report or soften the claim. |
+| Welsh Language Commissioner findings on telephone services | Resolved 2026-08-19: both site and brochure now use the staffing framing ("few can staff every line"), which needs no citation. Cite a specific published Commissioner report before reintroducing any "weakest compliance area" claim. |
 | Cost comparison versus a voice artist | We have credible figures for the cloud-vendor route, not for studio recording. Don't quote a saving until we can source it. |
 | Any quality score, MOS or accuracy percentage | **We have none.** An automated speech-recognition sweep over 12,024 clips exists, but it was built to rank clips worst-first for human review, not to measure quality — Welsh speech recognition is itself weak, so the absolute figures mean little. **Never present it as an accuracy metric.** |
 | First-language listening panel results | Framework built, dialect-stratified, **not yet run**. §10 says so; keep it that way. |
