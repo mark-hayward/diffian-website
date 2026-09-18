@@ -184,7 +184,7 @@
 <section>
     <div class="wrap-narrow">
         <h2>Pronunciation engineering, not just synthesis</h2>
-        <p>The synthesis model is only half the work. The other half is deciding, for every single word, <em>how it should be said</em>. Diffian&#8217;s front end works per word, and exposes its decisions as phonetic transcription you can inspect and correct.</p>
+        <p>The synthesis model is only half the work. The other half is deciding <em>how each word should be said</em>. On English sentences Diffian classifies words so Welsh place names keep Welsh sounds, and it exposes those decisions as phonetic transcription you can inspect and correct.</p>
 
         <h3>Per-word language detection</h3>
         <p>Every word is classified before it reaches the voice, so Welsh place names inside English sentences are read the Welsh way. This is the engine&#8217;s actual output:</p>
@@ -197,7 +197,7 @@
         <p>When automatic detection isn&#8217;t what you want, language can be marked explicitly per word or per phrase with SSML tags, so editorial control always wins.</p>
 
         <h3>A national place-name lexicon</h3>
-        <p>We mined the national transport dataset for Wales to build a curated lexicon of thousands of Welsh place names, cross-checked against an English dictionary so names like <em>Penny</em>, <em>Lloyd</em> or <em>Trevor</em> aren&#8217;t misread as Welsh. Hyphenated compounds (<span class="pron">Pen-y-lan</span>) and the Welsh article are handled as units.</p>
+        <p>We mined the national transport dataset for Wales to build a curated lexicon of Welsh place names, cross-checked against an English dictionary so names like <em>Penny</em>, <em>Lloyd</em> or <em>Trevor</em> aren&#8217;t misread as Welsh. Hyphenated compounds (<span class="pron">Pen-y-lan</span>) and the Welsh article are handled as units.</p>
 
         <h3>Mutation-aware pronunciation</h3>
         <p>Welsh initial consonant mutations change the start of words in ordinary sentences. <span class="pron">Caerdydd</span> appears as <span class="pron">Gaerdydd</span> or <span class="pron">Nghaerdydd</span> depending on grammar, and our pronunciation overrides cover mutated forms explicitly, so real sentences sound right, not just dictionary citations.</p>
