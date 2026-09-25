@@ -11,7 +11,7 @@
     <!-- Microsoft Clarity -->
     <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","w6ff8ysyas");</script>
     <title>Testun-i-Leferydd Cymraeg i Sefydliadau Cymru | Diffian</title>
-    <meta name="description" content="Testun-i-leferydd dwyieithog Cymraeg a Saesneg ar gyfer y sefydliadau sy’n gwasanaethu Cymru. Llinellau ffôn, negeseuon atgoffa, cyhoeddiadau a gwybodaeth hygyrch, gyda phob enw lle Cymraeg yn cael ei ddweud yn iawn. Gwrandewch arno’n siarad.">
+    <meta name="description" content="Testun-i-leferydd dwyieithog Cymraeg a Saesneg ar gyfer y sefydliadau sy’n gwasanaethu Cymru. Llinellau ffôn, negeseuon atgoffa, cyhoeddiadau a gwybodaeth hygyrch, gyda phob enw lle Cymraeg yn cael ei ddweud yn iawn.">
     <link rel="canonical" href="https://diffian.com/cy/">
     <link rel="alternate" hreflang="en" href="https://diffian.com/">
     <link rel="alternate" hreflang="cy" href="https://diffian.com/cy/">
@@ -143,20 +143,11 @@
             letter-spacing: 0.18em; text-transform: uppercase; color: var(--board-dim);
             border-bottom: 1px solid #232b24; padding-bottom: 12px; margin-bottom: 6px;
         }
-        .board .board-head .live { color: var(--amber); }
         .board-line {
-            display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
-            background: none; border: none; border-bottom: 1px solid #1a211b;
-            padding: 16px 0; cursor: pointer; font-family: inherit;
+            display: flex; align-items: center; gap: 14px;
+            border-bottom: 1px solid #1a211b; padding: 16px 0;
         }
         .board-line:last-of-type { border-bottom: none; }
-        .board-play {
-            flex: 0 0 auto; width: 34px; height: 34px; border: 1.5px solid var(--amber);
-            border-radius: 2px; color: var(--amber); font-size: 0.62rem;
-            display: inline-flex; align-items: center; justify-content: center;
-            transition: background 0.15s, color 0.15s;
-        }
-        .board-line:hover .board-play, .board-line.playing .board-play { background: var(--amber); color: var(--board); }
         .board-line .board-lang {
             flex: 0 0 auto; font-family: 'Doto', monospace; font-weight: 900; font-size: 0.8rem;
             color: var(--board-dim); letter-spacing: 0.1em;
@@ -164,10 +155,6 @@
         .board-line .board-text {
             font-family: 'Doto', monospace; font-weight: 700; font-size: 1.18rem;
             color: var(--amber); letter-spacing: 0.02em;
-        }
-        .board-foot {
-            font-family: 'Archivo', sans-serif; font-size: 0.68rem; letter-spacing: 0.14em;
-            text-transform: uppercase; color: var(--board-dim); margin-top: 14px;
         }
 
         /* ── Sections ── */
@@ -184,21 +171,12 @@
         .col-item .fix { margin-top: 12px; font-size: 0.9rem; color: var(--ink-soft); }
         .col-item .fix strong { color: var(--accent-deep); font-weight: 700; }
 
-        /* audio demo rows */
+        /* phonetic examples */
         .demo-rows { border-top: 2px solid var(--ink); max-width: 900px; }
         .demo-row {
-            display: flex; align-items: flex-start; gap: 20px; width: 100%; text-align: left;
-            background: none; border: none; border-bottom: 1px solid var(--rule);
-            padding: 22px 4px; cursor: pointer; font-family: inherit;
+            display: flex; align-items: flex-start; gap: 20px;
+            border-bottom: 1px solid var(--rule); padding: 22px 4px;
         }
-        .demo-row:hover { background: var(--tint); }
-        .demo-play {
-            flex: 0 0 auto; width: 44px; height: 44px; margin-top: 3px;
-            background: var(--accent); color: #fff; font-size: 0.72rem; border-radius: 2px;
-            display: inline-flex; align-items: center; justify-content: center;
-            transition: background 0.15s;
-        }
-        .demo-row.playing .demo-play { background: var(--ink); }
         .demo-text { font-family: 'Archivo', sans-serif; font-size: 1.08rem; font-weight: 600; color: var(--ink); }
         .demo-ipa { display: block; font-family: 'Gentium Plus', serif; font-size: 0.98rem; color: var(--muted); margin-top: 4px; }
         .demo-why { display: block; font-size: 0.88rem; color: var(--ink-soft); margin-top: 6px; }
@@ -207,53 +185,6 @@
             letter-spacing: 0.08em; color: #fff; background: var(--ink);
             padding: 2px 7px; margin-right: 10px; vertical-align: 2px;
         }
-
-        /* try-it panel */
-        .tryit {
-            background: var(--board); border-radius: 4px; padding: 28px;
-            margin-top: 40px; max-width: 900px;
-        }
-        .tryit-head {
-            display: flex; justify-content: space-between; align-items: center; gap: 16px;
-            flex-wrap: wrap; margin-bottom: 16px;
-        }
-        .tryit-title {
-            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fcfdfc;
-        }
-        .tryit-tabs { display: flex; gap: 8px; }
-        .tryit-tabs button {
-            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.78rem;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            background: none; border: 1.5px solid var(--board-dim); color: var(--board-dim);
-            border-radius: 2px; padding: 6px 12px; cursor: pointer;
-        }
-        .tryit-tabs button.active { border-color: var(--amber); color: var(--amber); }
-        .tryit textarea {
-            width: 100%; min-height: 92px; padding: 14px; border: 1.5px solid #2a332b;
-            border-radius: 2px; background: #131a14; color: #fcfdfc;
-            font-family: 'Public Sans', system-ui, sans-serif; font-size: 1rem; line-height: 1.5;
-            resize: vertical;
-        }
-        .tryit textarea.code { font-family: 'Gentium Plus', serif; font-size: 1.02rem; }
-        .tryit textarea:focus { outline: none; border-color: var(--amber); }
-        .tryit-row { display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
-        .tryit select {
-            background: #131a14; color: #fcfdfc; border: 1.5px solid #2a332b; border-radius: 2px;
-            font-family: inherit; font-size: 0.92rem; padding: 10px 12px;
-        }
-        .tryit-go {
-            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.95rem;
-            background: var(--amber); color: var(--board); border: none; border-radius: 2px;
-            padding: 11px 22px; cursor: pointer;
-        }
-        .tryit-go:hover { background: #ffc233; }
-        .tryit-go:disabled { opacity: 0.6; cursor: default; }
-        .tryit-hint { font-size: 0.8rem; color: var(--board-dim); margin-top: 12px; }
-        .tryit-out { margin-top: 16px; display: none; }
-        .tryit-out .ipa { color: var(--amber); font-size: 1rem; word-break: break-word; }
-        .tryit-out a { color: var(--board-dim); font-size: 0.85rem; }
-        .tryit-err { margin-top: 14px; display: none; font-size: 0.9rem; color: #e2635c; }
-        .tryit-err a { color: #e2635c; }
 
         /* stats board */
         .stats-band { background: var(--board); padding: 56px 0; }
@@ -277,7 +208,7 @@
             width: 100%; padding: 12px 14px; border: 1.5px solid var(--rule); border-radius: 2px;
             font-family: inherit; font-size: 1rem; background: #fff; color: var(--ink);
         }
-        form input:focus, form textarea:focus, form select:focus, .demo-row:focus-visible, .board-line:focus-visible, a:focus-visible, button:focus-visible {
+        form input:focus, form textarea:focus, form select:focus, a:focus-visible, button:focus-visible {
             outline: 2px solid var(--accent); outline-offset: 2px;
         }
         form button {
@@ -313,7 +244,7 @@
         <nav>
             <a class="brand" href="/cy/"><img src="/images/logo.png" alt="Diffian" width="461" height="128"></a>
             <div class="nav-links">
-                <a href="#hear">Gwrando</a>
+                <a href="#examples">Enghreifftiau</a>
                 <a href="#own-voice">Eich llais</a>
                 <a href="#sectors">Sectorau</a>
                 <a href="/cy/technoleg/">Technoleg</a>
@@ -334,23 +265,20 @@
             <h1>Testun-i-leferydd Cymraeg sy’n ynganu pob gair yn gywir.</h1>
             <p class="lede">Fi yw gwasanaeth testun-i-leferydd dwyieithog Cymraeg a Saesneg Diffian, ar gyfer y sefydliadau sy’n gwasanaethu Cymru. Llinellau ffôn, negeseuon atgoffa apwyntiadau, cyhoeddiadau, gwybodaeth hygyrch: lle bynnag y mae eich gwasanaeth yn siarad, gall siarad Cymraeg yn iawn.</p>
             <div class="btn-row">
-                <a class="btn btn-primary" href="#hear">Gwrandewch arno’n siarad</a>
+                <a class="btn btn-primary" href="#examples">Gweld sut mae’n darllen</a>
                 <a class="btn btn-ghost" href="#contact">Siaradwch â ni</a>
             </div>
         </div>
-        <div class="board" aria-label="Neges gwasanaeth ddwyieithog enghreifftiol, tapiwch linell i’w chwarae">
-            <div class="board-head"><span>Neges gwasanaeth</span><span class="live">Carys &middot; yn fyw</span></div>
-            <button class="board-line" data-audio="/audio/ivr_cy.mp3?v=7" aria-label="Chwarae’r neges Gymraeg">
-                <span class="board-play" aria-hidden="true">&#9654;</span>
+        <div class="board" aria-label="Neges gwasanaeth ddwyieithog enghreifftiol">
+            <div class="board-head"><span>Neges gwasanaeth</span></div>
+            <div class="board-line">
                 <span class="board-lang">CY</span>
                 <span class="board-text">Pwyswch un am wasanaeth yn y Gymraeg.</span>
-            </button>
-            <button class="board-line" data-audio="/audio/ivr_en.mp3?v=6" aria-label="Chwarae’r neges Saesneg">
-                <span class="board-play" aria-hidden="true">&#9654;</span>
+            </div>
+            <div class="board-line">
                 <span class="board-lang">EN</span>
                 <span class="board-text" lang="en">Press one for service in Welsh.</span>
-            </button>
-            <div class="board-foot">Wedi’i gynhyrchu ar CPU &middot; Llais Carys &middot; 24 kHz</div>
+            </div>
         </div>
     </div>
 </section>
@@ -380,70 +308,42 @@
     </div>
 </section>
 
-<section id="hear">
+<section id="examples">
     <div class="wrap">
-        <div class="kicker">Gwrando</div>
-        <h2>Gwrandewch drosoch eich hun.</h2>
-        <p class="section-lede">Cafodd pob clip ei gynhyrchu gan Carys, ein llais niwral ein hunain, ar Fi, yr un peiriant ag y byddai eich gwasanaeth chi’n ei ddefnyddio. Y llinell o dan bob brawddeg yw gwir allbwn ffonetig y peiriant.</p>
+        <div class="kicker">Enghreifftiau</div>
+        <h2>Pob gair, wedi’i ddarllen yn gywir.</h2>
+        <p class="section-lede">Mae ein llais newydd, David, ar y ffordd, a byddwch chi’n gallu ei glywed yma pan fydd yn barod. Tan hynny, dyma beth mae Fi, yr un peiriant ag y byddai eich gwasanaeth chi’n ei ddefnyddio, yn ei wneud o rai brawddegau anodd. Y llinell o dan bob brawddeg yw gwir allbwn ffonetig y peiriant.</p>
         <div class="demo-rows">
-            <button class="demo-row" data-audio="/audio/ivr_cy.mp3?v=7">
-                <span class="demo-play" aria-hidden="true">&#9654;</span>
+            <div class="demo-row">
                 <span>
                     <span class="demo-text"><span class="lang-chip">CY</span>“Pwyswch un am wasanaeth yn y Gymraeg.”</span>
                     <span class="demo-ipa" aria-hidden="true">pˈuɨsʊx ˈɨːn am wasˈanɑɨθ ən ə ɡˈʌmrɑɨɡ</span>
                     <span class="demo-why">Neges IVR. Rhowch lais rhugl, Cymraeg yn gyntaf, i’ch llinellau ffôn.</span>
                 </span>
-            </button>
-            <button class="demo-row" data-audio="/audio/appointment_en.mp3?v=6">
-                <span class="demo-play" aria-hidden="true">&#9654;</span>
+            </div>
+            <div class="demo-row">
                 <span>
                     <span class="demo-text"><span class="lang-chip">EN</span><span lang="en">“Your appointment is at the Heath in Cardiff on the fourth of March.”</span></span>
                     <span class="demo-ipa" aria-hidden="true">jɔːɹ ɐpˈɔɪntmənt ɪz at ðə hˈiːθ ɪn kˈɑːdɪf ɒnðə fˈɔːθ ɒv mˈɑːtʃ</span>
                     <span class="demo-why">Neges atgoffa apwyntiad: brawddeg Saesneg gyda dyddiad wedi’i lefaru, yn barod ar gyfer galwadau atgoffa a llythyrau cleifion.</span>
                 </span>
-            </button>
-            <button class="demo-row" data-audio="/audio/croeso_gaerdydd.mp3?v=7">
-                <span class="demo-play" aria-hidden="true">&#9654;</span>
+            </div>
+            <div class="demo-row">
                 <span>
                     <span class="demo-text"><span class="lang-chip">CY</span>“Croeso i Gaerdydd.”</span>
                     <span class="demo-ipa" aria-hidden="true">krˈɔɨsɔ ˈɨ ɡaɪrdˈiːð</span>
                     <span class="demo-why">Enw lle wedi’i dreiglo. Caerdydd sydd yma, ar ffurf “Gaerdydd”, ac mae’n dal i gael ei ynganu’n gywir.</span>
                 </span>
-            </button>
-            <button class="demo-row" data-audio="/audio/calls_at_en.mp3?v=6">
-                <span class="demo-play" aria-hidden="true">&#9654;</span>
+            </div>
+            <div class="demo-row">
                 <span>
                     <span class="demo-text"><span class="lang-chip">EN</span><span lang="en">“This service calls at Llanelli, Machynlleth, and Aberystwyth.”</span></span>
                     <span class="demo-ipa" aria-hidden="true">ðɪs sˈɜːvɪs kˈɔːlz at ɬanˈɛɬɨ, maxˈʌnɬɛθ, and ˌabɛrˈʌstuɨθ</span>
                     <span class="demo-why">Tri enw lle anodd mewn un frawddeg Saesneg, a phob un yn cadw ei seiniau Cymraeg. Sylwch ar yr ɬ, y “ll” Gymraeg go iawn.</span>
                 </span>
-            </button>
+            </div>
         </div>
-        <div class="tryit" id="tryit">
-            <div class="tryit-head">
-                <div class="tryit-title">Nawr teipiwch un eich hun.</div>
-                <div class="tryit-tabs" role="tablist">
-                    <button type="button" class="active" data-mode="std">Testun</button>
-                    <button type="button" data-mode="ssml">SSML</button>
-                </div>
-            </div>
-            <label for="tryText" style="position:absolute; left:-9999px;">Testun i’w lefaru</label>
-            <textarea id="tryText" maxlength="2000">Mae'r trên nesaf i Fangor yn gadael o blatfform dau.</textarea>
-            <div class="tryit-row">
-                <select id="tryLang" aria-label="Iaith">
-                    <option value="cy" selected>Cymraeg</option>
-                    <option value="en">Saesneg</option>
-                </select>
-                <button type="button" class="tryit-go" id="tryGo">Llefaru</button>
-            </div>
-            <div class="tryit-hint" id="tryHint">Cynhyrchir yn fyw gan Carys ar ein peiriant ni. Rhowch gynnig ar enw lle, treiglad, neu frawddeg sy’n cymysgu’r ddwy iaith.</div>
-            <div class="tryit-out" id="tryOut">
-                <div class="ipa" id="tryIpa"></div>
-                <a id="tryDl" download="carys.wav" href="#">Lawrlwytho WAV</a>
-            </div>
-            <div class="tryit-err" id="tryErr"></div>
-        </div>
-        <p style="margin-top:24px; font-size:1.02rem;">Angen llais pwrpasol neu becyn cyhoeddiadau cyflawn? <a href="#contact" style="font-weight:700;">Siaradwch â ni</a>.</p>
+        <p style="margin-top:24px; font-size:1.02rem;">Eisiau clywed David cyn gynted ag y bydd yn barod, neu angen llais pwrpasol neu becyn cyhoeddiadau cyflawn? <a href="#contact" style="font-weight:700;">Siaradwch â ni</a>.</p>
     </div>
 </section>
 
@@ -451,10 +351,10 @@
     <div class="wrap">
         <div class="kicker">Yr hyn a adeiladwyd gennym</div>
         <h2>Ein llais ein hunain. Ein peiriant ein hunain. Wedi’u hadeiladu ar gyfer sut mae’r Gymraeg yn cael ei siarad go iawn.</h2>
-        <p class="section-lede">Fi yw’r peiriant a Carys yw ei lais. Pan welson ni na allai’r un cyflenwr cwmwl gynnig llais pwrpasol sy’n siarad Cymraeg, fe hyfforddon ni ein llais ein hunain. Un llais niwral yw Carys sy’n siarad y ddwy iaith, felly mae ei Saesneg yn ynganu enwau lleoedd Cymru’n gywir ac mae ei Chymraeg yn llifo fel iaith gyntaf. A chan mai ni piau’r llais, gall berthyn i’ch gwasanaeth chi: dim trwyddedu fesul nod a dim clymu wrth gyflenwr.</p>
+        <p class="section-lede">Fi yw’r peiriant a David yw ei lais newydd. Pan welson ni na allai’r un cyflenwr cwmwl gynnig llais pwrpasol sy’n siarad Cymraeg, fe adeiladon ni’r biblinell i hyfforddi ein llais ein hunain. Mae David yn cael ei hyfforddi fel un llais niwral sy’n siarad y ddwy iaith, felly mae ei Saesneg yn ynganu enwau lleoedd Cymru’n gywir ac mae ei Gymraeg yn llifo fel iaith gyntaf. A chan mai ni piau’r llais, gall berthyn i’ch gwasanaeth chi: dim trwyddedu fesul nod a dim clymu wrth gyflenwr.</p>
         <div class="cols-2">
             <div class="col-item">
-                <h3>Carys, llais y gallwch ei berchnogi</h3>
+                <h3>David, llais y gallwch ei berchnogi</h3>
                 <p>Llais niwral wedi’i hyfforddi’n bwrpasol sy’n cynhyrchu sain 24&nbsp;kHz, yn ddigon effeithlon i redeg ar weinyddion CPU cyffredin. Gallwch ei letya ar eich seilwaith eich hun neu ei ddefnyddio fel API a reolir gennym ni. Nid oes rhaid i’ch cynnwys adael eich ystad o gwbl.</p>
             </div>
             <div class="col-item">
@@ -477,15 +377,15 @@
     <div class="wrap">
         <div class="kicker">Eich llais eich hun</div>
         <h2>Neu gwnewch y llais yn un i chi’n unig.</h2>
-        <p class="section-lede">Mae Carys yn barod heddiw. Ond gall yr un biblinell ag a’i hyfforddodd hi hyfforddi llais sy’n perthyn i’ch sefydliad chi’n unig: hunaniaeth unigryw, gyson ar draws pob sianel awtomataidd, yn y ddwy iaith. Dyna’r addewid yn enw’r gwasanaeth: Fi.</p>
+        <p class="section-lede">Mae David ar y ffordd. Gall yr un biblinell sy’n ei hyfforddi ef hyfforddi llais sy’n perthyn i’ch sefydliad chi’n unig: hunaniaeth unigryw, gyson ar draws pob sianel awtomataidd, yn y ddwy iaith. Dyna’r addewid yn enw’r gwasanaeth: Fi.</p>
         <div class="cols-2">
             <div class="col-item">
-                <h3>Dechreuwch gyda Carys</h3>
-                <p>Llais dwyieithog sy’n barod i’w ddefnyddio nawr, o dan eich rheolaeth chi: wedi’i letya ar eich seilwaith eich hun neu fel API a reolir gennym ni, heb fesurydd fesul nod a heb glymu wrth gyflenwr.</p>
+                <h3>Dechreuwch gyda David</h3>
+                <p>Ein llais dwyieithog ein hunain, o dan eich rheolaeth chi: wedi’i letya ar eich seilwaith eich hun neu fel API a reolir gennym ni, heb fesurydd fesul nod a heb glymu wrth gyflenwr.</p>
             </div>
             <div class="col-item">
                 <h3>Neu hyfforddwch lais sy’n eiddo i chi’n unig</h3>
-                <p>Rydym yn adeiladu llais niwral pwrpasol o recordiadau siaradwr o’ch dewis chi. Mae’n siarad Cymraeg a Saesneg fel y gwna Carys, gan gynnwys treigladau, enwau lleoedd a brawddegau cymysg, ond mae’n swnio fel eich sefydliad chi ac yn perthyn iddo. Nid oedd yr un cyflenwr cwmwl yn cynnig hyn ar gyfer y Gymraeg pan wirion ni ddiwethaf, ym Mai 2026.</p>
+                <p>Rydym yn adeiladu llais niwral pwrpasol o recordiadau siaradwr o’ch dewis chi. Mae’n siarad Cymraeg a Saesneg ar yr un peiriant, gan gynnwys treigladau, enwau lleoedd a brawddegau cymysg, ond mae’n swnio fel eich sefydliad chi ac yn perthyn iddo. Nid oedd yr un cyflenwr cwmwl yn cynnig hyn ar gyfer y Gymraeg pan wirion ni ddiwethaf, ym Mai 2026.</p>
             </div>
         </div>
         <p style="margin-top:36px; font-size:1.02rem;"><a href="#contact" style="font-weight:700;">Siaradwch â ni am eich llais eich hun</a>.</p>
@@ -497,7 +397,6 @@
         <div class="kicker">Wedi’i brofi ar raddfa genedlaethol</div>
         <h2>Y prawf cyntaf: pob arhosfan bws yng Nghymru.</h2>
         <p class="section-lede">Mae’r Rheoliadau Gwybodaeth Hygyrch (PSV) yn mynnu cyhoeddiadau clywadwy am yr arhosfan nesaf ar wasanaethau bysiau lleol o fis Hydref 2026. Yng Nghymru, mae hynny’n golygu dweud enw pob anheddiad, stryd a chyfnewidfa yn gywir, yn y ddwy iaith. Cafodd Fi ei adeiladu i ddatrys yn union hynny, yna’i redeg ar draws set ddata amserlenni’r wlad gyfan.</p>
-        <p><a href="/samples/" style="color: var(--amber); font-weight:700;">Porwch y teithiau enghreifftiol a chlywed y corpws drosoch eich hun</a>.</p>
     </div>
 </section>
 
@@ -592,219 +491,12 @@
         <div>&copy; 2026 Diffian &middot; Caerdydd, Cymru &middot; <span lang="en">Cardiff, Wales</span></div>
         <div>
             <a href="/cy/technoleg/">Technoleg</a>
-            <a href="/samples/">Teithiau enghreifftiol</a>
             <a href="mailto:hello@diffian.com">hello@diffian.com</a>
         </div>
     </div>
 </footer>
 
 <script>
-// Audio demos: one shared player, click to toggle
-const player = new Audio();
-let currentBtn = null;
-// The live demo streams one WAV per sentence. They're scheduled on a Web Audio
-// timeline rather than played through <audio> so they join without gaps.
-let streamCtx = null, streamNodes = [];
-function stopStream() {
-    streamNodes.forEach(n => { try { n.stop(); } catch (e) { /* already finished */ } });
-    streamNodes = [];
-    if (streamCtx) { streamCtx.close().catch(() => {}); streamCtx = null; }
-}
-function stopPlayback() {
-    player.pause();
-    stopStream();
-    if (currentBtn) currentBtn.classList.remove('playing');
-    currentBtn = null;
-}
-player.addEventListener('ended', stopPlayback);
-document.querySelectorAll('[data-audio]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (currentBtn === btn) { stopPlayback(); return; }
-        stopPlayback();
-        player.src = btn.getAttribute('data-audio');
-        player.play();
-        btn.classList.add('playing');
-        currentBtn = btn;
-        if (typeof gtag === 'function') gtag('event', 'audio_demo_play', { clip: btn.getAttribute('data-audio') });
-    });
-});
-
-// Live try-it demo against the Carys engine
-(function () {
-    const TTS_BASE = 'https://d9jzgtlho3s3h.cloudfront.net';
-    const STD_DEFAULTS = {
-        cy: "Mae'r trên nesaf i Fangor yn gadael o blatfform dau.",
-        en: "The next train to Bangor leaves from platform two."
-    };
-    const SSML_DEFAULT = '<speak>\n  Yn cyrraedd <prosody rate="slow">Llandysul</prosody> nawr.\n  <break time="400ms"/>\n  <lang xml:lang="en-GB">Now arriving at Llandysul.</lang>\n</speak>';
-    // a box holding only a default (or nothing) is fair game to swap; typed text never is
-    function isDefaultText(v) {
-        return !v.trim() || v === STD_DEFAULTS.cy || v === STD_DEFAULTS.en || v === SSML_DEFAULT;
-    }
-    function stdDefault() {
-        return STD_DEFAULTS[document.getElementById('tryLang').value] || STD_DEFAULTS.cy;
-    }
-    const text = document.getElementById('tryText');
-    const go = document.getElementById('tryGo');
-    const out = document.getElementById('tryOut');
-    const ipa = document.getElementById('tryIpa');
-    const dl = document.getElementById('tryDl');
-    const err = document.getElementById('tryErr');
-    const hint = document.getElementById('tryHint');
-    let mode = 'std';
-
-    document.querySelectorAll('.tryit-tabs button').forEach(btn => {
-        btn.addEventListener('click', () => {
-            mode = btn.dataset.mode;
-            document.querySelectorAll('.tryit-tabs button').forEach(b => b.classList.toggle('active', b === btn));
-            text.classList.toggle('code', mode === 'ssml');
-            // /tts/stream keeps bytes flowing, so there's no proxy timeout to stay
-            // under; 2000 is an abuse cap, not an infrastructure one.
-            text.maxLength = 2000;
-            if (isDefaultText(text.value)) text.value = mode === 'ssml' ? SSML_DEFAULT : stdDefault();
-            hint.textContent = mode === 'ssml'
-                ? 'Yn cefnogi’r tagiau <break>, <prosody>, <lang>, <sub>, <phoneme> a <say-as>.'
-                : 'Cynhyrchir yn fyw gan Carys ar ein peiriant ni. Rhowch gynnig ar enw lle, treiglad, neu frawddeg sy’n cymysgu’r ddwy iaith.';
-        });
-    });
-
-    // Switching language swaps the sample sentence with it, so English doesn't
-    // arrive pointed at a Welsh sentence. Typed text is left alone.
-    document.getElementById('tryLang').addEventListener('change', () => {
-        if (mode === 'std' && isDefaultText(text.value)) text.value = stdDefault();
-    });
-
-    function decodePhonemes(raw) {
-        return raw
-            .replace(/\\x([0-9a-fA-F]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)))
-            .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
-    }
-
-    // /tts/stream renders the whole input in one request — one shared voice style
-    // across the paragraph — and emits each sentence as a self-contained WAV frame
-    // ([4-byte big-endian length][WAV]) the moment it renders. CloudFront routes it
-    // to a RESPONSE_STREAM Function URL signed via OAC, so frames arrive as they
-    // render instead of being buffered the way API Gateway buffers /tts.
-    function wavPcm(bytes) {
-        const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-        let off = 12;                                   // past 'RIFF' <size> 'WAVE'
-        while (off + 8 <= bytes.byteLength) {
-            const id = String.fromCharCode(bytes[off], bytes[off + 1], bytes[off + 2], bytes[off + 3]);
-            const sz = dv.getUint32(off + 4, true);
-            if (id === 'data') return bytes.subarray(off + 8, off + 8 + sz);
-            off += 8 + sz + (sz & 1);                   // chunks are word-aligned
-        }
-        return new Uint8Array(0);
-    }
-    function joinWavs(frames, gapSec) {                 // one WAV for download / replay
-        const gap = new Uint8Array(Math.round((gapSec || 0) * 24000) * 2);   // 16-bit silence
-        const datas = [];
-        frames.forEach((f, i) => { if (i) datas.push(gap); datas.push(wavPcm(f)); });
-        const total = datas.reduce((n, d) => n + d.length, 0);
-        const out = new Uint8Array(44 + total);
-        const dv = new DataView(out.buffer);
-        const put = (o, s) => { for (let i = 0; i < s.length; i++) out[o + i] = s.charCodeAt(i); };
-        put(0, 'RIFF'); dv.setUint32(4, 36 + total, true); put(8, 'WAVEfmt ');
-        dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
-        dv.setUint32(24, 24000, true); dv.setUint32(28, 48000, true);
-        dv.setUint16(32, 2, true); dv.setUint16(34, 16, true);
-        put(36, 'data'); dv.setUint32(40, total, true);
-        let o = 44;
-        datas.forEach(d => { out.set(d, o); o += d.length; });
-        return new Blob([out], { type: 'audio/wav' });
-    }
-
-    go.addEventListener('click', async () => {
-        if (!text.value.trim()) return;
-        stopPlayback();
-        err.style.display = 'none';
-        go.disabled = true;
-        go.textContent = 'Wrthi’n cynhyrchu…';
-        // built inside the click handler so it counts as a user gesture
-        streamCtx = new (window.AudioContext || window.webkitAudioContext)();
-        try {
-            const isSsml = mode === 'ssml';
-            const body = JSON.stringify({ text: text.value, lang: document.getElementById('tryLang').value, name_lang: 'auto', ssml: isSsml });
-            // CloudFront's signed origin requests (OAC) require the body's SHA-256 on POST
-            const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(body));
-            const bodyHash = Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
-            const res = await fetch(TTS_BASE + '/tts/stream', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'x-amz-content-sha256': bodyHash },
-                body: body
-            });
-            if (!res.ok) { const httpErr = new Error('HTTP ' + res.status); httpErr.status = res.status; throw httpErr; }
-            ipa.textContent = decodePhonemes(res.headers.get('X-Phonemes') || '');
-            out.style.display = 'block';
-
-            const reader = res.body.getReader();
-            const frames = [];
-            // Hold playback until ~2.5s of audio is queued: a short opening sentence
-            // gives almost no cover for the next sentence's render, so starting on the
-            // first frame opens a gap mid-paragraph. Single-sentence inputs still play
-            // immediately, because the stream ends with the first frame.
-            const LEAD = 2.5;
-            const pendingAudio = [];
-            let buf = new Uint8Array(0), playAt = 0, started = false, pendingDur = 0;
-            function schedule(audio) {
-                const node = streamCtx.createBufferSource();
-                node.buffer = audio;
-                node.connect(streamCtx.destination);
-                // never schedule in the past: if a frame came back late, start it now
-                const at = Math.max(playAt, streamCtx.currentTime + 0.05);
-                node.start(at);
-                playAt = at + audio.duration;
-                streamNodes.push(node);
-            }
-            function flush() {
-                started = true; go.textContent = 'Yn llefaru…';
-                pendingAudio.splice(0).forEach(schedule);
-            }
-            for (;;) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                const joined = new Uint8Array(buf.length + value.length);
-                joined.set(buf); joined.set(value, buf.length);
-                buf = joined;
-                while (buf.length >= 4) {
-                    const n = new DataView(buf.buffer, buf.byteOffset, 4).getUint32(0);
-                    if (buf.length < 4 + n) break;
-                    const frame = buf.slice(4, 4 + n);
-                    buf = buf.slice(4 + n);
-                    frames.push(frame);
-                    if (!streamCtx) return;             // stopped part-way through
-                    // decodeAudioData detaches the buffer it's given, so hand it a copy
-                    const audio = await streamCtx.decodeAudioData(frame.slice().buffer);
-                    if (started) { schedule(audio); }
-                    else {
-                        pendingAudio.push(audio); pendingDur += audio.duration;
-                        if (pendingDur >= LEAD) flush();
-                    }
-                }
-            }
-            if (!started) flush();                      // short input: play the moment it's done
-            const url = URL.createObjectURL(joinWavs(frames, 0));
-            player.src = url;                           // Web Audio already played it
-            dl.href = url;
-            if (typeof gtag === 'function') gtag('event', 'tts_live_generate', { mode: mode });
-        } catch (e) {
-            stopStream();
-            out.style.display = 'none';
-            if (e && e.status >= 400 && e.status < 500) {
-                err.innerHTML = mode === 'ssml'
-                    ? 'Wnaeth yr SSML yna ddim parsio. Gwiriwch y tagiau a rhowch gynnig arall arni.'
-                    : 'Doedd y peiriant ddim yn gallu darllen y testun yna. Gwiriwch ef a rhowch gynnig arall arni.';
-            } else {
-                err.innerHTML = 'Wnaeth y peiriant byw ddim ymateb. Rhowch gynnig arall arni mewn munud, neu <a href="#contact">anfonwch eich brawddeg atom</a> ac fe’i dychwelwn wedi’i llefaru.';
-            }
-            err.style.display = 'block';
-        } finally {
-            go.disabled = false;
-            go.textContent = 'Llefaru';
-        }
-    });
-})();
-
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
